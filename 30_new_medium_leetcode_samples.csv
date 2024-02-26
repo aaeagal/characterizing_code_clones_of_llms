@@ -1,0 +1,2733 @@
+Prompt_ID,LeetCode_Link,date_of_first_published_solution,Original_Java_Snippet,Java_link,Original_Python_Snippet,Python_link,Original_C++_Snippet,C++_link,
+apply_ops_empty_str,https://leetcode.com/problems/apply-operations-to-make-string-empty/,02-17-2024,"class Solution {
+    public String lastNonEmptyString(String s) {
+        int arr[] = new int[26];
+        int max = 0;
+        
+        for (int i = 0; i < s.length(); i++) {
+            arr[s.charAt(i) - 'a'] ++;
+        }
+        
+        for (int i = 0; i < 26; i++) {
+            max = Math.max(max, arr[i]);
+        }
+        
+        
+        String ans = """";
+        
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (arr[s.charAt(i) - 'a'] == max) {
+                arr[s.charAt(i) - 'a'] --;
+                ans = s.charAt(i) + ans;
+            }
+        }
+        
+        return ans;
+    }
+}",https://leetcode.com/problems/apply-operations-to-make-string-empty/solutions/4742265/java-sol/,"from collections import Counter,defaultdict
+
+class Solution(object):
+    def lastNonEmptyString(self, s):
+        
+        d = Counter(s)
+        d_list = sorted(d.items(), key=lambda x: x[1], reverse=True)
+        
+        highest = d_list[0][1]
+        d = defaultdict()
+        ans = """"
+        
+        for key, val in d_list:
+            if val == highest:
+                d[key]=val
+            else:
+                break
+
+        for i in s:
+            if i in d:
+                if d[i]==1:
+                    ans += i
+                d[i]-=1
+
+        return ans
+        ",https://leetcode.com/problems/apply-operations-to-make-string-empty/solutions/4742291/detailed-python-solution-count-freq-and-sort/,"class Solution {
+public:
+    string lastNonEmptyString(string s) {
+        vector<int>freq(26,0);
+        vector<int>last(26,-1);
+        
+        for(int i=0; i< s.length() ; i++){
+            freq[s[i]-'a']++;
+            last[s[i]-'a']=i;
+        }
+        int maxi = *max_element(freq.begin() , freq.end());
+        maxi--;
+        string ans;
+        for(int i=0; i< 26 ; i++){
+            if(freq[i]-maxi >0){
+                ans +=string(freq[i] - maxi, 'a' + i);
+            }
+        }
+        auto customComparator = [&last](char a, char b) {
+            return last[a - 'a'] < last[b - 'a'];
+        };
+
+        // Sort the ans string using the custom comparator
+        sort(ans.begin(), ans.end(), customComparator);
+        return ans;
+    }
+};",https://leetcode.com/problems/apply-operations-to-make-string-empty/solutions/4742295/2-easy-approach-with-explanation-0-1-space-and-0-n-time-in-c/,
+bob_alice_flower,https://leetcode.com/problems/alice-and-bob-playing-flower-game/,01-27-2024,"class Solution {
+    public long flowerGame(int n, int m) {
+        int oddCountN = (n + 1) / 2, oddCountM = (m + 1) / 2;
+        int evenCountN = n / 2, evenCountM = m / 2;
+        return oddCountN * 1L * evenCountM + oddCountM * 1L * evenCountN;
+    }
+}",https://leetcode.com/problems/alice-and-bob-playing-flower-game/solutions/4636701/math-with-explanation/,"class Solution:
+    def flowerGame(self, n: int, m: int) -> int:
+        return m * n // 2",https://leetcode.com/problems/alice-and-bob-playing-flower-game/solutions/4636705/python-simple-solution-o-1-time-o-1-space-one-line/,"class Solution {
+public:
+    long long flowerGame(int n, int m) {
+        long long AOdd = n % 2 == 1 ? n / 2 + 1 : n / 2;
+        long long AEven = n / 2;
+        long long BOdd = m % 2 == 1 ? m / 2 + 1 : m / 2;
+        long long BEven = m / 2;
+        return AOdd * BEven + AEven * BOdd;
+    }
+};",https://leetcode.com/problems/alice-and-bob-playing-flower-game/solutions/4636703/c-o-1-math/,
+can_sort,https://leetcode.com/problems/find-if-array-can-be-sorted/,01-20-2024,"class Solution {
+    public boolean canSortArray(int[] a) {
+        int[] a2 = new int[a.length];
+        int n = a.length;
+        for(int i=0; i<n; i++){
+            a2[i] = a[i];
+        }
+        Arrays.sort(a2);
+        if(Arrays.equals(a,a2)) return true;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n-i-1; j++){
+                int x = Integer.bitCount(a[j]);
+                int y = Integer.bitCount(a[j + 1]);
+                if(x==y && a[j] > a[j+1]){
+                    int t=a[j];
+                    a[j]=a[j+1];
+                    a[j+1] = t;
+                }
+            }
+        }
+        return Arrays.equals(a,a2);
+    }
+}",https://leetcode.com/problems/find-if-array-can-be-sorted/solutions/4598268/bubble-sort/,"class Solution:
+    def canSortArray(self, nums: List[int]) -> bool:
+        def can_swap(a, b):
+            return a.bit_count() == b.bit_count()
+        n = len(nums)
+        for i in range(n*n):
+            for j in range(n-1):
+                if nums[j] > nums[j+1] and can_swap(nums[j], nums[j+1]):
+                    nums[j], nums[j+1] = nums[j+1], nums[j]
+        return nums == sorted(nums)",https://leetcode.com/problems/find-if-array-can-be-sorted/solutions/4598275/python-brute-bubble-sort/,"class Solution {
+public:
+    bool canSortArray(vector<int>& nums) {
+        int n = nums.size();
+        
+        vector<int> c = nums;
+        sort(begin(c),end(c));
+        
+        int prev=0 , i=0;
+        int a = __builtin_popcount(nums[0]);
+        while(i < n) {
+            int b = __builtin_popcount(nums[i]);
+            
+            while(i<n && a==__builtin_popcount(nums[i])) {
+                i++;
+            }
+            sort(nums.begin()+prev,nums.begin()+i);
+            prev = i;
+            if(i < n)   a = __builtin_popcount(nums[i]);
+        }
+        return c==nums;
+    }
+};",https://leetcode.com/problems/find-if-array-can-be-sorted/solutions/4598307/fully-explained-easy-solution/,
+divide_arrays_with_max_diff,https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/,12-16-2023,"class Solution {
+  public int[][] divideArray(int[] nums, int k) {
+    final int n = nums.length;
+    Arrays.sort(nums);
+    int[][] result = new int[n / 3][3];
+    for (int i = 0; i < n; i++) {
+      result[i / 3][i % 3] = nums[i];
+      if (i % 3 == 2) {
+        if (result[i / 3][2] - result[i / 3][0] > k) {
+          return new int[][] {};
+        }
+      }
+    }
+
+    return result;
+  }
+}",https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/solutions/4414713/sort-and-split/,"class Solution:
+    def divideArray(self, nums: List[int], k: int) -> List[List[int]]:
+        nums.sort()
+        res = []
+        for i in range(0, len(nums), 3):
+            array = nums[i:i + 3]
+            if array[-1] - array[0] > k:
+                return None
+            res.append(array)
+        return res",https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/solutions/4414714/python-solution/,"class Solution {
+public:
+    vector<vector<int>> divideArray(vector<int>& nums, int k) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>ans;
+        for(int i=0;i<nums.size();i+=3){
+            if(nums[i+2]-nums[i]>k) return {};
+            vector<int>tmp={nums[i],nums[i+1],nums[i+2]};
+            ans.push_back(tmp);
+        }
+        return ans;
+    }
+};",https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/solutions/4414718/sorting-brute-force/,
+double_mod_exp,https://leetcode.com/problems/double-modular-exponentiation/,12-09-2023,"class Solution {
+    //returns (a ^ b) % mod
+    private int power (int a, int b, int mod) {
+        if (b == 0)
+                return 1;
+        if (b % 2 == 0)
+            return power((a * a) % mod, b / 2, mod);
+        else
+            return (a * power((a * a) % mod , b / 2, mod)) % mod;
+    }
+    
+    public List<Integer> getGoodIndices(int[][] variables, int target) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < variables.length; i++) {
+            int a = variables[i][0], b = variables[i][1], c = variables[i][2], m = variables[i][3];
+            int calculated = power(power(a, b, 10), c, m);
+            if (calculated == target)
+                result.add(i);
+        }
+        return result;
+    }
+}",https://leetcode.com/problems/double-modular-exponentiation/solutions/4384359/custom-power-function-o-nlogn/,"class Solution:
+    def getGoodIndices(self, variables: List[List[int]], target: int) -> List[int]:
+        res = []
+        for i, (a, b, c, m) in enumerate(variables):
+            if pow((pow(a, b) % 10), c) % m == target:
+                res.append(i)
+        return res",https://leetcode.com/problems/double-modular-exponentiation/solutions/4384354/python-solution/,"int f(int n, int p) // function to calculate (ai power bi % 10)
+{
+    int i = 0;
+    int res = 1;
+
+    while (i < p)
+    {
+        res *= n;
+        res %= 10;
+        ++i;
+    }
+
+    return res;
+}
+
+int s(int n, int p, int m)  // function to calculate ((ai power bi % 10) power ci) % mi
+{ 
+    int i = 0;
+    int res = 1;
+
+    while (i < p)
+    {
+        res *= n;
+        res %= m;
+        ++i;
+    }
+
+    return res;
+}
+
+class Solution
+{
+public:
+    vector<int> getGoodIndices(vector<vector<int>> &v, int target)
+    {
+
+        int first, sec;
+
+        vector<int> res;
+        vector<int> t;
+
+        int a, b, c, m;
+
+        for (int i = 0; i < v.size(); ++i)
+        {
+            t = v[i];
+            a = t[0];
+            b = t[1];
+            c = t[2];
+            m = t[3];
+
+            first = f(a, b);
+
+            sec = s(first, c, m);
+
+            if (sec == target)
+                res.push_back(i);
+        }
+
+        return res;
+    }
+};",https://leetcode.com/problems/double-modular-exponentiation/solutions/4384364/take-care-of-the-overflow/,
+find_equalindromic,https://leetcode.com/problems/minimum-cost-to-make-array-equalindromic/,12-16-2023,"class Solution {
+    public long minimumCost(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        int middle = nums[n/2];
+        int inc = middle;
+        int dec = middle;
+
+        while(!isPal(inc)) inc++; 
+        while(!isPal(dec)) dec--;
+
+        return Math.min(calculateCost(nums,inc), calculateCost(nums,dec));
+    }
+
+
+    public boolean isPal(int n) {
+        int r, sum = 0, temp;
+        temp = n;
+        while (n > 0) {
+            r = n % 10; 
+            sum = (sum * 10) + r;
+            n = n / 10;
+        }
+        return temp == sum;
+    }
+
+    public long calculateCost(int[] nums, int r) {
+        long cost = 0;
+        for (int n: nums) cost += Math.abs(n - r);
+        return cost;
+    }
+}",https://leetcode.com/problems/minimum-cost-to-make-array-equalindromic/solutions/4414716/find-median-easy-java-solution-beats-100/,"class Solution:
+    def minimumCost(self, nums: List[int]) -> int:
+        
+        nums.sort()
+        n=len(nums)
+
+        def pal(n):            
+            t=str(n)
+            return t==t[::-1]
+        
+        def check(n):
+            for a in range(n,0,-1):
+                if pal(a):
+                    res=sum(abs(it -a) for it in nums)
+                    break
+            for b in range(n,10**9):
+                if pal(b):
+                    res=min(res,sum(abs(it -b) for it in nums))
+                    break
+            return res
+
+
+        return min(check(nums[n//2]),check(nums[n//2-1]))",https://leetcode.com/problems/minimum-cost-to-make-array-equalindromic/solutions/4414800/check-nearest-two-palindromics-to-the-median/,"long long minimumCost(vector<int>& nums) {
+long long ans = LONG_MAX, median = 0, n = nums.size();
+sort(nums.begin(), nums.end());
+median = (n %2 )?nums[n/2]: (nums[n/2] + nums[n/2 - 1])/2;
+//Find out possible palindroms
+vector<long long> pal;
+string t = to_string(median);
+pal.push_back(pow(10, t.size()-1) - 1); //case 1 : next palindrom with one digit less
+pal.push_back(pow(10, t.size()) + 1);   //case 2: next palindrom with one digit more
+//case 3: palidrom with just mirror image of the left half
+for(int i = 0; i < t.size()/2; ++i) t[t.size() - i - 1] = t[i];
+pal.push_back(stoll(t));
+//case 4: palidrom with mirror image of the left half with left half + 1
+string pal_next = to_string(stoi(t.substr(0,(t.size()+1)/2)) + 1);
+string temp = pal_next;
+if(t.size()%2) pal_next = pal_next.substr(0, pal_next.size() - 1);
+reverse(pal_next.begin(), pal_next.end());
+pal.push_back(stoll(temp + pal_next));
+//case 5: palidrom with mirror image of the left half with left half - 1
+string pal_prev = to_string(stoi(t.substr(0,(t.size()+1)/2)) - 1);
+temp = pal_prev;
+if(t.size()%2)  pal_prev = pal_prev.substr(0, pal_prev.size() - 1);
+reverse(pal_prev.begin(), pal_prev.end());
+pal.push_back(stoll(temp + pal_prev));
+//find the cost with each palindrom and take the min as answer
+for(auto p: pal){
+long long sum = 0;
+for(auto num: nums) sum += abs(num - p);
+ans = min(ans, sum);
+}
+return ans;
+}",https://leetcode.com/problems/minimum-cost-to-make-array-equalindromic/solutions/4414729/find-nearest-palindrom-to-median-very-simple/,
+find_grid,https://leetcode.com/problems/find-the-grid-of-region-average/,02-03-2024,"class Solution {
+    int[][] dirs = {{1, 0}, {0, 1}, {0, -1}, {-1, 0}};
+    
+    public int[][] resultGrid(int[][] image, int threshold) {
+        int r = image.length, c = image[0].length;
+        int[][] res = new int[r][c];
+        int[][] count = new int[r][c];
+
+        for (int i = 1; i < r - 1; i++) {
+            for (int j = 1; j < c - 1; j++) {
+                int r0 = i - 1, c0 = j - 1;
+                int r1 = i + 1, c1 = j + 1;
+
+                // Find if we have valid 3X3 region.
+                boolean foundRegion = helper(image, i, j, r0, c0, r1, c1, threshold);
+                if (foundRegion) {
+                    for (int[] dir : dirs) {
+                        int x = dir[0] + i;
+                        int y = dir[1] + j;
+                        foundRegion &= helper(image, x, y, r0, c0, r1, c1, threshold);
+                        if (!foundRegion) break;
+                    }
+                }
+
+                if (foundRegion) {
+                    int sum = 0;
+                    for (int k = r0; k <= r1; k++) {
+                        for (int l = c0; l <= c1; l++) {
+                            sum += image[k][l];
+                            count[k][l]++;
+                        }
+                    }
+
+                    for (int k = r0; k <= r1; k++) {
+                        for (int l = c0; l <= c1; l++) {
+                            int avg = sum / 9;
+                            res[k][l] = (count[k][l] == 1) ? avg : res[k][l] + avg;
+                        }
+                    }
+                } else {
+                    for (int k = r0; k <= r1; k++) {
+                        for (int l = c0; l <= c1; l++) {
+                            if (count[k][l] == 0) res[k][l] = image[k][l];
+                        }
+                    }
+                }
+            }
+        }
+
+        // Update overlapped averages
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                if (count[i][j] > 1) {
+                    res[i][j] = res[i][j] / count[i][j];
+                }
+            }
+        }
+
+        return res;
+    }
+
+    public boolean helper(int[][] image, int i, int j, int r0, int c0, int r1, int c1, int t) {
+        for (int[] dir : dirs) {
+            int x = dir[0] + i;
+            int y = dir[1] + j;
+            if (x < r0 || x > r1 || y < c0 || y > c1) continue;
+            if (Math.abs(image[x][y] - image[i][j]) > t) return false;
+        }
+        return true;
+    }
+}",https://leetcode.com/problems/find-the-grid-of-region-average/solutions/4673957/java-beat-100-easy/,"class Solution:
+    def resultGrid(self, im: List[List[int]], threshold: int) -> List[List[int]]:
+        
+        def isRegion(i, j):
+            for k in range(i, i+3):
+                for l in range(j, j+3):
+                    
+                    ist = True
+                    
+                    if k > i:
+                        ist = ist and (abs(im[k][l]-im[k-1][l]) <= threshold)
+                    if l > j:
+                        ist = ist and (abs(im[k][l]-im[k][l-1]) <= threshold) 
+                    if k+1 < i+2:
+                        ist = ist and (abs(im[k][l]-im[k+1][l]) <= threshold) 
+                    if l+1 < j+2:
+                        ist = ist and (abs(im[k][l]-im[k][l+1]) <= threshold)
+                    
+                    if not ist:
+                        return False
+            return True
+        
+        counts = [[0 for _ in range(len(im[0]))] for _ in range(len(im))]
+        result = [[0 for _ in range(len(im[0]))] for _ in range(len(im))]
+        
+        
+        
+        for i in range(len(im)-2):
+            for j in range(len(im[0])-2):             
+                if isRegion(i, j):
+                    # print('isRegion', i, j)
+                    curr = 0
+                    
+                    for k in range(i, i+3):
+                        for l in range(j, j+3):
+                            curr += im[k][l]
+                    
+                    for k in range(i, i+3):
+                        for l in range(j, j+3):
+                            result[k][l] += curr//9
+                            counts[k][l] += 1
+                # else:
+                #     print('not region ',i, j)
+        
+        # print(counts, result)
+        
+        for i in range(len(im)):
+            for j in range(len(im[0])):
+                if counts[i][j] > 0:
+                    result[i][j] = result[i][j]//counts[i][j]
+                else:
+                    result[i][j] = im[i][j]
+        
+        return result
+                    ",https://leetcode.com/problems/find-the-grid-of-region-average/solutions/4673965/just-do-what-is-asked-brute-force/,"class Solution {
+    vector<vector<int>> temp;
+public:
+    bool isreg(int r, int c, int k){
+        for(int i=r;i<(r+3);i++){
+            for(int j=c;j<(c+3);j++){
+                if(j<(c+2) && abs(temp[i][j] - temp[i][j+1])>k)
+                    return false;
+                if(i<(r+2) && abs(temp[i][j] - temp[i+1][j]) > k)
+                    return false;
+            }
+        }
+        return true;
+    }
+    
+    int calcavg(int r, int c){
+        int avg=0;
+        for(int i=r;i<r+3;i++){
+            for(int j=c;j<c+3;j++)
+                avg += temp[i][j];
+        }
+        return avg/9;
+    }
+    
+    vector<vector<int>> resultGrid(vector<vector<int>>& image, int threshold) {
+        temp = image;
+        int m = image.size();
+        int n = image[0].size();
+        vector<vector<int>> res(m, vector<int>(n, -1));
+        vector<vector<int>> div(m, vector<int>(n, 1));  // divisor matrix as the we need to be precise while calculating the average
+        for(int i=0;i<=m-3;i++){
+            for(int j=0;j<=n-3;j++){
+                if(isreg(i,j, threshold)){  // calculate if it is a region
+                    int avg = calcavg(i,j);     // calculate the average
+                    for(int ti = i;ti<(i+3);ti++){
+                        for(int tj=j;tj<(j+3);tj++)
+                            if(res[ti][tj]!=-1){
+                                res[ti][tj] = (res[ti][tj]+avg);
+                                div[ti][tj]++;
+                            }
+                            else{
+                                res[ti][tj] = avg;
+                                div[ti][tj]=1;
+                            }
+                    }
+                }
+            }
+        }
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(res[i][j]==-1){
+                    res[i][j]=image[i][j];
+                }
+                else{
+                    res[i][j] = res[i][j]/div[i][j];
+                }
+            }
+        }
+        
+        return res;
+    }
+};",https://leetcode.com/problems/find-the-grid-of-region-average/solutions/4673971/simple-logic-explained-c-commented-code/,
+find_indices,https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-i/,01-13-2024,"class Solution {
+  public List<Integer> beautifulIndices(String s, String a, String b, int k) {
+    // shift of pattern b
+    TreeSet<Integer> shifts = new TreeSet<>(build(s, b));
+
+    List<Integer> result = new ArrayList<>();
+    for (int i : build(s, a)) {
+      // check existence of j among [i - k, i + k + 1)
+      if (!shifts.subSet(i - k, i + k + 1).isEmpty()) {
+        result.add(i);
+      }
+    }
+
+    return result;
+  }
+
+  private List<Integer> build(String text, String pattern) {
+    List<Integer> shift = new ArrayList<>();
+
+    final int m = text.length();
+    final int n = pattern.length();
+    for (int i = 0; i <= m - n; i++) {
+      boolean match = true;
+      for (int j = 0; j < n; j++) {
+        if (pattern.charAt(j) != text.charAt(i + j)) {
+          match = false;
+          break;
+        }
+      }
+
+      if (match) {
+        shift.add(i);
+      }
+    }
+
+    return shift;
+  }
+}",https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-i/solutions/4561709/brute-force/,"from collections import deque
+
+class KMP:
+    def partial(pattern):
+        """""" Calculate partial match table: String -> [Int]""""""
+        ret = [0]
+        
+        for i in range(1, len(pattern)):
+            j = ret[i - 1]
+            while j > 0 and pattern[j] != pattern[i]:
+                j = ret[j - 1]
+            ret.append(j + 1 if pattern[j] == pattern[i] else j)
+        return ret
+
+    def search(T, P):
+        """""" 
+        KMP search main algorithm: String -> String -> [Int] 
+        Return all the matching position of pattern string P in T
+        """"""
+        partial, ret, j = KMP.partial(P), deque([]), 0
+        
+        for i in range(len(T)):
+            while j > 0 and T[i] != P[j]:
+                j = partial[j - 1]
+            if T[i] == P[j]: j += 1
+            if j == len(P): 
+                ret.append(i - (j - 1))
+                j = partial[j - 1]
+            
+        return ret
+
+class Solution:
+    def beautifulIndices(self, s: str, a: str, b: str, k: int) -> List[int]:
+
+        a, b = KMP.search(s, a), KMP.search(s, b)
+        ans = []
+
+        while a and b:
+            while b and b[0] < a[0] - k:
+                b.popleft()
+
+            if b and abs(a[0] - b[0]) <= k:
+                ans.append(a[0])
+
+            a.popleft()
+
+        return ans",https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-i/solutions/4561715/kmp-sliding-window/,"class Solution {
+public:
+    vector<int> beautifulIndices(string s, string a, string b, int k) {
+        vector<int> c, d;
+        int j = 0, n = s.size();
+        for(int i=0;i<n;i++) {
+            if(s[i] == a[j] and j < a.size()) {
+                j++;
+            } else {
+                if(j == a.size()) c.push_back(i-j);
+                j = 0;
+                if(s[i] == a[j]) j++;
+            }
+        }
+        if(j == a.size()) c.push_back(n-j);
+        j = 0;
+        for(int i=0;i<n;i++) {
+            if(s[i] == b[j] and j < b.size()) {
+                j++;
+            } else {
+                if(j == b.size()) d.push_back(i-j);
+                j = 0;
+                if(s[i] == b[j]) j++;
+            }
+        }
+        if(j == b.size()) d.push_back(n-j);
+        
+        vector<int> ans;
+        for(int num1 : c) {
+            for(int num2 : d) {
+                if(abs(num1-num2) <= k) {
+                    ans.push_back(num1);
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+};",https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-i/solutions/4561725/easy-c-solution/,
+find_polygon,https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/,12-23-2023,"class Solution {
+public long largestPerimeter(int[] nums) {
+final int n = nums.length;
+Arrays.sort(nums);
+long result = -1;
+long prefix = nums[0] + nums[1];
+for (int i = 2; i < n; i++) {
+if (prefix > nums[i]) {
+result = Math.max(result, prefix + nums[i]);
+}
+prefix += nums[i];
+}
+return result;
+}
+}",https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/solutions/4447256/triangle-a-b-c/,"class Solution:
+    def largestPerimeter(self, nums: List[int]) -> int:
+        nums.sort()
+        for i in range(0,len(nums),1):
+            print(nums[len(nums)-1-i],sum(nums[:len(nums)-i-1]))
+            if sum(nums[:len(nums)-i-1])>nums[len(nums)-1-i]:
+                return sum(nums[:len(nums)-i-1])+nums[len(nums)-1-i]
+        return -1
+                ",https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/solutions/4447260/python3-o-n-easy-solution/,"class Solution {
+public:
+    long long largestPerimeter(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        long long sum=0,ans=-1;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]<sum) ans=sum+nums[i];
+            sum+=nums[i];
+        }
+        return ans;
+    }
+};",https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/solutions/4447257/2-approaches-greedy-prefix-sum/,
+frequent_prime,https://leetcode.com/problems/most-frequent-prime/,2-17-2024,"class Solution {
+    public int mostFrequentPrime(int[][] mat) {
+        HashMap<String, Integer> hm = new HashMap<>();
+        
+        int m = mat.length, n = mat[0].length;
+        
+        for(int i=0; i<m; i++) {
+            for(int j=0; j<n; j++) {
+                traverse(mat, hm, i, j, -1, 0, m, n); // Top
+                traverse(mat, hm, i, j, -1, 1, m, n); // Top-right
+                traverse(mat, hm, i, j, 0, 1, m, n); // right
+                traverse(mat, hm, i, j, 1, 1, m, n); // bottom-right
+                traverse(mat, hm, i, j, 1, 0, m, n); // bottom
+                traverse(mat, hm, i, j, 1, -1, m, n); // bottom-left
+                traverse(mat, hm, i, j, 0, -1, m, n); // left
+                traverse(mat, hm, i, j, -1, -1, m, n); // top-left
+            }
+        }
+        
+        int maxfreq = 0;
+        for (int freq : hm.values()) {
+            maxfreq = Math.max(maxfreq, freq);
+        }
+        
+        int ans = -1;
+        for (String k : hm.keySet()) {
+            if (hm.get(k) == maxfreq) 
+                ans = Math.max(ans, Integer.parseInt(k));
+        }
+        
+        return ans;
+    }
+    
+    private StringBuilder sb = new StringBuilder();
+    public void traverse(int[][] mat, HashMap<String, Integer> hm, int curri, int currj, int upi, int upj, int m, int n) {
+        if(curri<0 || currj<0 || curri>=m || currj>=n)
+            return;
+        
+        sb.append(mat[curri][currj]);
+        int val = Integer.parseInt(sb.toString());
+        if(val > 10 && isPrime(val)) {
+            hm.put(sb.toString(), hm.getOrDefault(sb.toString(), 0) + 1);
+        }
+            
+        traverse(mat, hm, curri+upi, currj+upj, upi, upj, m, n);
+        sb.deleteCharAt(sb.length()-1);
+    }
+    
+    public boolean isPrime(int n) {
+        for(int i=2; i<=Math.sqrt(n); i++) {
+            if(n%i == 0) 
+                return false;
+        }
+        
+        return true;
+    }
+}",https://leetcode.com/problems/most-frequent-prime/solutions/4744439/simplest-approach-using-recursion/,"class Solution:
+    def mostFrequentPrime(self, mat: list[list[int]]) -> int:
+        d = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+        m, n = len(mat), len(mat[0])
+        counter = defaultdict(int)
+
+        def cal(i, j, val):
+            for dx, dy in d:
+                n_i, n_j, n_val = i, j, val
+                while n_i >= 0 and n_i < m and n_j >= 0 and n_j < n:
+                    n_val = n_val * 10 + mat[n_i][n_j]
+                    counter[n_val] += 1
+                    n_i, n_j = n_i + dx, n_j + dy
+            
+        def check(i):
+            if i < 10: return False
+            for j in range(2, int(sqrt(i)) + 1):
+                if i % j == 0:
+                    return False
+            return True
+        
+        for i in range(m):
+            for j in range(n):
+                cal(i, j, 0)
+        
+        cnt = [(counter[x], x) for x in counter.keys()]
+        cnt.sort(reverse=True)
+
+        for _, val in cnt:
+            if check(val):
+                return val
+        
+        return -1",https://leetcode.com/problems/most-frequent-prime/solutions/4744456/simple-solution/,"#include <iostream>
+#include <unordered_map>
+#include <queue>
+#include <cmath>
+
+using namespace std;
+
+class Solution {
+public:
+    bool prime(int n) {
+        for (int i = 2; i <= sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    int mostFrequentPrime(vector<vector<int>>& mat) {
+        unordered_map<int, int> map;
+        int n = mat.size();
+        int m = mat[0].size();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int num = 0;
+
+                for (int row = i; row < n; row++) {
+                    num = num * 10 + mat[row][j];
+                    if (num >= 10 && prime(num)) {
+                        map[num]++;
+                    }
+                }
+
+                num = 0;
+                for (int row = i; row >= 0; row--) {
+                    num = num * 10 + mat[row][j];
+                    if (num >= 10 && prime(num)) {
+                        map[num]++;
+                    }
+                }
+
+                num = 0;
+                for (int col = j; col < m; col++) {
+                    num = num * 10 + mat[i][col];
+                    if (num >= 10 && prime(num)) {
+                        map[num]++;
+                    }
+                }
+
+                num = 0;
+                for (int col = j; col >= 0; col--) {
+                    num = num * 10 + mat[i][col];
+                    if (num >= 10 && prime(num)) {
+                        map[num]++;
+                    }
+                }
+
+                num = 0;
+                for (int row = i, col = j; row < n && col < m; row++, col++) {
+                    num = num * 10 + mat[row][col];
+                    if (num >= 10 && prime(num)) {
+                        map[num]++;
+                    }
+                }
+
+                num = 0;
+                for (int row = i, col = j; row >= 0 && col >= 0; row--, col--) {
+                    num = num * 10 + mat[row][col];
+                    if (num >= 10 && prime(num)) {
+                        map[num]++;
+                    }
+                }
+
+                num = 0;
+                for (int row = i, col = j; row < n && col >= 0; row++, col--) {
+                    num = num * 10 + mat[row][col];
+                    if (num >= 10 && prime(num)) {
+                        map[num]++;
+                    }
+                }
+
+                num = 0;
+                for (int row = i, col = j; row >= 0 && col < m; row--, col++) {
+                    num = num * 10 + mat[row][col];
+                    if (num >= 10 && prime(num)) {
+                        map[num]++;
+                    }
+                }
+            }
+        }
+
+        priority_queue<pair> pq;
+
+        for (auto it = map.begin(); it != map.end(); ++it) {
+            pq.push(pair(it->second, it->first));
+        }
+
+        if (pq.empty()) {
+            return -1;
+        }
+        return pq.top().num;
+    }
+
+private:
+    struct pair {
+        int feq;
+        int num;
+
+        pair(int feq, int num) : feq(feq), num(num) {}
+
+        bool operator<(const pair& other) const {
+            if (feq != other.feq) {
+                return feq < other.feq;
+            } else {
+                return num < other.num;
+            }
+        }
+    };
+};",https://leetcode.com/problems/most-frequent-prime/solutions/4744458/simple-cpp-solution-very-easy-cpp/,
+house_distance,https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-i/,1-20-2024,"class Solution {
+    public int[] countOfPairs(int n, int x, int y) {
+        if (x == y) {
+            x = -1;
+            y = -1;
+        }
+        int[] result = new int[n];
+        for (int i = 1;i <= n;i++) {
+            Queue<int[]> queue = new ArrayDeque<>();
+            queue.add(new int[]{i, 0});
+            int[] distances = new int[n];
+            Arrays.fill(distances, Integer.MAX_VALUE);
+            Set<Integer> visited = new HashSet<>();
+            while (!queue.isEmpty()) {
+                int[] data = queue.poll();
+                int node = data[0];
+                int steps = data[1];
+                distances[node-1] = Math.min(distances[node-1], steps);
+                if (visited.contains(node)) {
+                    continue;
+                }
+                visited.add(node);
+                if (node == x || node == y) {
+                    queue.add(new int[]{node == x ? y : x, steps+1});
+                }
+                
+                if (node + 1 <= n) {
+                    queue.add(new int[]{node+1, steps+1});
+                }
+                if (node - 1 >= 1) {
+                    queue.add(new int[]{node-1, steps+1});
+                }       
+            }
+            for (int val : distances) {
+                if (val != 0)
+                    result[val-1]++;
+            }
+        }
+        return result;
+    }
+}",https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-i/solutions/4600583/java-bfs/,"class Solution:
+    def countOfPairs(self, n: int, x: int, y: int) -> List[int]:
+        vis=set()
+        if(x==y or x+1==y or y+1==x):
+            y=float('inf')
+            
+        ans=[0 for i in range(n)]
+        def do(cur):
+            st=[cur]
+            lv=0
+            while(st):
+                o=[]
+                for i in st:
+                    if(i-1>0 and i-1 not in vis):
+                        ans[lv]+=1
+                        o.append(i-1)
+                        vis.add(i-1)
+                    if(i+1<=n and i+1 not in vis):
+                        ans[lv]+=1
+                        o.append(i+1)
+                        vis.add(i+1)
+                    if(i==x):
+                        if(y not in vis):
+                            ans[lv]+=1
+                            o.append(y)
+                            vis.add(y)
+                    if(i==y):
+                        if(x not in vis):
+                            ans[lv]+=1
+                            o.append(x)
+                            vis.add(x)
+                st=o
+                lv+=1
+                # print(o,lv,cur)
+                        
+                    
+        for i in range(1,n+1):
+            vis={float('inf'),i}
+            do(i)
+        return ans
+    ",https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-i/solutions/4600666/bfs-finding-depths-brute-force/,"class Solution {
+public:
+    
+    vector<int> countOfPairs(int n, int x, int y) {
+        vector<int> ans(n, 0);
+        for (int i = 1; i <= n; ++i) {
+            for (int j = i + 1; j <= n; ++j) {
+                int d = min(abs(i - j), min(abs(i - x) + 1 + abs(y - j), abs(i - y) + 1 + abs(x - j)));
+                ans[d - 1] += 2;
+            }
+        }
+        return ans;
+    }
+
+};",https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-i/solutions/4600586/beats-81-of-codes-easy-solution/,https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-i/solutions/4600586/beats-81-of-codes-easy-solution/
+longest_common_prefix,https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/,2-17-2024,"class Solution {
+  public int longestCommonPrefix(int[] arr1, int[] arr2) {
+    List<String> one = new ArrayList<>();
+    for (int num : arr1) {
+      one.add(Integer.toString(num));
+    }
+
+    List<String> two = new ArrayList<>();
+    for (int num : arr2) {
+      two.add(Integer.toString(num));
+    }
+
+    return dfs(one, two, 0);
+  }
+
+  private int dfs(List<String> one, List<String> two, int depth) {
+    Map<Integer, List<String>> m1 = split(one);
+    Map<Integer, List<String>> m2 = split(two);
+
+    int max = depth;
+    for (int key : m1.keySet()) {
+      if (m2.containsKey(key)) {
+        max = Math.max(max, dfs(m1.get(key), m2.get(key), depth + 1));
+      }
+    }
+
+    return max;
+  }
+
+  private Map<Integer, List<String>> split(List<String> one) {
+    Map<Integer, List<String>> m = new HashMap<>();
+    for (String s : one) {
+      if (!s.isEmpty()) {
+        int d = s.charAt(0) - '0';
+        m.putIfAbsent(d, new ArrayList<>());
+        m.get(d).add(s.substring(1));
+      }
+    }
+
+    return m;
+  }
+}",https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/solutions/4744423/dfs/,"class Solution:
+    def longestCommonPrefix(self, arr11: List[int], arr21: List[int]) -> int:
+        d = defaultdict(int)
+        p = defaultdict(int)
+        arr1 = list(set(arr11))
+        arr2 = list(set(arr21))
+        count = 0
+        for i in arr1:
+            if d[i]==0:
+                d[i]+=1
+                a = str(i)
+                if len(a)>1:
+                    t = len(a)-1
+                    while t>0:
+                        if d[int(a[:t])]>0:
+                            break
+                        else:
+                            d[int(a[:t])]+=1
+                            t-=1
+        for i in arr2:
+            if p[i]==0:
+                p[i]+=1
+                a = str(i)
+                if d[i]>0:
+                    count = max(count,len(a))
+                elif len(a)>1:
+                    t = len(a)-1
+                    while t>0:
+                        if d[int(a[:t])]>0:
+                            count = max(count,len(a[:t]))
+                            break
+                        else:
+                            p[int(a[:t])]+=1
+                            t-=1
+        return count",https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/solutions/4744452/easy-python-solution/,"#include <string>
+class Solution {
+private:
+    struct TrieNode{
+        char num;
+        unordered_map<int,TrieNode*> map;
+        TrieNode(char c): num(c) {};
+    };
+public:
+    int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
+        TrieNode* root = new TrieNode(' ');
+        for(auto& ch: arr1){
+            stringstream ss;
+            ss << ch;
+            string str = ss.str();
+            TrieNode* cur = root;
+            for(auto& ch: str){
+                if(!cur -> map.count(ch)){
+                    TrieNode* tmp = new TrieNode(ch);
+                    cur -> map[ch] = tmp;
+                }
+                cur = cur -> map[ch];
+            }
+        }
+        
+        int ans = 0;
+        for(auto& ch: arr2){
+            stringstream ss;
+            ss << ch;
+            string str = ss.str();
+            TrieNode* cur = root;
+            int cnt = 0;
+            for(auto& ch: str){
+                if(!cur -> map.count(ch)) break;
+                cnt += 1;
+                cur = cur -> map[ch];
+            }
+            ans = max(ans,cnt);
+        }
+        return ans;
+    }
+};",https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/solutions/4744428/c-trie/,
+longest_substring_thrice,https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/,12-30-2023,"class Solution {
+  public int maximumLength(String s) {
+    // top three longest length of each char
+    int[][] count = new int[26][3];
+    final int n = s.length();
+    for (int i = 0, j = 0; i < n; i = j) {
+      char c = s.charAt(i);
+      // count the length of special substring
+      while (j < n && s.charAt(j) == c) {
+        j++;
+      }
+
+      // save the top three longest length
+      int[] t = count[c - 'a'];
+      Arrays.sort(t);
+      t[0] = Math.max(t[0], j - i);
+    }
+
+    int result = -1;
+    for (int[] p : count) {
+      Arrays.sort(p);
+      int a = p[0];
+      int b = p[1];
+      int c = p[2];
+
+      // invalid special substring
+      // [0, 1 ,1]
+      // [0, 0 ,2]
+      if (a + b + c < 3) {
+        continue;
+      }
+
+      if (a == b && a == c) {
+        // pick top three special substring
+        result = Math.max(result, c);
+      }
+
+      if (c == b + 1 || c == b) {
+        // pick top two special substring
+        result = Math.max(result, c - 1);
+      } else {
+        // pick top one special substring
+        result = Math.max(result, c - 2);
+      }
+    }
+
+    return result;
+  }
+}",https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/solutions/4480938/top-three-longest-special-substring/,"class Solution(object):
+    def maximumLength(self, s):
+        """"""
+        :type s: str
+        :rtype: int
+        """"""
+        s = s + '-'
+        maps = collections.defaultdict(list)
+        count = 1
+        for i in range(1, len(s)):
+            if s[i] == s[i - 1]:
+                count += 1
+            else:
+                maps[s[i - 1]].append(count)
+                count = 1
+        res = -1
+        for key in maps.keys():
+            val = self.compute(maps[key])
+            res = max(res, val)
+        return res
+    
+    def compute(self, arr):
+        left, right = 0, max(arr)
+        while left < right:
+            mid = (left + right + 1) / 2
+            count = 0
+            for ele in arr:
+                if ele >= mid:
+                    count += (ele - mid + 1)
+            if count >= 3:
+                left = mid
+            else:
+                right = mid - 1
+        return left if left >= 1 else -1",https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/solutions/4480977/binary-search-for-general-case/,"class Solution {
+public:
+    int maximumLength(string s) {
+        int ans = -1;
+        unordered_map<char, int>mp;
+        string aux="""";
+        for(int i = 0;i<s.length();i++){
+            mp[s[i]]++;
+        }
+        for(auto x : mp){
+            int y = x.second;
+            char c = x.first;
+            map<int, int>map2;
+            int length = 0;
+            int sum = 0;
+            for(int i = 0;i<s.length();i++){
+                if(s[i]==c){
+                    length++;
+                }
+                else{
+                    if(length){
+                        map2[length]++;
+                        sum++;
+                    }
+                    length = 0;
+                }
+            }
+            if(length!=0){
+                map2[length]++;
+                sum++;
+            }
+            int size = map2.size();
+            for(auto var : map2){
+                int r = 3-var.second;
+                int l = var.first;
+                if(var.second>=3)
+                    ans = max(ans, l);
+                else if(var.second==2)
+                    ans = max(ans, l-1);
+                else if(size>1)
+                    ans = max(ans, l);
+                else if(var.first>2)
+                        ans = max(ans, l-2);
+                size--;
+                }                    
+        }
+        if(ans==0)
+            return -1;
+        return ans;
+    }
+};",https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/solutions/4480947/check-for-each-alphabet-one-by-one/,
+max_good_subarray_sum,https://leetcode.com/problems/maximum-good-subarray-sum/,02-03-2024,"class Solution {
+    
+    long prefixSum[];
+    
+    public long maximumSubarraySum(int[] nums, int k) {
+        prefixSum = new long[nums.length];
+        prefixSum[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            prefixSum[i] = prefixSum[i - 1] + nums[i];
+        }
+        
+        long max = Long.MIN_VALUE;
+        HashMap<Integer, Integer> idxByNum = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (idxByNum.containsKey(k + nums[i])) {
+                int idx = idxByNum.get(k + nums[i]);
+                max = Math.max(max, sum(idx, i));
+            }
+            if (idxByNum.containsKey(nums[i] - k)) {
+                int idx = idxByNum.get(nums[i] - k);
+                max = Math.max(max, sum(idx, i));
+            }
+            
+            if (idxByNum.containsKey(nums[i])) {
+                int prev = idxByNum.get(nums[i]);
+                if (sum(prev + 1, i) < 0) {
+                    idxByNum.put(nums[i], i);
+                }
+            } else {
+                idxByNum.put(nums[i], i);
+            }
+        }
+        return max == Long.MIN_VALUE ? 0 : max;
+    }
+    
+    public long sum(int fromInclusive, int endInclusive) {
+        return prefixSum[endInclusive] - (fromInclusive > 0 ? prefixSum[fromInclusive - 1] : 0);
+    }
+}",https://leetcode.com/problems/maximum-good-subarray-sum/solutions/4671694/hashmap-prefix-sum-with-proof/,"class Solution:
+    def maximumSubarraySum(self, nums: List[int], k: int) -> int:
+        pref=list(accumulate(nums,initial=0))
+        d={}
+        ans=float('-inf')
+        for i,x in enumerate(nums):
+            if x not in d:
+                d[x]=i
+            elif pref[i]<pref[d[x]]:
+                d[x]=i
+            target=[x-k,x+k]
+            for t in target:
+                if t in d:
+                    ans=max(ans,pref[i+1]-pref[d[t]])
+        return ans if ans!=float(""-inf"") else 0",https://leetcode.com/problems/maximum-good-subarray-sum/solutions/4671702/prefix-sum-and-best-left-index-map/,"class Solution {
+public:
+    long long maximumSubarraySum(vector<int>& nums, int k) {
+        int n=nums.size();
+        vector<long long>pre(n);
+        pre[0]=nums[0];
+        for(int i=1;i<nums.size();i++)
+        {
+            pre[i]=pre[i-1]+nums[i];
+        }
+        unordered_map<int,vector<int>>mp;
+        long long ans=-1e16;
+        mp[nums[0]].push_back(0);
+        for(int i=1;i<n;i++)
+        {
+            for(auto it:mp[nums[i]-k])
+            {
+                long long sum=pre[i]-(it==0?0:pre[it-1]);
+                ans=max(ans,sum);
+            }
+            for(auto it:mp[nums[i]+k])
+            {
+                long long sum=pre[i]-(it==0?0:pre[it-1]);
+                ans=max(ans,sum);
+            }
+            mp[nums[i]].push_back(i);
+        }
+        return ans==-1e16?0:ans;
+    }
+};",https://leetcode.com/problems/maximum-good-subarray-sum/solutions/4671686/c/,
+max_num_elements_subsets,https://leetcode.com/problems/find-the-maximum-number-of-elements-in-subset/,01-27-2024,"class Solution {
+  public int maximumLength(int[] nums) {
+    int max = 0;
+    // [number, count]
+    TreeMap<Integer, Integer> count = new TreeMap<>();
+    for (int num : nums) {
+      max = Math.max(max, num);
+      count.merge(num, 1, Integer::sum);
+    }
+
+    int result = 1;
+    // iterator returns the entries in ascending key order
+    for (Map.Entry<Integer, Integer> entry : count.entrySet()) {
+      int key = entry.getKey();
+      int value = entry.getValue();
+
+      // the first must larger or equal than 2
+      if (value < 2) {
+        continue;
+      }
+
+      // fast fail
+      if ((long) key * key > max) {
+        break;
+      }
+
+      // [1,1,1,...,1,1] always follows the pattern
+      if (key == 1) {
+        // pay attention to odd number of 1
+        if (value % 2 == 0) {
+          result = Math.max(result, value - 1);
+        } else {
+          result = Math.max(result, value);
+        }
+        continue;
+      }
+
+      // check all pattern number
+      for (int i = 0; true; i++) {
+        key *= key;
+        int m = count.getOrDefault(key, 0);
+        // stop on m < 2
+        if (m == 1) {
+          result = Math.max(result, (i + 1) * 2 + 1);
+          break;
+        }
+
+        if (m == 0) {
+          result = Math.max(result, (i + 1) * 2 - 1);
+          break;
+        }
+      }
+    }
+
+    return result;
+  }
+}",https://leetcode.com/problems/find-the-maximum-number-of-elements-in-subset/solutions/4636699/check-all-possible-x-with-pattern/,"class Solution:
+    def maximumLength(self, nums: List[int]) -> int:
+        cnt = collections.Counter(nums)
+        res = 1
+        if 1 in cnt:
+            one = cnt[1]
+            if one % 2 == 0:
+                res = one - 1
+            else:
+                res = one
+        seen = {1}
+        for k in sorted(cnt.keys()):
+            if k not in seen:
+                if cnt[k] > 1:
+                    curMax = 1
+                    cur = k
+                    while cur * cur in cnt:
+                        curMax += 1
+                        cur = cur * cur
+                        if cnt[cur] == 1:
+                            break
+                        seen.add(cur)
+                    res = max(res, curMax * 2 - 1)
+            seen.add(k)
+        return res",https://leetcode.com/problems/find-the-maximum-number-of-elements-in-subset/solutions/4636709/python-easy-solution/,"typedef long long ll;
+
+class Solution {
+public:
+    bool checkPerfectSquare(ll x) {
+        
+        if(ceil(double(sqrt(x))) == floor(double(sqrt(x)))) return true;
+        else return false;
+    }
+    
+    int maximumLength(vector<int>& nums) {
+        
+        unordered_map<int, int> map;
+        
+        for(auto x : nums) {
+            map[x]++;
+        }
+        
+        int subLen = 1;
+        for(ll x : nums) {
+            int tempLen = 1;
+            
+            // Edge case i.e. when the current element is 1. It can 
+            // include as many odd number of 1 in its subset.
+            if(x == 1) {
+                if(map[x] != 1) subLen = max(subLen, map[x] - (map[x]%2 == 0));
+                continue;
+            }
+            
+            // First check whether the current no. itself is eligible to be a perfect square.
+            while(checkPerfectSquare(x)) {
+
+                // Then check the other condition for it predecessors
+
+                ll sqrtX = sqrt(x);
+                if(map.find(sqrtX) != map.end() && map[sqrtX] >=2) {
+                    tempLen += 2;
+                }
+                else {
+                    break;
+                }
+
+                // Reduce the peak
+                x = sqrtX;
+            }
+            
+            subLen = max(subLen, tempLen);
+        }
+        
+        return subLen;
+    }
+};",https://leetcode.com/problems/find-the-maximum-number-of-elements-in-subset/solutions/4636706/hashmap-or-unordered-map-easy-and-explanation/,
+max_num_less_eq_k,https://leetcode.com/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k/,01-13-2024,"public class Solution {
+    public long count(long k, int bit, int x) {
+        if (k < bit)
+            return 0;
+        long n = 1, bits = bit, p = 1;
+        while (2 * bits + (p % x == 0 ? n : 0) <= k) {
+            bits = 2 * bits + (p % x == 0 ? n : 0);
+            n *= 2;
+            ++p;
+        }
+        return n + count(k - bits, bit + (p % x == 0 ? 1 : 0), x);
+    }
+
+    public long findMaximumNumber(long k, int x) {
+        return count(k, 0, x) - 1;
+    }
+
+    
+}",https://leetcode.com/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k/solutions/4561785/java/,"class Solution:
+    def __init__(self):
+        self.x = None
+
+    def price(self, num):
+        res = 0
+        for i in range(self.x - 1, 64, self.x):
+            numModTwoTimesI = num % (1 << (i + 1))
+            res += ((num - numModTwoTimesI) >> 1) + max(numModTwoTimesI - (1 << i), 0)
+        return res
+
+    def findMaximumNumber(self, k: int, x: int) -> int:
+        self.x = x
+        return bisect_right(range((1 << 63) - 1), k, key=self.price) - 2",https://leetcode.com/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k/solutions/4561717/binary-search-over-answer/,"class Solution {
+public:
+    long long findMaximumNumber(long long k, int x) {
+        long long ans;
+        long long l = 0, r = 1e17;
+        vector<int> v;    //bits which should be considered
+        for (int i = 0; i < 54;i++){
+            if(((i+1)%x)==0)
+                v.push_back(i);
+        }
+        while (l <= r)
+        {
+            long long m = (l + r) / 2;
+            long long count = 0;
+            long long one=1;
+            for(int i: v){
+                count += ((m + 1) / (one<<(i+1)))*(one<<i);   //in ith bit 2^i 0s and 1s repeat
+                long long t=(m+1)/(one<<i);     // number of one set 0 and 1
+
+                if(t&1){                      //t is odd
+                    count += (m+1)%(one<<i);  //then all 0s are covered and at last few 1s may be present add these 1s
+                }
+
+            }
+
+            if(count<=k){
+                ans = m;
+                l = m + 1;
+            }
+            else{
+                r = m - 1;
+            }
+        }
+        return ans;
+        }
+};",https://leetcode.com/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k/solutions/4561777/easy-binary-search-with-explanation/,
+max_num_ops,https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-ii/,02-17-2024,"class Solution {
+    int N = 0;
+    Integer[][] memo1, memo2, memo3;
+    public int maxOperations(int[] nums) {
+        N = nums.length;
+        memo1 = new Integer[N][N];
+        memo2 = new Integer[N][N];
+        memo3 = new Integer[N][N];
+        
+        int sum1 = nums[0] + nums[1];
+        int sum2 = nums[N - 1] + nums[N - 2];
+        int sum3 = nums[0] + nums[N - 1];
+        return Math.max(Math.max(helper(nums, 0, N - 1, sum2, memo2), helper(nums, 0, N - 1, sum1, memo1)), helper(nums, 0, N - 1, sum3, memo3));
+    }
+    
+    int helper(int[] nums, int l, int r, int sum, Integer[][] memo) {
+        if(l > r - 1) return 0;
+        if(memo[l][r] != null) return memo[l][r];
+        int res1 = 0, res2 = 0, res3 = 0;
+        if(nums[l] + nums[l + 1] == sum) {
+            res1 = 1 + helper(nums, l + 2, r, sum, memo);
+        }
+        if(nums[r] + nums[r - 1] == sum) {
+            res2 = 1 + helper(nums, l, r - 2, sum, memo);
+        }
+        if(nums[l] + nums[r] == sum) {
+            res3 = 1 + helper(nums, l + 1, r - 1, sum, memo);
+        }
+        return memo[l][r] = Math.max(Math.max(res1, res2), res3);
+    }
+
+}",https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-ii/solutions/4742267/java-dp-topdown/,"class Solution:
+    def maxOperations(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 1: return 0
+        @cache
+        def dfs(target, start, end):
+            if end - start <= 0:
+                return 0
+            p1 = p2 = p3 = 0
+            if nums[start] + nums[start+1] == target:
+                p1 = 1 + dfs(target, start+2, end)
+            if nums[start] + nums[end] == target:
+                p2 = 1 + dfs(target, start+1, end-1)
+            if nums[end] + nums[end-1] == target:
+                p3 = 1 + dfs(target, start, end-2)
+            return max(p1, p2, p3)
+        return max(dfs(nums[0]+nums[1], 0, n-1), dfs(nums[0]+nums[-1], 0, n-1), dfs(nums[-1]+nums[-2], 0, n-1))",https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-ii/solutions/4742269/dp-solution/,"class Solution {
+public:
+    vector<vector<int>>dp;
+    int solve(int l,int r,int score,vector<int>&nums)
+    {
+        if(l>=r)return 0;
+        if(dp[l][r]!=-1)return dp[l][r];
+        
+        int ans=0;
+        if(nums[l]+nums[l+1]==score)ans=max(ans,1+solve(l+2,r,score,nums));
+        if(nums[r]+nums[r-1]==score)ans=max(ans,1+solve(l,r-2,score,nums));
+        if(nums[l]+nums[r]==score)ans=max(ans,1+solve(l+1,r-1,score,nums));
+        
+        return dp[l][r]=ans;
+    }
+    int maxOperations(vector<int>& nums) {
+        dp.resize(nums.size()+1,vector<int>(nums.size()+1,-1));
+        int n=nums.size();
+        int ans=0;
+        ans=max(ans,1+solve(2,n-1,nums[0]+nums[1],nums));
+        ans=max(ans,1+solve(0,n-3,nums[n-1]+nums[n-2],nums));
+        ans=max(ans,1+solve(1,n-2,nums[0]+nums[n-1],nums));
+        return ans;
+    }
+};",https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-ii/solutions/4742284/c-dp-easy-solution-memoization/,
+max_palindrome_ops,https://leetcode.com/problems/maximum-palindromes-after-operations/,02-10-2024,"class Solution {
+    public int maxPalindromesAfterOperations(String[] words) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        
+        int[] freq = new int[26];
+        for(String word: words) {
+            pq.add(word.length());
+            for(char ch: word.toCharArray()) {
+                freq[ch - 'a']++;
+            }
+        }
+        
+        int cnt = 0;
+        while(!pq.isEmpty()) {
+            int n = pq.poll();
+            
+            if(n%2 != 0) {
+                for(int i=0; i<26; i++) {
+                    if(freq[i]%2 != 0) {
+                        n -= 1;
+                        freq[i]-=1;
+                        if(n == 0) cnt++;
+                        break;
+                    }
+                }
+            }
+            
+            if(n != 0) {
+                for(int i=0; i<26; i++) {
+                    if(freq[i]>=n) {
+                        cnt++;
+                        freq[i] -= n;
+                        break;
+                    } else {
+                        int nc = freq[i]/2;
+                        n -= 2*nc;
+                        freq[i] -= 2*nc;
+                    }
+                }
+            }
+        }
+        
+        return cnt;
+    }
+}",https://leetcode.com/problems/maximum-palindromes-after-operations/solutions/4708804/simplest-appraoch/,"class Solution:
+    def maxPalindromesAfterOperations(self, words: List[str]) -> int:
+        n = len(words)
+        v = Counter(''.join(words)).most_common()     
+        v = sum([f//2 for a,f in v])        
+        sizes = [len(w) for w in words]
+        sizes.sort()
+        
+        ans = 0
+        for i in range(n):
+            need = sizes[i]//2
+            x = min(need,v)
+            v-=x 
+            need-=x
+            if need==0:
+                ans+=1
+        
+        return ans
+",https://leetcode.com/problems/maximum-palindromes-after-operations/solutions/4708762/greedy-and-sorting-python/,"int maxPalindromesAfterOperations(vector<string> words) {
+    int n = words.size();
+    vector<int> chrs(26);
+    vector<int> lens;
+    for(auto& word : words){
+        for(char c : word){
+            chrs[c-'a']++;
+        }
+        lens.push_back(word.size());
+    }
+    int pairs=0,singles =0;
+    for(int x : chrs){
+        pairs += x/2;
+        singles += (x%2);
+    }
+    sort(lens.begin(), lens.end());
+    int ans = 0;
+    for(int i=0;i<n;i++){
+        int len = lens[i];
+        bool odd = (len%2);
+        if (odd){
+            if (singles)
+                singles--;
+            else {
+                pairs--;
+                singles++;
+            }
+            len--;
+        }
+        if (pairs >= len/2){
+            ans++;
+            pairs -= len/2;
+        }
+    }
+    return ans;
+}",https://leetcode.com/problems/maximum-palindromes-after-operations/solutions/4708753/count-pairs-and-singles-detailed-explanation-c/,
+max_set_removals,https://leetcode.com/problems/maximum-size-of-a-set-after-removals/,01-06-2024,"class Solution {
+    public int maximumSetSize(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int dyn=0; //count of elements which contains in both arrays i.e. dynamic
+        int n=nums1.length;
+        int c=n/2; //cutoff elements
+        int a=0; //count of nums1 elements to be added
+        int b=0; //count of nums2 elements to be added
+        int idx1=0;
+        int idx2=0;
+        HashSet<Integer> hs=new HashSet<>(); //Hashset to see which elements are visisted
+        
+        while(idx1<n||idx2<n){
+            int val1=Integer.MAX_VALUE;
+            int val2=Integer.MAX_VALUE;
+            if(idx1<n) val1=nums1[idx1];
+            if(idx2<n) val2=nums2[idx2];
+            if(val1==val2){ //same element
+                idx1++;
+                idx2++;
+                if(hs.contains(val1)) continue;
+                hs.add(val1);
+                dyn++;
+            }else if(val1<val2){ //nums1 element is small
+                idx1++;
+                if(hs.contains(val1)||a==c) continue; //a==c means, we have already reached cutoff for a
+                hs.add(val1);
+                a++;
+            }else{ //nums2 element is small
+                idx2++;
+                if(hs.contains(val2)||b==c) continue; //b==c means, we have already reached cutoff for b
+                hs.add(val2);
+                b++;
+            }
+        }
+        
+        if(a+b<n) // if total elements from a and b are less than n then take elemnts from dynamic
+            if(a+b+dyn>n) return n;
+            else return a+b+dyn;
+        return a+b;
+    }
+}",https://leetcode.com/problems/maximum-size-of-a-set-after-removals/solutions/4520686/simple-solution-with-comments-java/,"class Solution:
+    def maximumSetSize(self, nums1: List[int], nums2: List[int]) -> int:
+        n = len(nums1)
+        S1, S2 = set(nums1), set(nums2)
+        s1, s2 = set(nums1), set(nums2)
+        if len(S1) > n//2:
+            for num in s1:
+                if num in S2:
+                    S1.remove(num)
+                    if len(S1) == n//2: break
+            while len(S1) > n//2:
+                for num in s1:
+                    if num in S1:
+                        S1.remove(num)
+                        if len(S1) == n//2: break
+        if len(S2) > n//2:
+            for num in s2:
+                if num in S1:
+                    S2.remove(num)
+                    if len(S2) == n//2: break
+            while len(S2) > n//2:
+                for num in s2:
+                    if num in S2:
+                        S2.remove(num)
+                        if len(S2) == n//2: break
+                    
+        return len(S1 | S2)
+        ",https://leetcode.com/problems/maximum-size-of-a-set-after-removals/solutions/4520682/python-solution-set/,"class Solution {
+public:
+    int maximumSetSize(vector<int>& A, vector<int>& B) {
+        int n=A.size();
+        unordered_set<int>s1(A.begin(),A.end());
+        unordered_set<int>s2(B.begin(),B.end());
+        int i=0,j=0;
+        unordered_set<int>st;
+        // Add all unique elements first
+
+        for(auto&it:s1){
+            if(i==n/2) break;
+            if(s2.find(it)==s2.end()) {
+                st.insert(it);
+                i++;
+            }
+        }
+        for(auto&it:s2){
+            if(j==n/2) break;
+            if(s1.find(it)==s1.end()) {
+                st.insert(it);
+                j++;
+            }
+        }
+
+        //If we still have some elements left, add duplicates
+
+        if(i<n/2){
+            for(auto&it:s1){
+                if(i==n/2) break;
+                if(s2.find(it)!=s2.end()) {
+                    st.insert(it);
+                    // to add it in different n/2 set from s2
+                    s2.erase(it);
+                    i++;
+                }
+            }
+        }
+        if(j<n/2){
+            for(auto&it:s2){
+                if(j==n/2) break;
+                if(s1.find(it)!=s1.end()) {
+                    st.insert(it);
+                    j++;
+                }
+            }
+        }
+        return st.size();
+    }
+};",https://leetcode.com/problems/maximum-size-of-a-set-after-removals/solutions/4520676/set-easy/,
+max_sq_area,https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/,12-23-2023,"class Solution {
+  private static final int modulo = (int) 1e9 + 7;
+
+  public int maximizeSquareArea(int m, int n, int[] hFences, int[] vFences) {
+    Set<Integer> seen = new HashSet<>();
+    int l = hFences.length + 2;
+    int[] h = Arrays.copyOf(hFences, l);
+    // add both boundary
+    h[l - 2] = 1;
+    h[l - 1] = m;
+    for (int i = 0; i < l; i++) {
+      for (int j = i + 1; j < l; j++) {
+        seen.add(Math.abs(h[j] - h[i]));
+      }
+    }
+
+    l = vFences.length + 2;
+    int[] v = Arrays.copyOf(vFences, l);
+    // add both boundary
+    v[l - 2] = 1;
+    v[l - 1] = n;
+
+    int gap = 0;
+    // check vertical fences
+    for (int i = 0; i < l; i++) {
+      for (int j = i + 1; j < l; j++) {
+        int distance = Math.abs(v[j] - v[i]);
+        if (seen.contains(distance)) {
+          gap = Math.max(gap, distance);
+        }
+      }
+    }
+
+    if (gap == 0) {
+      return -1;
+    }
+
+    return (int) ((long) gap * gap % modulo);
+  }
+}
+",https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/solutions/4449488/largest-common-gap-between-fences/,"
+class Solution:
+    def maximizeSquareArea(self, m: int, n: int, hFences: List[int], vFences: List[int]) -> int:
+        sects = defaultdict(list)
+        hFences.insert(0, 1); hFences.append(m)
+        vFences.insert(0, 1); vFences.append(n)
+        hFences.sort(); vFences.sort()
+        answer = -1
+        for h in hFences:
+            for v in vFences:
+                if h-v not in sects:
+                    sects[h-v] = [h, v]
+                else:
+                    answer = max(answer, (h-sects[h-v][0]) * (v-sects[h-v][1]))
+        if answer == -1: return -1
+        return answer % 1000000007    ",https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/solutions/4449536/python3-hash/,"class Solution {
+public:
+    int maximizeSquareArea(int m, int n, vector<int>& H, vector<int>& V) {
+        int mod = 1E9 + 7;
+        
+        // also push boundries of vertical and horizontal frence
+        H.push_back(1), H.push_back(m);
+        V.push_back(1), V.push_back(n);
+        
+        // sort all horizontal frence and vertical frence
+        sort(H.begin(), H.end());
+        sort(V.begin(), V.end());
+        
+        // calculate all possible horizontal length for area with removing some h_frence
+        unordered_set<int> h_len;
+        for(int i = 0; i < H.size(); i++) {
+            for(int j = i + 1; j < H.size(); j++) {
+                h_len.insert(H[j] - H[i]);
+            }
+        }
+        
+        long long ans = -1;
+        
+         // calculate all possible vertical length for area with removing some h_frence
+        for(int i = 0; i < V.size(); i++) {
+            for(int j = i + 1; j < V.size(); j++) {
+                int v_len = V[j] - V[i];
+                // horizontal length match to vertical length then we make square with length v_len
+                if(h_len.count(v_len)) ans = max(ans, v_len * 1ll * v_len);
+            }
+        }
+        
+        
+        return ans % mod;
+    }
+};",https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/solutions/4449490/cpp-very-easy-subarray-question-with-explanation/,
+min_cost_covert_str,https://leetcode.com/problems/minimum-cost-to-convert-string-i/,12-23-2023,"class Solution {
+    public long minimumCost(String s, String t, char[] o, char[] c, int[] cost) {
+        long[][] g = new long[26][26];
+        
+        for(int i = 0; i < o.length; i++){
+            if(g[o[i]-'a'][c[i]-'a'] > 0)
+                g[o[i]-'a'][c[i]-'a'] = Math.min(g[o[i]-'a'][c[i]-'a'], cost[i]);
+            else
+                g[o[i]-'a'][c[i]-'a'] = cost[i];
+        }
+        // System.out.println(g[2][1]);
+        // System.out.println(g[2][4]);
+        // System.out.println(g[4][1]);
+        
+        for(int k = 0; k < 26; k++){
+            for(int i = 0; i < 26; i++)
+                for(int j = 0; j < 26; j++){
+                    // if(i == 2 && j == 1 && k == 4)
+                    //     System.out.println(i +"" ""+ j + "" ""+k + ""  g[i][k]=""+g[i][k] +"" g[k][i]=""+g[k][i]);
+                    if(g[i][k] > 0 && g[k][j] > 0){
+                        
+                        if(g[i][j] == 0 || g[i][j] > g[i][k] + g[k][j]){
+                            
+                            g[i][j] = g[i][k] + g[k][j];
+                        }
+                    }
+                }
+        }
+
+        long ans = 0;
+        
+        for(int i = 0; i < s.length(); i++){
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
+            
+            int isc = sc - 'a';
+            int itc = tc - 'a';
+            
+            if(isc != itc){
+                if(g[isc][itc] > 0){
+                    ans += g[isc][itc];
+                }
+                else
+                    return -1;
+            }
+        }
+        
+        return ans;
+    }
+}",https://leetcode.com/problems/minimum-cost-to-convert-string-i/solutions/4449493/super-easy-explain-floyd-warshall/,"class Solution(object):
+    def minimumCost(self, source, target, original, changed, cost):
+        """"""
+        :type source: str
+        :type target: str
+        :type original: List[str]
+        :type changed: List[str]
+        :type cost: List[int]
+        :rtype: int
+        """"""
+    
+        A = [[float('inf') for i in range(26)] for j in range(26)]
+        
+        for i in range(len(original)):
+            a, b = original[i], changed[i]
+            a, b = ord(a) - ord('a'), ord(b) - ord('a')
+            A[a][b] = min(A[a][b], cost[i])
+        for k in range(26):
+            for i in range(26):
+                for j in range(26):
+                    if A[i][j] > A[i][k] + A[k][j]:
+                        A[i][j] = A[i][k] + A[k][j]
+        res = 0
+        for i in range(len(source)):
+            if source[i] != target[i]:
+                a, b = source[i], target[i]
+                a, b = ord(a) - ord('a'), ord(b) - ord('a')
+                if A[a][b] == float('inf'): return -1
+                res += A[a][b]
+                
+        return res",https://leetcode.com/problems/minimum-cost-to-convert-string-i/solutions/4449495/floyd-algorithm/,"typedef pair<int,int> pii;
+
+class Solution {
+public:
+    long long minimumCost(string source, string target, vector<char>& O, vector<char>& C, vector<int>& cost) {
+        vector<vector<pii>> adj(26);
+        for (int i = 0; i < O.size(); i++) {
+            adj[O[i]-'a'].push_back({C[i]-'a', cost[i]});
+        }
+        
+        vector<vector<int>> memo(26, vector<int>(26, -1));
+        
+        function<int(int,int)> dijkstra = [&](int s, int e) {
+            if (memo[s][e] != -1) return memo[s][e];
+            
+            int n = adj.size();
+            vector<int> dist(n, INT_MAX);
+            dist[s] = 0;
+
+            priority_queue<pii, vector<pii>, greater<pii>> minq;
+            minq.push({0, s});
+
+            int u, v, w;
+            while (!minq.empty()) {
+                auto p = minq.top(); minq.pop();
+                u = p.second;
+
+                if (dist[u] < p.first)
+                    continue;
+
+                if (u == e)
+                    return memo[s][e] = p.first;
+
+                for (auto& node: adj[u]) {
+                    v = node.first, w = node.second;
+                    if (dist[v] > dist[u] + w) {
+                        dist[v] = dist[u] + w;
+                        minq.push({dist[v], v});
+                    }
+                }
+            }
+            return memo[s][e] = (dist[e] == INT_MAX ? -2 : dist[e]);
+        };
+        
+        long long res = 0;
+        for (int i = 0; i < source.size(); i++) {
+            if (source[i] != target[i]) {
+                int c = dijkstra(source[i]-'a', target[i]-'a');
+                if (c < 0) return -1;
+                res += c;
+            }
+        }
+        return res;
+    }
+};",https://leetcode.com/problems/minimum-cost-to-convert-string-i/solutions/4449496/c-shortest-path-dijkstra/,
+min_len_ops,https://leetcode.com/problems/minimize-length-of-array-using-operations/,01-20-2024,"class Solution {
+     private int gcd(int A,int B) {
+        while (B!=0) {
+            int temp=B;
+            B=A%B;
+            A=temp;
+        }
+        return A;
+    }
+    public int minimumArrayLength(int[] nums) {
+        Arrays.sort(nums);
+        int G=nums[0];
+        for (int i=1;i<nums.length;i++) {
+            G=gcd(G,nums[i]);
+        }
+        int count=0;
+        for (int i=0;i<nums.length;i++){
+            if (nums[i]==G)
+                count++;
+        }
+        return Math.max(1,(count+1)/2);
+    }
+}",https://leetcode.com/problems/minimize-length-of-array-using-operations/solutions/4598313/biweekly-contest-122-java-easy-approach/,"class Solution:
+    def minimumArrayLength(self, nums: List[int]) -> int:
+        nums.sort()
+        
+        cnt = 1
+        for num in nums[1:]:
+            if num == nums[0]: cnt += 1
+            else: 
+                if num % nums[0] != 0: return 1
+        return (cnt+1)//2",https://leetcode.com/problems/minimize-length-of-array-using-operations/solutions/4598266/python-10-line-code/,"class Solution {
+public:
+    int minimumArrayLength(vector<int>& nums) {
+        int mx = INT_MIN, mn = INT_MAX, res = 0;
+        for(auto& a: nums) 
+            mx = max(mx, a), mn = min(mn, a);
+        for(auto& a: nums)
+            if(a == mn) res++;
+            else if(a % mn != 0) return 1;
+        return (res+1)/2;
+    }
+};",https://leetcode.com/problems/minimize-length-of-array-using-operations/solutions/4598273/easy-and-clean-o-n-c-solution/,
+min_moves_queen,https://leetcode.com/problems/minimum-moves-to-capture-the-queen/,01-06-2024,"class Solution {
+    public int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {
+        int rookXPosition = a;
+        int rookYPosition = b;
+        int bishopXPosition = c;
+        int bishopYPosition = d; 
+        int queenXPosition = e;
+        int queenYPosition = f;
+        
+        int result = 2;
+                
+        int tempRookXPosition = rookXPosition;
+        int tempRookYPosition = rookYPosition;
+        
+        while (tempRookXPosition <= 8) {
+            if (tempRookXPosition == bishopXPosition && tempRookYPosition == bishopYPosition) {
+                break;
+            }
+            if (tempRookXPosition == queenXPosition && tempRookYPosition == queenYPosition) {
+                result = Math.min(result, 1);
+            }
+            tempRookXPosition++;
+        }
+        
+        tempRookXPosition = rookXPosition;
+        tempRookYPosition = rookYPosition;
+        
+        while (tempRookXPosition >= 1) {
+            if (tempRookXPosition == bishopXPosition && tempRookYPosition == bishopYPosition) {
+                break;
+            }
+            if (tempRookXPosition == queenXPosition && tempRookYPosition == queenYPosition) {
+                result = Math.min(result, 1);
+            }
+            tempRookXPosition--;
+        }
+                
+        tempRookXPosition = rookXPosition;
+        tempRookYPosition = rookYPosition;
+        
+        while (tempRookYPosition <= 8) {
+            if (tempRookXPosition == bishopXPosition && tempRookYPosition == bishopYPosition) {
+                break;
+            }
+            if (tempRookXPosition == queenXPosition && tempRookYPosition == queenYPosition) {
+                result = Math.min(result, 1);
+            }
+            tempRookYPosition++;
+        }
+        
+        tempRookXPosition = rookXPosition;
+        tempRookYPosition = rookYPosition;
+        
+        while (tempRookYPosition >= 1) {
+            if (tempRookXPosition == bishopXPosition && tempRookYPosition == bishopYPosition) {
+                break;
+            }
+            if (tempRookXPosition == queenXPosition && tempRookYPosition == queenYPosition) {
+                result = Math.min(result, 1);
+            }
+            tempRookYPosition--;
+        }
+        
+        int tempBishopXPosition = bishopXPosition;
+        int tempBishopYPosition = bishopYPosition;
+        
+        while (tempBishopXPosition >= 1 || tempBishopYPosition >= 1) {
+            if (tempBishopXPosition == rookXPosition && tempBishopYPosition == rookYPosition) {
+                break;
+            }
+            if (tempBishopXPosition == queenXPosition && tempBishopYPosition == queenYPosition) {
+                result = Math.min(result, 1);
+            }
+            tempBishopXPosition--;
+            tempBishopYPosition--;
+        }  
+        
+        tempBishopXPosition = bishopXPosition;
+        tempBishopYPosition = bishopYPosition;
+        
+        while (tempBishopXPosition <= 8 || tempBishopYPosition <= 8) {
+            if (tempBishopXPosition == rookXPosition && tempBishopYPosition == rookYPosition) {
+                break;
+            }
+            if (tempBishopXPosition == queenXPosition && tempBishopYPosition == queenYPosition) {
+                result = Math.min(result, 1);
+            }
+            tempBishopXPosition++;
+            tempBishopYPosition++;
+        } 
+        
+        tempBishopXPosition = bishopXPosition;
+        tempBishopYPosition = bishopYPosition;
+        
+        while (tempBishopXPosition >= 1 || tempBishopYPosition <= 8) {
+            if (tempBishopXPosition == rookXPosition && tempBishopYPosition == rookYPosition) {
+                break;
+            }
+            if (tempBishopXPosition == queenXPosition && tempBishopYPosition == queenYPosition) {
+                result = Math.min(result, 1);
+            }
+            tempBishopXPosition--;
+            tempBishopYPosition++;
+        }  
+        
+        tempBishopXPosition = bishopXPosition;
+        tempBishopYPosition = bishopYPosition;
+        
+        while (tempBishopXPosition <= 8 || tempBishopYPosition >= 1) {
+            if (tempBishopXPosition == rookXPosition && tempBishopYPosition == rookYPosition) {
+                break;
+            }
+            if (tempBishopXPosition == queenXPosition && tempBishopYPosition == queenYPosition) {
+                result = Math.min(result, 1);
+            }
+            tempBishopXPosition++;
+            tempBishopYPosition--;
+        } 
+        
+        return result;
+    }
+}",https://leetcode.com/problems/minimum-moves-to-capture-the-queen/solutions/4520683/java-solution/,"class Solution:
+    def minMovesToCaptureTheQueen(self, a: int, b: int, c: int, d: int, e: int, f: int) -> int:
+        wb = (2 - int(c-d==e-f) - int(c+d==e+f)) if (c+d)%2==(e+f)%2 else 10000
+        wr = 2 - int(a==e) - int(b==f)
+        if (a==c and c==e and min(b, f) < d < max(b, f)) or (b==d and d==f and min(a, e) < c < max(a, e)):
+            wr += 1
+        if (a+b==c+d and a+b==e+f and min(c, e) < a < max(c, e)) or (a-b==c-d and a-b==e-f and min(c, e) < a < max(c, e)):
+            wb += 1
+        return min(wb, wr)",https://leetcode.com/problems/minimum-moves-to-capture-the-queen/solutions/4520673/simple-solution-math/,"class Solution {
+public:
+    int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {
+        // (a,b)
+        // (c,d)
+        // (e,f)
+        int rook = 2, bishop = 2;
+        if (a == e || b == f) { // rook: is inline
+            // BlockingCase1
+            if (a == e and c == a) {
+                if (b < d and d < f) return 2;
+                if (b > d and d > f) return 2;
+            }
+            else if (b == f and d == b) {
+                if (a < c and c < e) return 2;
+                if (a > c and c > e) return 2;
+            } 
+            rook = 1;
+        }
+        if (abs(c-e) == abs(d-f)) { // bishop: is diagonal
+            // BlockingCase2
+            if (abs(a-c) == abs(b-d)) {
+                if (c < a and a < e) { 
+                    if (d < b and b < f) return 2;
+                    if (d > b and b > f) return 2;
+                }
+                if (c > a and a > e) {
+                    if (d < b and b < f) return 2;
+                    if (d > b and b > f) return 2;
+                }
+            }
+            bishop = 1;
+        }
+        return min(rook, bishop);
+    }
+}",https://leetcode.com/problems/minimum-moves-to-capture-the-queen/solutions/4520687/o-1-explanation-with-the-graphs/,
+min_num_x_and_y,https://leetcode.com/problems/minimum-number-of-operations-to-make-x-and-y-equal/,01-06-2024,"class Solution {
+  public int minimumOperationsToMakeEqual(int x, int y) {
+    if (x <= y) {
+      return y - x;
+    }
+    Set<Integer> seen = new HashSet<>();
+    seen.add(x);
+    Queue<Integer> queue = new ArrayDeque<>();
+    queue.add(x);
+    int depth = 0;
+    while (!queue.isEmpty()) {
+      for (int i = queue.size(); i > 0; i--) {
+        int p = queue.poll();
+        if (p == y) {
+          return depth;
+        }
+
+        if (seen.add(p + 1)) {
+          queue.offer(p + 1);
+        }
+
+        if (seen.add(p - 1) && p - 1 > 0) {
+          queue.offer(p - 1);
+        }
+
+        if (p % 5 == 0 && seen.add(p / 5)) {
+          queue.offer(p / 5);
+        }
+
+        if (p % 11 == 0 && seen.add(p / 11)) {
+          queue.offer(p / 11);
+        }
+      }
+      depth++;
+    }
+
+    return -1;
+  }
+}",https://leetcode.com/problems/minimum-number-of-operations-to-make-x-and-y-equal/solutions/4518277/simple-bfs-solution/,"class Solution:
+    def minimumOperationsToMakeEqual(self, x: int, y: int) -> int:
+        def moves(a):
+            ans=[a+1,a-1]
+            if a%11==0:
+                ans.append(a//11)
+            if a%5==0:
+                ans.append(a//5)
+            return ans
+                
+        def dijkstras_10(start):
+            h = deque([(0,start)])
+            dist = {start: 0}
+
+            while h:
+                cost, cur = h.popleft()
+                if cur==y:
+                    return cost
+                for val in moves(cur):
+                    if val not in dist or dist[val] > cost + 1:
+                        dist[val] = cost+1
+                        h.append((cost+1,val))
+            return dist
+      
+        return dijkstras_10(x)",https://leetcode.com/problems/minimum-number-of-operations-to-make-x-and-y-equal/solutions/4518267/bfs-dijkstras-python3/,"class Solution {
+public:
+    int minimumOperationsToMakeEqual(int x, int y) {
+        if(y>x) return y-x;   
+        queue<pair<int,int>>q;
+        unordered_set<int>st;
+        st.insert(x);
+        q.push({x,0});
+        while(q.size()){
+            int curr=q.front().first;
+            int dis=q.front().second;
+            int t;
+            q.pop();
+            if(curr==y) return dis;
+            if(curr>1e4 || curr<0) continue; 
+            if(curr%11==0){
+                if(st.find(curr/11)==st.end()) {
+                    q.push({curr/11,dis+1});
+                    st.insert(curr/11);
+                }
+            }
+            if(curr%5==0){
+                if(st.find(curr/5)==st.end()) {
+                    st.insert(curr/5);
+                    q.push({curr/5,dis+1});
+                }
+            }
+            if(st.find(curr+1)==st.end()) {
+                q.push({curr+1,dis+1});
+                st.insert(curr+1);
+            }
+            if(st.find(curr-1)==st.end()) {
+                q.push({curr-1,dis+1});
+                st.insert(curr-1);
+            }
+        }
+        return -1;
+    }
+};",https://leetcode.com/problems/minimum-number-of-operations-to-make-x-and-y-equal/solutions/4518261/simple-bfs/,
+min_pushes,https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-ii/,01-20-2024,"class Solution {
+  public int minimumPushes(String word) {
+    int[] count = new int[26];
+    for (char c : word.toCharArray()) {
+      count[c - 'a']++;
+    }
+
+    int push = 0;
+    Arrays.sort(count);
+    for (int i = 0; i < 26; i++) {
+      push += count[25 - i] * (i / 8 + 1);
+    }
+
+    return push;
+  }
+}",https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-ii/solutions/4600579/one-loop-with-greedy/,"class Solution:
+    def minimumPushes(self, word: str) -> int:
+        count = 1 
+        d = {}
+        g = Counter(word)
+        count1 = 0
+        l = sorted(g.items(),key = lambda x:x[1])
+        l = l[::-1]
+        for i in range(len(l)):
+            if count<9:
+                d[l[i][0]] = 1
+                count+=1
+            elif count<17:
+                d[l[i][0]] = 2
+                count+=1
+            elif count <25:
+                d[l[i][0]]=3
+                count+=1
+            else:
+                d[l[i][0]] = 4
+                count+=1
+        for i in word:
+            count1+= d[i]
+        return count1
+            ",https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-ii/solutions/4600614/easy-python-greedy-solution/,"class Solution {
+public:
+    int minimumPushes(string s) {
+        map<int,int>m;
+        for(int i = 0; i < (int)s.size(); i++) {
+            m[s[i]]++;
+        }
+        vector<int>arr;
+        for(auto it = m.begin(); it != m.end(); it++) {
+            arr.push_back(it->second);
+        }
+        sort(arr.rbegin(),arr.rend());
+        int p = 1,cnt = 0,ans = 0;
+        for(int i = 0; i < arr.size(); i++) {
+            if(cnt <= 8) {
+                ans += (p * arr[i]);
+                cnt += 1;
+            }
+            if(cnt == 8) {
+                cnt = 0;
+                p += 1;
+            }
+        }
+        return ans;
+    }
+};",https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-ii/solutions/4600585/easy-to-understand-sorting-c-solution/,
+min_time_revert,https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-i/,02-03-2024,"class Solution {
+    public int minimumTimeToInitialState(String word, int k) {
+        int result = 1;
+        for (int i = k; i < word.length(); i = i + k) {
+            if (word.startsWith(word.substring(i))) {
+                break;
+            }
+            result++;
+        }
+        return result;
+    }
+}",https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-i/solutions/4673960/java-solution/,"class Solution:
+    def minimumTimeToInitialState(self, word: str, k: int) -> int:
+        count = 0
+        for i in range(0,len(word),k):
+            a = word[i:]
+            if a==word[:len(a)] and count!=0:
+                break
+            count+=1
+        return (count)",https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-i/solutions/4673980/easy-python-solution/,"int minimumTimeToInitialState(string word, int k) {
+    int n = word.size();
+    vector<int> z(n);
+    z[0] = n;
+    for (int i = 1, l = 0, r = 0; i < n; i++) {
+        if (i <= r)
+            z[i] = min(z[i - l], r - i + 1);
+        for (int &j = z[i]; i + j < n && word[j] == word[i + j]; j++);
+        if (i % k == 0 && z[i] == n - i)
+            return i / k;
+        if (z[i] > r - i + 1)
+            l = i, r = i + z[i] - 1;
+    }
+    return (n + k - 1) / k;
+}",https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-i/solutions/4673964/z-function-o-n-c/,
+min_XOR,https://leetcode.com/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/,01-06-2024,"class Solution {
+  public int minOperations(int[] nums, int k) {
+    int mask = 0;
+    for (int num : nums) {
+      mask ^= num;
+    }
+
+    return Integer.bitCount(mask ^ k);
+  }
+}",https://leetcode.com/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/solutions/4518262/bit-count-of-xor-number/,"class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        
+        xor_all=0
+        for num in nums:
+            xor_all^=num
+
+        target_xor = xor_all^k
+        total_flips = 0
+
+        while target_xor >0:
+            if target_xor&1== 1:
+                total_flips+= 1
+            target_xor >>=1
+
+        return total_flips",https://leetcode.com/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/solutions/4518290/python-accepted/,"class Solution {
+public:
+    int minOperations(vector<int>& nums, int k) {
+        int n=nums.size();
+        int ans=0;
+        for(int i=0;i<32;i++){
+            int onecnt=0;
+            for(int j=0;j<n;j++){
+                if(nums[j]&(1<<i))onecnt++;
+            }
+            int reqbit=k&(1<<i);
+            if(reqbit==0){
+                if(onecnt%2)ans++;
+                //  if req bit is 0 and 1cnt is odd means we need to change 1 bit
+            }
+            else{
+                if(onecnt%2==0)ans++;
+                //  if req bit is 1 and 1cnt is even means we need to change 1 bit
+            }
+        }
+        return ans;
+    }
+};",https://leetcode.com/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/solutions/4518266/count-the-set-bits-at-every-position/,
+num_subarrays_patterns,https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-i/,01-10-2024,"class Solution {
+    public int countMatchingSubarrays(int[] nums, int[] pattern) {
+        if (nums.length <= pattern.length) return -1;
+        int cnt = 0;
+        
+        for (int i = 0; i < nums.length; i++) {
+            int flag = 0;
+            
+            for (int j = 0; j < pattern.length; j++) {
+                if ((nums.length - i) <= pattern.length) {
+                    flag = 1;
+                    break;
+                }
+                if (pattern[j] == 1) {
+                    if (nums[i+j+1] <= nums[i+j]) {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (pattern[j] == 0) {
+                    if (nums[i+j+1] != nums[i+j]) {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (pattern[j] == -1) {
+                    if (nums[i+j+1] >= nums[i+j]) {
+                        flag = 1;
+                        break;
+                    }
+                }
+            }
+            
+            if (flag == 0) cnt ++;
+        }
+        
+        return cnt;
+    }
+}",https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-i/solutions/4708755/java-simple-solution/,"class Solution:
+    def countMatchingSubarrays(self, nums: List[int], pattern: List[int]) -> int:
+        ans=0
+        for i in range(len(nums)-len(pattern)):
+            j=i+1
+            fl=0
+            for k in range(len(pattern)):
+                # print(k)
+                if(pattern[k]==0):
+                    if(nums[j]-nums[j-1]!=0):
+                        fl=1
+                        break
+                elif(pattern[k]==1):
+                    if(nums[j]-nums[j-1]<=0):
+                        fl=2
+                        break
+                else:
+                    if(nums[j]-nums[j-1]>=0):
+                        fl=3
+                        break
+                j+=1
+            # print(i,fl)
+            if(fl==0):
+                ans+=1
+        return ans",https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-i/solutions/4708778/do-as-asked-easy-to-understand-solution/,"char sign(int i) {
+    return i > 0 ? '+' : i < 0 ? '-' : '0';
+}
+
+int countMatchingSubarrays(vector<int>& nums, vector<int>& pattern) {
+    string s, p;
+    for (int i = 1; i < nums.size(); i++)
+        s += sign(nums[i] - nums[i - 1]);
+    for (int i : pattern)
+        p += sign(i);
+    return kmp_search(s, p, kmp_table(p)).size();
+}",https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-i/solutions/4708770/concise-kmp-o-n-solution-c/,
+place_people,https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i/,02-03-2024,"class Solution {
+    public int numberOfPairs(int[][] points) {
+        int maxi = 0;
+        for(int i=0;i<points.length;i++)
+        {
+            for(int j=0;j<points.length;j++)
+            {
+                if(i==j || points[i][0]>points[j][0] || points[i][1]<points[j][1])
+                {
+                    continue;
+                }
+                int k = 0;
+                for(;k<points.length;k++)
+                {
+                    if(k==i || k==j)
+                    {
+                        continue;
+                    }
+                    if(points[k][1] <= points[i][1] && points[k][1] >= points[j][1] && points[k][0] <= points[j][0] && points[k][0] >= points[i][0]) {
+                        break;
+                    }
+                }
+                if(k==points.length)
+                {
+                    maxi++;
+                }
+            }
+        }
+        return maxi;
+    }
+}",https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i/solutions/4671687/simple-java-solution/,"class Solution:
+    def numberOfPairs(self, points: List[List[int]]) -> int:
+        ans = 0
+        for i in range(len(points)):
+            x1, y1 = points[i]
+            for j in range(len(points)):
+                if i == j: continue
+                x2, y2 = points[j]
+                if x1 >= x2 and y1 <= y2:
+                    for k, p in enumerate(points):
+                        if k == i or k == j: continue
+                        if x1 >= p[0] >= x2 and y1 <= p[1] <= y2:
+                            ans -= 1
+                            break
+                    ans += 1
+        return ans",https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i/solutions/4671685/brute-force/,"class Solution {
+public:
+    int numberOfPairs(vector<vector<int>>& points) {
+        int res=0;
+        sort(points.begin(), points.end());
+        for(int i=0 ; i<points.size() ; ++i) {
+            for(int j=i+1 ; j<points.size() ; ++j) {
+                
+                int x1=points[i][0], y1=points[i][1];
+                int x2=points[j][0], y2=points[j][1];
+                
+                if(x1<=x2 && y1>=y2) {}
+                else if(x1>=x2 && y1<=y2) {
+                    swap(x1,x2), swap(y1,y2);
+                }
+                else continue;
+                
+                bool flag=true;
+                for(int k=0 ; k<points.size() ; ++k) {
+                    
+                    if(k==i || k==j) continue;
+                    
+                    int midx=points[k][0], midy=points[k][1];
+                    
+                    if(x1<=midx && x2>=midx && y2<=midy && y1>=midy) {
+                        flag=false;
+                        break;
+                    }
+                    
+                }
+                if(flag) {
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+};",https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i/solutions/4671706/easy-to-understand-sorting-brute-force/,
+subarrays_atleast_ktimes,https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/,12-09-2023,"class Solution {
+  public long countSubarrays(int[] nums, int k) {
+    final int n = nums.length;
+    int max = 0;
+    for (int num : nums) {
+      max = Math.max(max, num);
+    }
+
+    long count = 0;
+    // frequency ==> index
+    Map<Integer, Integer> seen = new HashMap<>();
+    for (int i = 0, current = 0; i < n; i++) {
+      if (nums[i] == max) {
+        current++;
+        seen.put(current, i);
+      }
+      if (current >= k) {
+        // number of subarray end with nums[i]
+        count += seen.get(current - k + 1) + 1;
+      }
+    }
+
+    return count;
+  }
+}",https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/solutions/4384349/simple-slide-window/,"class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        maxnum = max(nums)
+        n = len(nums)
+        g = defaultdict(int)
+        
+        right = 0
+        left = 0
+        target = k
+        total = 0
+        ans = 0
+        count =  ( 1 + n ) * n // 2
+        
+            
+        
+        while right < n:
+            g[nums[right]] += 1
+            
+            while g[maxnum] >= target and left <= right:
+                g[nums[left]] -= 1
+                left += 1
+            
+            ans += (right - left + 1)
+            right += 1
+        
+        return count - ans
+        ",https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/solutions/4384387/python-all-combination-number-at-last-k-1-times-number-to-get-answer-time-complexity-o-n/,"class Solution {
+public:
+    long long f(const vector<int>& arr, int target, int k) {
+        long long n=arr.size(),ans=0,cnt=0,left=0;
+        for (long long right=0;right<n;right++){
+            if (arr[right] == target)cnt++;
+            while(cnt>=k){
+                ans+=(n-right);
+                if(arr[left]==target) cnt--;
+                left++;
+            }
+        }
+        return ans;
+    }
+    long long countSubarrays(vector<int>& nums, int k) {
+        int maxi=*max_element(nums.begin(),nums.end());
+        return f(nums,maxi,k);
+    }
+};",https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/solutions/4384356/c-o-n-sliding-window/,
