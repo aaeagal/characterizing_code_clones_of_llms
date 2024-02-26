@@ -1,9 +1,12 @@
 import pandas
 import os
+
 models = ["codellama", "gpt_3.5_turbo", "gpt4", "starcoder"]
 temperatures = ["0", "0.5", "1", "1.5", "2"]
+tasks = ["javaToPython", "javaToCpp", "pythonToJava", "pythonToCpp", "cppToJava", "cppToPython"]
+
 def main():
-    with open("../30_new_medium_leetcode_samples.csv") as file:
+    with open("../../30_new_medium_leetcode_samples.csv") as file:
         data = pandas.read_csv(file)
 
         # put the rows in the column "Prompt_ID" into a list
@@ -11,15 +14,19 @@ def main():
 
         # create a directory for each prompt_id
         for prompt_id in prompt_ids:
-            os.mkdir(f"../data/{prompt_id}")
+            os.mkdir(f"../../data/{prompt_id}")
 
             # create a directory for each temperature
             for temp in temperatures:
-                os.mkdir(f"../data/{prompt_id}/{temp}")
+                os.mkdir(f"../../data/{prompt_id}/{temp}")
 
                 # create a directory for each model
                 for model in models:
-                    os.mkdir(f"../data/{prompt_id}/{temp}/{model}")
+                    os.mkdir(f"../../data/{prompt_id}/{temp}/{model}")
+
+                    # create a directory for each task
+                    for task in tasks:
+                        os.mkdir(f"../../data/{prompt_id}/{temp}/{model}/{task}")
 
         # Get the earliest date from the column "date_of_first_published_solution"
         data["date_of_first_published_solution"] = pandas.to_datetime(data["date_of_first_published_solution"])
