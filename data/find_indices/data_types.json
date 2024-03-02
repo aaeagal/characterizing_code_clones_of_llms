@@ -1,0 +1,12 @@
+{
+    "beautifulIndices": [
+        "String",
+        "String",
+        "String",
+        "int"
+    ],
+    "build": [
+        "String",
+        "String"
+    ]
+}

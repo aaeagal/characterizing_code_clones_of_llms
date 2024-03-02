@@ -1,0 +1,14 @@
+{
+    "longestCommonPrefix": [
+        "int[]",
+        "int[]"
+    ],
+    "dfs": [
+        "List<String>",
+        "List<String>",
+        "int"
+    ],
+    "split": [
+        "List<String>"
+    ]
+}

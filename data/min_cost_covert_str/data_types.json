@@ -1,0 +1,9 @@
+{
+    "minimumCost": [
+        "String",
+        "String",
+        "char[]",
+        "char[]",
+        "int[]"
+    ]
+}

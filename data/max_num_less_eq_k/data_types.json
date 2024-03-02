@@ -1,0 +1,11 @@
+{
+    "count": [
+        "long",
+        "int",
+        "int"
+    ],
+    "findMaximumNumber": [
+        "long",
+        "int"
+    ]
+}

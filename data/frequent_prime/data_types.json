@@ -1,0 +1,18 @@
+{
+    "mostFrequentPrime": [
+        "int[][]"
+    ],
+    "traverse": [
+        "int[][]",
+        "HashMap<String, Integer>",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+    ],
+    "isPrime": [
+        "int"
+    ]
+}

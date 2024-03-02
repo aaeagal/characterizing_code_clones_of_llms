@@ -1,0 +1,10 @@
+{
+    "minMovesToCaptureTheQueen": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+    ]
+}

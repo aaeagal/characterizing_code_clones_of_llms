@@ -1,0 +1,12 @@
+{
+    "maxOperations": [
+        "int[]"
+    ],
+    "helper": [
+        "int[]",
+        "int",
+        "int",
+        "int",
+        "Integer[][]"
+    ]
+}

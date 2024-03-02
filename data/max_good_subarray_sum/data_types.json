@@ -1,0 +1,10 @@
+{
+    "maximumSubarraySum": [
+        "int[]",
+        "int"
+    ],
+    "sum": [
+        "int",
+        "int"
+    ]
+}

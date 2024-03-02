@@ -1,0 +1,6 @@
+{
+    "minOperations": [
+        "int[]",
+        "int"
+    ]
+}

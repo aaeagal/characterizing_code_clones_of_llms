@@ -1,0 +1,12 @@
+{
+    "minimumCost": [
+        "int[]"
+    ],
+    "isPal": [
+        "int"
+    ],
+    "calculateCost": [
+        "int[]",
+        "int"
+    ]
+}

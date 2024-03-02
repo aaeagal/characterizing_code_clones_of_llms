@@ -1,0 +1,9 @@
+{
+    "gcd": [
+        "int",
+        "int"
+    ],
+    "minimumArrayLength": [
+        "int[]"
+    ]
+}
