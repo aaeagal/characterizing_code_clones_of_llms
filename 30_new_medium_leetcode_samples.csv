@@ -1,4 +1,4 @@
-Prompt_ID,LeetCode_Link,date_of_first_published_solution,Original_Java_Snippet,Java_link,Original_Python_Snippet,Python_link,Original_C++_Snippet,C++_link,
+Prompt_ID,LeetCode_Link,date_of_first_published_solution,Original_Java_Snippet,Java_link,Original_Python_Snippet,Python_link,Original_C++_snippets,C++_link,
 apply_ops_empty_str,https://leetcode.com/problems/apply-operations-to-make-string-empty/,02-17-2024,"class Solution {
     public String lastNonEmptyString(String s) {
         int arr[] = new int[26];
@@ -633,42 +633,37 @@ class Solution:
         return ans",https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-i/solutions/4561715/kmp-sliding-window/,"class Solution {
 public:
     vector<int> beautifulIndices(string s, string a, string b, int k) {
-        vector<int> c, d;
-        int j = 0, n = s.size();
-        for(int i=0;i<n;i++) {
-            if(s[i] == a[j] and j < a.size()) {
-                j++;
-            } else {
-                if(j == a.size()) c.push_back(i-j);
-                j = 0;
-                if(s[i] == a[j]) j++;
+        vector<int> pa,pb;
+        int n = s.length();
+        for(int i = 0; i<=n-a.length(); i++){
+            if(a.length()>s.length()) break;
+            string x = """";
+            x = s.substr(i,a.length());
+            if(x == a){
+                pa.push_back(i);
+            }
+            
+        }
+        for(int i = 0; i<=n-b.length(); i++){
+            if(b.length()>s.length()) break;
+            string x = """";
+            x = s.substr(i,b.length());
+            if(x == b){
+                pb.push_back(i);
             }
         }
-        if(j == a.size()) c.push_back(n-j);
-        j = 0;
-        for(int i=0;i<n;i++) {
-            if(s[i] == b[j] and j < b.size()) {
-                j++;
-            } else {
-                if(j == b.size()) d.push_back(i-j);
-                j = 0;
-                if(s[i] == b[j]) j++;
-            }
-        }
-        if(j == b.size()) d.push_back(n-j);
         
         vector<int> ans;
-        for(int num1 : c) {
-            for(int num2 : d) {
-                if(abs(num1-num2) <= k) {
-                    ans.push_back(num1);
-                    break;
-                }
-            }
+        int i = 0,j = 0;
+        while(i<pa.size() && j<pb.size()){
+            if(abs(pa[i]-pb[j]) <= k) ans.push_back(pa[i]),i++;
+            else if(pa[i]<pb[j]) i++;
+            else j++;
         }
+        
         return ans;
     }
-};",https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-i/solutions/4561725/easy-c-solution/,
+};",https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-i/solutions/4561738/brute-force-c/,
 find_polygon,https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/,12-23-2023,"class Solution {
 public long largestPerimeter(int[] nums) {
 final int n = nums.length;
@@ -1171,40 +1166,59 @@ longest_substring_thrice,https://leetcode.com/problems/find-longest-special-subs
 
     return result;
   }
-}",https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/solutions/4480938/top-three-longest-special-substring/,"class Solution(object):
-    def maximumLength(self, s):
-        """"""
-        :type s: str
-        :rtype: int
-        """"""
-        s = s + '-'
-        maps = collections.defaultdict(list)
-        count = 1
-        for i in range(1, len(s)):
-            if s[i] == s[i - 1]:
-                count += 1
-            else:
-                maps[s[i - 1]].append(count)
-                count = 1
+}",https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/solutions/4480938/top-three-longest-special-substring/,"class Solution:
+    def maximumLength(self, s: str) -> int:
+        from collections import Counter
+        check = Counter(s)
         res = -1
-        for key in maps.keys():
-            val = self.compute(maps[key])
-            res = max(res, val)
-        return res
+        for i in check:
+            if check[i]>=3:
+                res =1
+                break
     
-    def compute(self, arr):
-        left, right = 0, max(arr)
-        while left < right:
-            mid = (left + right + 1) / 2
-            count = 0
-            for ele in arr:
-                if ele >= mid:
-                    count += (ele - mid + 1)
-            if count >= 3:
-                left = mid
+        
+        
+        
+        count = collections.defaultdict(list)
+        l = 0
+        r = 0
+        temp = ''
+        while r<len(s):
+            if temp=='' or temp[-1]==s[r]:
+                temp+=s[r]
             else:
-                right = mid - 1
-        return left if left >= 1 else -1",https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/solutions/4480977/binary-search-for-general-case/,"class Solution {
+                count[temp[0]].append(len(temp))
+                temp = s[r]
+                l=r
+            r+=1
+        
+        count[temp[0]].append(len(temp))
+        def check_t(sort_l,tar):
+            temp = 0 
+            for i,j in sort_l:
+                if i>=tar:
+                    temp+=j*(i-tar+1)
+                    if temp>=3:
+                        return True
+                if i<tar:
+                    return False
+                    
+        
+        
+        
+        #print(count)
+        for i in count:
+            sort_l = sorted(Counter(count[i]).items(),key = lambda x:-x[0])
+            temp = 0
+            max_t = sort_l[0][0]
+            for j in range(max_t,0,-1):
+                if j<=res:
+                    break
+                if check_t(sort_l,j):
+                    res= max(res,j)
+                    break
+                    
+        return res  ",https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/submissions/1191078537/,"class Solution {
 public:
     int maximumLength(string s) {
         int ans = -1;
@@ -1310,33 +1324,28 @@ max_good_subarray_sum,https://leetcode.com/problems/maximum-good-subarray-sum/,0
         return ans if ans!=float(""-inf"") else 0",https://leetcode.com/problems/maximum-good-subarray-sum/solutions/4671702/prefix-sum-and-best-left-index-map/,"class Solution {
 public:
     long long maximumSubarraySum(vector<int>& nums, int k) {
-        int n=nums.size();
-        vector<long long>pre(n);
-        pre[0]=nums[0];
-        for(int i=1;i<nums.size();i++)
-        {
-            pre[i]=pre[i-1]+nums[i];
+        int n = nums.size();
+        long ans = LONG_MIN, preSum = 0;
+        unordered_map<int, int> mp;
+        vector<long> pre;
+        for(auto it : nums){
+            preSum += it;
+            pre.push_back(preSum);
         }
-        unordered_map<int,vector<int>>mp;
-        long long ans=-1e16;
-        mp[nums[0]].push_back(0);
-        for(int i=1;i<n;i++)
-        {
-            for(auto it:mp[nums[i]-k])
-            {
-                long long sum=pre[i]-(it==0?0:pre[it-1]);
-                ans=max(ans,sum);
-            }
-            for(auto it:mp[nums[i]+k])
-            {
-                long long sum=pre[i]-(it==0?0:pre[it-1]);
-                ans=max(ans,sum);
-            }
-            mp[nums[i]].push_back(i);
+        for(int i = 0 ; i < n ; i++){
+            int diff1 = nums[i] - k, diff2 = nums[i] + k;
+            if(mp.contains(diff1))
+                ans = max(ans, pre[i] - pre[mp[diff1]] + diff1);
+            if(mp.contains(diff2))
+                ans = max(ans, pre[i] - pre[mp[diff2]] + diff2);
+            if(mp.contains(nums[i]))
+                mp[nums[i]] = pre[i] < pre[mp[nums[i]]] ? i : mp[nums[i]];
+            else
+                mp[nums[i]] = i;
         }
-        return ans==-1e16?0:ans;
+        return ans != LONG_MIN ? ans : 0;
     }
-};",https://leetcode.com/problems/maximum-good-subarray-sum/solutions/4671686/c/,
+};",https://leetcode.com/problems/maximum-good-subarray-sum/solutions/4671719/2-approaches-prefixsum-hashmap-clean-code/,
 max_num_elements_subsets,https://leetcode.com/problems/find-the-maximum-number-of-elements-in-subset/,01-27-2024,"class Solution {
   public int maximumLength(int[] nums) {
     int max = 0;

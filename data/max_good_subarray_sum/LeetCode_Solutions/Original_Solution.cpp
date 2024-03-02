@@ -1,30 +1,25 @@
 class Solution {
 public:
     long long maximumSubarraySum(vector<int>& nums, int k) {
-        int n=nums.size();
-        vector<long long>pre(n);
-        pre[0]=nums[0];
-        for(int i=1;i<nums.size();i++)
-        {
-            pre[i]=pre[i-1]+nums[i];
+        int n = nums.size();
+        long ans = LONG_MIN, preSum = 0;
+        unordered_map<int, int> mp;
+        vector<long> pre;
+        for(auto it : nums){
+            preSum += it;
+            pre.push_back(preSum);
         }
-        unordered_map<int,vector<int>>mp;
-        long long ans=-1e16;
-        mp[nums[0]].push_back(0);
-        for(int i=1;i<n;i++)
-        {
-            for(auto it:mp[nums[i]-k])
-            {
-                long long sum=pre[i]-(it==0?0:pre[it-1]);
-                ans=max(ans,sum);
-            }
-            for(auto it:mp[nums[i]+k])
-            {
-                long long sum=pre[i]-(it==0?0:pre[it-1]);
-                ans=max(ans,sum);
-            }
-            mp[nums[i]].push_back(i);
+        for(int i = 0 ; i < n ; i++){
+            int diff1 = nums[i] - k, diff2 = nums[i] + k;
+            if(mp.contains(diff1))
+                ans = max(ans, pre[i] - pre[mp[diff1]] + diff1);
+            if(mp.contains(diff2))
+                ans = max(ans, pre[i] - pre[mp[diff2]] + diff2);
+            if(mp.contains(nums[i]))
+                mp[nums[i]] = pre[i] < pre[mp[nums[i]]] ? i : mp[nums[i]];
+            else
+                mp[nums[i]] = i;
         }
-        return ans==-1e16?0:ans;
+        return ans != LONG_MIN ? ans : 0;
     }
 };

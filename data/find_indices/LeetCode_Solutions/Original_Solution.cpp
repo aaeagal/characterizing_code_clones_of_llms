@@ -1,39 +1,34 @@
 class Solution {
 public:
     vector<int> beautifulIndices(string s, string a, string b, int k) {
-        vector<int> c, d;
-        int j = 0, n = s.size();
-        for(int i=0;i<n;i++) {
-            if(s[i] == a[j] and j < a.size()) {
-                j++;
-            } else {
-                if(j == a.size()) c.push_back(i-j);
-                j = 0;
-                if(s[i] == a[j]) j++;
+        vector<int> pa,pb;
+        int n = s.length();
+        for(int i = 0; i<=n-a.length(); i++){
+            if(a.length()>s.length()) break;
+            string x = "";
+            x = s.substr(i,a.length());
+            if(x == a){
+                pa.push_back(i);
+            }
+            
+        }
+        for(int i = 0; i<=n-b.length(); i++){
+            if(b.length()>s.length()) break;
+            string x = "";
+            x = s.substr(i,b.length());
+            if(x == b){
+                pb.push_back(i);
             }
         }
-        if(j == a.size()) c.push_back(n-j);
-        j = 0;
-        for(int i=0;i<n;i++) {
-            if(s[i] == b[j] and j < b.size()) {
-                j++;
-            } else {
-                if(j == b.size()) d.push_back(i-j);
-                j = 0;
-                if(s[i] == b[j]) j++;
-            }
-        }
-        if(j == b.size()) d.push_back(n-j);
         
         vector<int> ans;
-        for(int num1 : c) {
-            for(int num2 : d) {
-                if(abs(num1-num2) <= k) {
-                    ans.push_back(num1);
-                    break;
-                }
-            }
+        int i = 0,j = 0;
+        while(i<pa.size() && j<pb.size()){
+            if(abs(pa[i]-pb[j]) <= k) ans.push_back(pa[i]),i++;
+            else if(pa[i]<pb[j]) i++;
+            else j++;
         }
+        
         return ans;
     }
 };
