@@ -1,4 +1,5 @@
 from collections import Counter,defaultdict
+import sys
 
 class Solution(object):
     def lastNonEmptyString(self, s):
@@ -24,3 +25,13 @@ class Solution(object):
 
         return ans
         
+def main():
+    sol = Solution()
+    # read only one line
+    s = input().strip()
+    print(sol.lastNonEmptyString(s))
+    # end the program
+    sys.exit(0)
+
+if __name__ == "__main__":
+    main()

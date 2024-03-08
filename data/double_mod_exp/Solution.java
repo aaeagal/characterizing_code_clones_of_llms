@@ -20,4 +20,37 @@ class Solution {
         }
         return result;
     }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        
+        // Extract the part containing the arrays and the target value separately
+        String[] inputParts = input.split("] ");
+        String arraysPart = inputParts[0] + "]";
+        int target = Integer.parseInt(inputParts[1]);
+        
+        // Remove the very first and last brackets and then split the arrays
+        arraysPart = arraysPart.substring(2, arraysPart.length() - 2); // Remove [[ and ]]
+        String[] arrayStrings = arraysPart.split("\\],\\[");
+        
+        List<int[]> variables = new ArrayList<>();
+        for (String arrayString : arrayStrings) {
+            String[] numberStrings = arrayString.split(",");
+            int[] numbers = new int[numberStrings.length];
+            for (int i = 0; i < numberStrings.length; i++) {
+                numbers[i] = Integer.parseInt(numberStrings[i].trim());
+            }
+            variables.add(numbers);
+        }
+
+        // Assuming the existence of a Solution class and a getGoodIndices method
+        Solution solution = new Solution();
+        // The next line is pseudocode, adjust according to your actual method signature and implementation
+        List<Integer> result = solution.getGoodIndices(variables.toArray(new int[variables.size()][]), target);
+
+        System.out.println(Arrays.toString(result.toArray()));
+
+        // Print results
+        
+    }
 }

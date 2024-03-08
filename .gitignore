@@ -1,2 +1,9 @@
 # ignore .hypothesis directory
 .hypothesis/
+
+# ignore .class files
+*.class
+
+# ingore all Solution files
+**/Solution
+**/solution

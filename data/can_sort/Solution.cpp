@@ -1,6 +1,8 @@
 #include <vector>
 #include <algorithm>
-
+#include <iostream>
+#include <string>
+#include <sstream>
 using namespace std;
 
 class Solution {
@@ -26,3 +28,20 @@ public:
         return c==nums;
     }
 };
+
+int main() {
+    string input;
+    getline(cin, input);
+    istringstream ss(input);
+    int number;
+    vector<int> nums;
+    while (ss >> number) {
+        nums.push_back(number);
+    }
+    Solution solution;
+    bool result = solution.canSortArray(nums);
+    // print the result as true or false
+    cout << (result ? "true" : "false") << endl;
+    
+    return 0;
+}

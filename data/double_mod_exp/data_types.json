@@ -1,9 +1,4 @@
 {
-    "power": [
-        "int",
-        "int",
-        "int"
-    ],
     "getGoodIndices": [
         "int[][]",
         "int"

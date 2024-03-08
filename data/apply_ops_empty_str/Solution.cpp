@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 class Solution {
@@ -30,3 +31,19 @@ public:
         return ans;
     }
 };
+
+int main() {
+    Solution solution;
+    string inputString;
+
+    // read only one line from stdin
+    getline(cin, inputString);
+
+    // call the solution's function and get the result
+    string result = solution.lastNonEmptyString(inputString);
+
+    // output the result to stdout
+    cout << result << endl;
+
+    return 0;
+}

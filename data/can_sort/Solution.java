@@ -1,5 +1,4 @@
 import java.util.*;
-
 class Solution {
     public boolean canSortArray(int[] a) {
         int[] a2 = new int[a.length];
@@ -21,5 +20,18 @@ class Solution {
             }
         }
         return Arrays.equals(a,a2);
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] numbers = input.split("\\s+");
+        List<Integer> nums = new ArrayList<>();
+        for (String number : numbers) {
+            nums.add(Integer.parseInt(number.trim()));
+
+        }
+        Solution solution = new Solution(); // Ensure there's a Solution class with canSortArray method
+        boolean result = solution.canSortArray(nums.stream().mapToInt(i->i).toArray());
+        System.out.println(result);
     }
 }

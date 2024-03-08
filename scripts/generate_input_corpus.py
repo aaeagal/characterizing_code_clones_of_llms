@@ -1,5 +1,6 @@
 import javalang
 from hypothesis import given, strategies as st, settings, HealthCheck
+from hypothesis.strategies import composite
 import json
 import argparse
 
@@ -21,11 +22,18 @@ strategies = {
     'String': st.text(),
     'List': st.lists(st.integers())
 }
+@composite
+def dynamic_composite(draw, param_type):
+    if param_type in strategies:
+        strategy = strategies[param_type]
+        return draw(strategy)
+    else:
+        raise ValueError(f"Unknown param_type: {param_type}")
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Generates an input corpus for Java methods.')
     parser.add_argument('--filepath', type=str, required=True, help='The path to the Java file')
-    parser.add_argument('--num_of_inputs', type=int, default=500, help='Number of inputs to generate for each method')
+    parser.add_argument('--num_of_inputs', type=int, default=512, help='Number of inputs to generate for each method')
     return parser.parse_args()
 
 def parse_java_file(filepath):
@@ -36,6 +44,9 @@ def parse_java_file(filepath):
 
     for _, node in tree.filter(javalang.tree.MethodDeclaration):
         param_types = []
+        # do not consider main method
+        if node.name == 'main':
+            continue
         for param in node.parameters:
             # Determine parameter type and handle arrays and generics
             if isinstance(param.type, javalang.tree.ReferenceType):
@@ -76,8 +87,10 @@ def parse_java_file(filepath):
     return methods
 
 def strategy_for_type(param_type):
-    # Custom strategy mapping logic based on param_type
-    return strategies.get(param_type, st.nothing())
+    # This function now correctly references dynamic_composite without passing the strategy directly.
+    # Instead, it passes the type identifier, which dynamic_composite uses to find and draw from the correct strategy.
+    return dynamic_composite(param_type)
+
 
 def make_immutable(input_item):
     """
@@ -108,16 +121,18 @@ def generate_input_corpus(methods, num_of_inputs):
 
         collected_inputs = set()
 
-        # Define a wrapper function to collect generated inputs
-        @given(combined_strategy)
-        @settings(max_examples=num_of_inputs, suppress_health_check=[HealthCheck.too_slow])
-        def test_func(inputs):
-            # Convert all input items (including nested structures) to immutable types
-            immutable_inputs = tuple(make_immutable(input_item) for input_item in inputs)
-            collected_inputs.add(immutable_inputs)
+        # Keep trying to generate inputs until we have the desired number
+        while len(collected_inputs) < num_of_inputs:
+            print(f'On {len(collected_inputs)} out of {num_of_inputs}')
+            @given(combined_strategy)
+            @settings(max_examples=num_of_inputs - len(collected_inputs), suppress_health_check=[HealthCheck.too_slow])
+            def test_func(inputs):
+                # Convert all input items (including nested structures) to immutable types
+                immutable_inputs = tuple(make_immutable(input_item) for input_item in inputs)
+                collected_inputs.add(immutable_inputs)
 
-        # Trigger the test function to collect inputs
-        test_func()
+            # Trigger the test function to collect inputs
+            test_func()
 
         # Convert collected inputs back to their original form (lists for JSON serialization or other uses)
         input_corpus[method_name] = [convert_to_list(input_item) for input_item in collected_inputs]
@@ -130,20 +145,11 @@ def main():
     methods = parse_java_file(args.filepath)
     print(methods)
     input_corpus = generate_input_corpus(methods, args.num_of_inputs)
-    # Add methods to the input corpus
-    
-    
     output_path = '/'.join(args.filepath.split('/')[:-1]) + '/input_corpus.json'
     
     with open(output_path, 'w') as file:
         json.dump(input_corpus, file, indent=4)
     
-    #output_types_path = '/'.join(args.filepath.split('/')[:-1]) + '/data_types.json'
-    # Serialize methods to a file
-    #for method_name, param_types in methods.items():
-    #    methods[method_name] = [str(param_type) for param_type in param_types]
-    #with open(output_types_path, 'w') as file:
-    #    json.dump(methods, file, indent=4)
     print(f"Input corpus generated at {output_path}")
 
 if __name__ == "__main__":

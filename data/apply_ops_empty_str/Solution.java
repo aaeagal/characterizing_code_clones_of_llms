@@ -1,3 +1,4 @@
+import java.util.Scanner;
 class Solution {
     public String lastNonEmptyString(String s) {
         int arr[] = new int[26];
@@ -22,5 +23,17 @@ class Solution {
         }
         
         return ans;
+    }
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        // read string from stdin
+        Scanner scanner = new Scanner(System.in);
+        // read only one line from stdin
+        String s = scanner.nextLine();
+        // call the function and print the result
+        System.out.println(sol.lastNonEmptyString(s));
+        scanner.close();
+        // end the program
+        System.exit(0);
     }
 }

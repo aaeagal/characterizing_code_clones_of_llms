@@ -3,6 +3,8 @@
 #include <string>
 #include <complex>
 #include <climits>
+#include <iostream>
+#include <sstream>
 using namespace std;    
 
 class Solution {
@@ -40,3 +42,33 @@ public:
         return ans;
     }
 };
+
+vector<int> parseInputString(const string& input) {
+    vector<int> nums;
+    stringstream ss(input);
+    int num;
+    while (ss >> num) {
+        nums.push_back(num);
+        // No need to check for a comma delimiter
+    }
+    return nums;
+}
+
+int main() {
+    Solution solution;
+    string line;
+
+    // Read each line from stdin
+    while (getline(cin, line)) {
+        // Inputs are space-separated
+        vector<int> nums = parseInputString(line);
+
+        // Call the minimumCost method
+        long long result = solution.minimumCost(nums);
+
+        // Print the result to stdout
+        cout << result << endl;
+    }
+
+    return 0;
+}
