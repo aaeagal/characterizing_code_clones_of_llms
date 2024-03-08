@@ -58,7 +58,6 @@ def get_output(file: str, input_corpus: dict, file_name: str) -> dict:
 
                     if output.returncode != 0:
                         behavior.update({input_str: output.stderr})
-                        continue
                     
                 #if counter == 10:
                 #    logging.info(f'Finished 10 inputs for {file_name}')
@@ -83,7 +82,6 @@ def get_output(file: str, input_corpus: dict, file_name: str) -> dict:
 
                 if output.returncode != 0:
                     behavior.update({input_str: output.stderr})
-                    continue
                 #if counter == 10:
                 #    logging.info(f'Finished 10 inputs for {file_name}')
                 #   return behavior
@@ -106,11 +104,11 @@ def get_output(file: str, input_corpus: dict, file_name: str) -> dict:
                     behavior.update({input_str: output.stdout})
                 if output.returncode != 0:
                     behavior.update({input_str: output.stderr})
-                    continue
                 #if counter == 10:
                 #    logging.info(f'Finished 10 inputs for {file_name}')
                 #    return behavior
     if "divide_arrays_with_max_diff" in file_path:
+        logging.info(f'Running divide_arrays_with_max_diff')
         #counter = 0
         for key, value in input_corpus.items():
             for input_list in value:
@@ -128,21 +126,32 @@ def get_output(file: str, input_corpus: dict, file_name: str) -> dict:
                     behavior.update({input_str: output.stdout})
                 if output.returncode != 0:
                     behavior.update({input_str: output.stderr})
-                    continue
                 #if counter == 10:
                 #    logging.info(f'Finished 10 inputs for {file_name}')
                 #    return behavior
     if "double_mod_exp" in file_path:
+        logging.info(f'Running double_mod_exp')
         counter = 0
         for key, value in input_corpus.items():
             for input_list in value:
                 counter += 1
                 input_str = " ".join(map(str, input_list))
-                print(input_str)
-                if counter == 10:
+                logging.info(f"Counter: {counter} with {input_str}")
+                if file.endswith('.py'):
+                    output = subprocess.run(['python3', file], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.java'):
+                    output = subprocess.run(["java", "-cp", file_path, executable_name], input=input_str, capture_output=True, text=True)                    
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.cpp'):
+                    output = subprocess.run([f'./{executable_name}'], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                if output.returncode != 0:
+                    behavior.update({input_str: output.stderr})
+                if counter >= 10:
                     logging.info(f'Finished 10 inputs for {file_name}')
                     return behavior
-    
+                
     logging.info(f'Calculated behavior for {file_name}')
     return behavior
         
