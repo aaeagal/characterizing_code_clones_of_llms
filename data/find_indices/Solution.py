@@ -45,3 +45,17 @@ class Solution:
             a.popleft()
 
         return ans
+    
+def main():
+    # Assuming the input format is "s a b k"
+    input_string = input()
+    parts = input_string.rsplit(' ', 3)  # Right split into 4 parts: s, a, b, and k
+    s, a, b, k = parts[0], parts[1], parts[2], int(parts[3])
+
+    solution = Solution()
+    beautiful_indices = solution.beautifulIndices(s, a, b, k)
+    print(beautiful_indices)
+
+
+if __name__ == "__main__":
+    main()

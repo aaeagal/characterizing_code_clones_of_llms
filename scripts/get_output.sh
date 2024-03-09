@@ -1,4 +1,4 @@
-python3 get_output_from_leetcode_solution.py --directory "/home/aeagal/characterizing_code_clones_of_llms/data/double_mod_exp"
+python3 get_output_from_leetcode_solution.py --directory "/home/aeagal/characterizing_code_clones_of_llms/data/frequent_prime"
 
 # Iterate through all the subdirectories
 # for dir in $(ls -d */); do

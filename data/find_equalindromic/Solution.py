@@ -1,4 +1,5 @@
 from typing import List
+import ast
 class Solution:
     def minimumCost(self, nums: List[int]) -> int:
         
@@ -22,3 +23,22 @@ class Solution:
 
 
         return min(check(nums[n//2]),check(nums[n//2-1]))
+
+def main():
+    # Read the input string
+    input_str = input("")
+    
+    # Convert the input string to a Python list
+    nums = ast.literal_eval(input_str)
+    
+    # Create an instance of the Solution class
+    solution = Solution()
+    
+    # Call the minimumCost method and store the result
+    cost = solution.minimumCost(nums)
+    
+    # Print the result
+    print(cost)
+
+if __name__ == "__main__":
+    main()

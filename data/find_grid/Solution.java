@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Scanner;
 class Solution {
     int[][] dirs = {{1, 0}, {0, 1}, {0, -1}, {-1, 0}};
     
@@ -67,5 +69,39 @@ class Solution {
             if (Math.abs(image[x][y] - image[i][j]) > t) return false;
         }
         return true;
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String inputLine = scanner.nextLine(); // Read the entire input line
+        scanner.close();
+        
+        // Separate the matrix string from the threshold
+        String[] parts = inputLine.split(" ");
+        String matrixString = parts[0];
+        int threshold = Integer.parseInt(parts[1]);
+        
+        // Process the matrix string
+        String[] rows = matrixString.substring(2, matrixString.length() - 2).split("\\],\\[");
+        int[][] matrix = new int[rows.length][];
+        for (int i = 0; i < rows.length; i++) {
+            String[] numbers = rows[i].split(",");
+            matrix[i] = new int[numbers.length];
+            for (int j = 0; j < numbers.length; j++) {
+                matrix[i][j] = Integer.parseInt(numbers[j].trim());
+            }
+        }
+        
+        Solution solution = new Solution();
+        int[][] result = solution.resultGrid(matrix, threshold);
+        
+        // Print the result
+        System.out.print("[");
+        for (int i = 0; i < result.length; i++) {
+            System.out.print(Arrays.toString(result[i]));
+            if (i < result.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
     }
 }

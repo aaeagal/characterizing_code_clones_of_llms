@@ -1,0 +1,12 @@
+{
+    "Z  a\u0018 -881895288": "Exception in thread \"main\" java.lang.IllegalArgumentException: fromKey > toKey\n\tat java.util.TreeMap$NavigableSubMap.<init>(TreeMap.java:1368)\n\tat java.util.TreeMap$AscendingSubMap.<init>(TreeMap.java:1855)\n\tat java.util.TreeMap.subMap(TreeMap.java:913)\n\tat java.util.TreeSet.subSet(TreeSet.java:325)\n\tat java.util.TreeSet.subSet(TreeSet.java:361)\n\tat Solution.beautifulIndices(Solution.java:11)\n\tat Solution.main(Solution.java:56)\n",
+    "\u00af\u0018\u00c9 \u0098fN \u008b\u008c -132": "[]\n",
+    "&\udb76\udeaf)   0": "[0, 1, 2, 3, 4]\n",
+    "O}\uda3a\ude9a\ud875\udde3 \u00e3+\ud95a\udf2d }\udb82\ude0167 -50389": "[]\n",
+    "\u009b\u0082\u00a2\udb46\udf84/ \u009b\u0082\u00a2\udb46\udf84\u009b \u8100\u00a2 -1314763037": "[]\n",
+    "\ud887\ude86350 0\u00cb 0\u00cb| 800182821": "[]\n",
+    ",\u0087\u0083   0": "[0, 1, 2, 3]\n",
+    "\ud82d\ude87\ud942\udda10\ud92e\ude77\u00c9\u00ef\ud892\ude48Pf\u00a7\u0090\ud942\udda1 \ud983\udd07\u00c7\u0015\u00e4\u00d7\u00e2 \u00c4\u00c6B\u00fd\u00d6\u000e 1746394194": "[]\n",
+    "\udb03\udc40 \udb03\udc40 \udb03\udc40 1537": "[0]\n",
+    "\u00e0\u00c0   0": "[0, 1, 2]\n"
+}

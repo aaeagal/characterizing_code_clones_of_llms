@@ -55,4 +55,25 @@ class Solution {
         
         return true;
     }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine(); // Reads the entire input line
+
+        // Removing the outer brackets and splitting the input into individual arrays
+        String[] rows = input.substring(2, input.length() - 2).split("\\],\\[");
+
+        int[][] mat = new int[rows.length][];
+        for (int i = 0; i < rows.length; i++) {
+            // Splitting each row into its elements and parsing them as integers
+            String[] elements = rows[i].split(",");
+            mat[i] = new int[elements.length];
+            for (int j = 0; j < elements.length; j++) {
+                mat[i][j] = Integer.parseInt(elements[j]);
+            }
+        }
+
+        Solution solution = new Solution();
+        int result = solution.mostFrequentPrime(mat);
+        System.out.println(result);
+    }
 }

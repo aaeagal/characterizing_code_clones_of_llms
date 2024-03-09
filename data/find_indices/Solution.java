@@ -37,4 +37,25 @@ class Solution {
 
     return shift;
   }
+    public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in);
+      String input = scanner.nextLine(); // Reads the entire input line
+
+      // Splitting the input string by spaces
+      String[] parts = input.split(" ");
+
+      // Extracting s, a, b, and k from the input parts
+      // s will be the first part, a the second, and b the third, k is the last integer
+      String s = parts[0];
+      String a = parts[1];
+      String b = input.substring(s.length() + a.length() + 2, input.lastIndexOf(" "));
+      int k = Integer.parseInt(parts[parts.length - 1]);
+
+      // Creating an instance of Solution and calling the beautifulIndices method
+      Solution solution = new Solution();
+      List<Integer> beautifulIndices = solution.beautifulIndices(s, a, b, k);
+
+      // Outputting the beautiful indices as an array
+      System.out.println(beautifulIndices);
+  }
 }

@@ -2,7 +2,8 @@
 #include <unordered_map>
 #include <queue>
 #include <cmath>
-
+#include <sstream>
+#include <string>
 using namespace std;
 
 class Solution {
@@ -118,3 +119,34 @@ private:
         }
     };
 };
+
+vector<vector<int>> parseInputMatrix(string input) {
+    vector<vector<int>> matrix;
+    stringstream ss(input.substr(1, input.size() - 2)); // Remove outer brackets
+    string row;
+    while (getline(ss, row, ']')) {
+        if (row[0] == ',') row = row.substr(2); // Handle comma at the start
+        vector<int> rowVec;
+        stringstream rs(row.substr(1)); // Remove leading '['
+        string num;
+        while (getline(rs, num, ',')) {
+            rowVec.push_back(stoi(num));
+        }
+        matrix.push_back(rowVec);
+        ss.ignore(1); // Ignore the comma between rows
+    }
+    return matrix;
+}
+
+int main() {
+    string input;
+    getline(cin, input); // Assuming the input is [[1,1],[9,9],[1,1]]
+
+    vector<vector<int>> mat = parseInputMatrix(input);
+
+    Solution solution;
+    int result = solution.mostFrequentPrime(mat);
+    cout << result << endl;
+
+    return 0;
+}

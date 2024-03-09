@@ -42,3 +42,29 @@ public:
         return ans;
     }
 };
+
+int main() {
+    std::string line;
+    std::getline(std::cin, line); // Read the input line
+    
+    // Remove the square brackets
+    line = line.substr(1, line.size() - 2);
+
+    std::vector<int> nums;
+    std::stringstream ss(line);
+    std::string item;
+
+    // Parse the integers from the string
+    while (std::getline(ss, item, ',')) {
+        nums.push_back(std::stoi(item));
+    }
+
+    // Instantiate the Solution class and call the minimumCost method
+    Solution solution;
+    long long cost = solution.minimumCost(nums);
+
+    // Print the result
+    std::cout << cost << std::endl;
+
+    return 0;
+}

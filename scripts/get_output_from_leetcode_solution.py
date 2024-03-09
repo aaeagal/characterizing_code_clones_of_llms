@@ -131,6 +131,116 @@ def get_output(file: str, input_corpus: dict, file_name: str) -> dict:
                 #    return behavior
     if "double_mod_exp" in file_path:
         logging.info(f'Running double_mod_exp')
+        #counter = 0
+        for key, value in input_corpus.items():
+            for input_list in value:
+                #counter += 1
+                input_str = " ".join(map(str, input_list))
+                #logging.info(f"Counter: {counter} with {input_str}")
+                if file.endswith('.py'):
+                    output = subprocess.run(['python3', file], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.java'):
+                    output = subprocess.run(["java", "-cp", file_path, executable_name], input=input_str, capture_output=True, text=True)                    
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.cpp'):
+                    output = subprocess.run([f'./{executable_name}'], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                if output.returncode != 0:
+                    behavior.update({input_str: output.stderr})
+                #if counter >= 10:
+                #    logging.info(f'Finished 10 inputs for {file_name}')
+                #    return behavior
+    if "find_equalindromic" in file_path:
+        logging.info(f'Running find_equalindromic')
+        counter = 0
+        for key, value in input_corpus.items():
+            for input_list in value:
+                counter += 1
+                input_str = " ".join(map(str, input_list))
+                logging.info(f"Counter: {counter} with {input_str}")
+                if file.endswith('.py'):
+                    output = subprocess.run(['python3', file], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.java'):
+                    output = subprocess.run(["java", "-cp", file_path, executable_name], input=input_str, capture_output=True, text=True)                    
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.cpp'):
+                    output = subprocess.run([f'./{executable_name}'], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                if output.returncode != 0:
+                    behavior.update({input_str: output.stderr})
+                if counter >= 10:
+                    logging.info(f'Finished 10 inputs for {file_name}')
+                    return behavior
+    if "find_grid" in file_path:
+        logging.info(f'Running find_grid')
+        counter = 0
+        for key, value in input_corpus.items():
+            for input_list in value:
+                counter += 1
+                input_str = " ".join(map(str, input_list))
+                logging.info(f"Counter: {counter} with {input_str}")
+                if file.endswith('.py'):
+                    output = subprocess.run(['python3', file], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.java'):
+                    output = subprocess.run(["java", "-cp", file_path, executable_name], input=input_str, capture_output=True, text=True)                    
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.cpp'):
+                    output = subprocess.run([f'./{executable_name}'], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                if output.returncode != 0:
+                    behavior.update({input_str: output.stderr})
+                if counter >= 10:
+                    logging.info(f'Finished 10 inputs for {file_name}')
+                    return behavior
+    if "find_indices" in file_path:
+        logging.info(f'Running find_indices')
+        counter = 0
+        for key, value in input_corpus.items():
+            for input_list in value:
+                counter += 1
+                input_str = " ".join(map(str, input_list))
+                logging.info(f"Counter: {counter} with {input_str}")
+                if file.endswith('.py'):
+                    output = subprocess.run(['python3', file], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.java'):
+                    output = subprocess.run(["java", "-cp", file_path, executable_name], input=input_str, capture_output=True, text=True)                    
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.cpp'):
+                    output = subprocess.run([f'./{executable_name}'], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                if output.returncode != 0:
+                    behavior.update({input_str: output.stderr})
+                if counter >= 10:
+                    logging.info(f'Finished 10 inputs for {file_name}')
+                    return behavior
+    if "find_polygon" in file_path:
+        logging.info(f'Running find_polygon')
+        counter = 0
+        for key, value in input_corpus.items():
+            for input_list in value:
+                counter += 1
+                input_str = " ".join(map(str, input_list))
+                logging.info(f"Counter: {counter} with {input_str}")
+                if file.endswith('.py'):
+                    output = subprocess.run(['python3', file], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.java'):
+                    output = subprocess.run(["java", "-cp", file_path, executable_name], input=input_str, capture_output=True, text=True)                    
+                    behavior.update({input_str: output.stdout})
+                elif file.endswith('.cpp'):
+                    output = subprocess.run([f'./{executable_name}'], input=input_str, capture_output=True, text=True)
+                    behavior.update({input_str: output.stdout})
+                if output.returncode != 0:
+                    behavior.update({input_str: output.stderr})
+                if counter >= 10:
+                    logging.info(f'Finished 10 inputs for {file_name}')
+                    return behavior
+    if "frequent_prime" in file_path:
+        logging.info(f'Running frequent_prime')
         counter = 0
         for key, value in input_corpus.items():
             for input_list in value:

@@ -1,4 +1,5 @@
 from typing import List
+import ast
 class Solution:
     def resultGrid(self, im: List[List[int]], threshold: int) -> List[List[int]]:
         
@@ -53,4 +54,25 @@ class Solution:
                     result[i][j] = im[i][j]
         
         return result
-                    
+def main():
+    # Read the input string from standard input
+    input_str = input()
+    
+    # Split the input string into the image part and the threshold part
+    image_str, threshold_str = input_str.rsplit(' ', 1)
+    
+    # Convert the image part from string to a 2D list of integers
+    image = ast.literal_eval(image_str)
+    
+    # Convert the threshold part from string to integer
+    threshold = int(threshold_str)
+    
+    # Create a Solution instance and call the resultGrid method
+    solution = Solution()
+    result = solution.resultGrid(image, threshold)
+    
+    # Print the result
+    print(result)
+
+if __name__ == "__main__":
+    main()

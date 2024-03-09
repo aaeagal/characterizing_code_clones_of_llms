@@ -1,6 +1,10 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <iostream>
+#include <sstream>
+#include <string>
+
 using namespace std;
 
 class Solution {
@@ -66,3 +70,52 @@ public:
         return res;
     }
 };
+
+vector<vector<int>> stringToMatrix(string input) {
+    vector<vector<int>> result;
+    istringstream iss(input);
+    string row;
+    // Skip the initial '['
+    getline(iss, row, '[');
+    while(getline(iss, row, '[')) {
+        vector<int> rowVector;
+        stringstream ss(row);
+        string value;
+        while(getline(ss, value, ',')) {
+            // Remove potential trailing ']' characters
+            value.erase(remove(value.begin(), value.end(), ']'), value.end());
+            if(!value.empty())
+                rowVector.push_back(stoi(value));
+        }
+        if(!rowVector.empty())
+            result.push_back(rowVector);
+    }
+    return result;
+}
+
+int main() {
+    string input;
+    getline(cin, input); // Read the entire line
+    size_t pos = input.find_last_of(' '); // Find the position of the last space character
+    string matrixString = input.substr(0, pos); // Extract the matrix part of the input
+    int threshold = stoi(input.substr(pos + 1)); // Extract the threshold part of the input
+
+    vector<vector<int>> matrix = stringToMatrix(matrixString);
+    Solution solution;
+    vector<vector<int>> result = solution.resultGrid(matrix, threshold);
+
+    // Print the result
+    cout << "[" ;
+    for (size_t i = 0; i < result.size(); ++i) {
+        cout << "[";
+        for (size_t j = 0; j < result[i].size(); ++j) {
+            cout << result[i][j];
+            if (j < result[i].size() - 1) cout << ", ";
+        }
+        cout << "]";
+        if (i < result.size() - 1) cout << ", ";
+    }
+    cout << "]" << endl;
+
+    return 0;
+}

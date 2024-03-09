@@ -1,5 +1,6 @@
 from collections import defaultdict
 from math import sqrt
+import ast
 class Solution:
     def mostFrequentPrime(self, mat: list[list[int]]) -> int:
         d = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
@@ -33,3 +34,13 @@ class Solution:
                 return val
         
         return -1
+    
+def main():
+    input_str = input()
+    mat = ast.literal_eval(input_str)
+    solution = Solution()  # Assuming Solution class is defined elsewhere
+    result = solution.mostFrequentPrime(mat)  # Assuming the Solution class has a method canSortArray
+    print(result)
+
+if __name__ == "__main__":
+    main()
