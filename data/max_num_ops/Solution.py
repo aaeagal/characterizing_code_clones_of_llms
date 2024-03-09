@@ -17,3 +17,12 @@ class Solution:
                 p3 = 1 + dfs(target, start, end-2)
             return max(p1, p2, p3)
         return max(dfs(nums[0]+nums[1], 0, n-1), dfs(nums[0]+nums[-1], 0, n-1), dfs(nums[-1]+nums[-2], 0, n-1))
+def main():
+    input_str = input()
+    nums = [int(num) for num in input_str.strip('[]').split(',')]
+    solution = Solution()
+    result = solution.maxOperations(nums)
+    print(result)
+
+if __name__ == "__main__":
+    main()

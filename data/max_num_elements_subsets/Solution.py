@@ -25,3 +25,14 @@ class Solution:
                     res = max(res, curMax * 2 - 1)
             seen.add(k)
         return res
+    
+def main():
+    input_str = input()
+    nums = list(map(int, input_str.strip("[]").split(",")))
+    
+    solution = Solution()
+    result = solution.maximumLength(nums)
+    print(result)
+
+if __name__ == "__main__":
+    main()

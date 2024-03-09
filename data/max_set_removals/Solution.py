@@ -26,4 +26,18 @@ class Solution:
                         if len(S2) == n//2: break
                     
         return len(S1 | S2)
-        
+
+def main():
+    input_str = input()
+
+    nums1_str, nums2_str = input_str.strip().split("] [")
+
+    nums1 = list(map(int, nums1_str.strip("[]").split(",")))
+    nums2 = list(map(int, nums2_str.strip("[]").split(",")))
+
+    solution = Solution()
+    
+    print(solution.maximumSetSize(nums1, nums2))
+
+if __name__ == "__main__":
+    main()

@@ -1,6 +1,10 @@
 #include <vector>
 #include <unordered_set>
 #include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <string>
+
 using namespace std;
 class Solution {
 public:
@@ -38,3 +42,33 @@ public:
         return ans % mod;
     }
 };
+
+std::vector<int> parseInputVector(const std::string& input) {
+    std::vector<int> result;
+    std::istringstream iss(input.substr(1, input.size() - 2)); // Remove the brackets
+    std::string item;
+    while (getline(iss, item, ',')) {
+        result.push_back(std::stoi(item));
+    }
+    return result;
+}
+
+int main() {
+    int m, n;
+    char comma; // To consume the commas in the input
+    std::cin >> m >> comma >> n >> comma;
+
+    std::string hStr, vStr;
+    std::cin >> hStr >> vStr; // Read the vector strings
+
+    std::vector<int> H = parseInputVector(hStr);
+    std::vector<int> V = parseInputVector(vStr);
+
+    Solution solution;
+    int result = solution.maximizeSquareArea(m, n, H, V);
+
+    // Output the result
+    std::cout <<  result << std::endl;
+
+    return 0;
+}

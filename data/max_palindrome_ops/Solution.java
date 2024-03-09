@@ -43,4 +43,24 @@ class Solution {
         
         return cnt;
     }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine(); // Read the input string
+        
+        // Trim the input to remove the first and last brackets
+        input = input.substring(1, input.length() - 1);
+        
+        // Split the input into an array of strings
+        String[] wordsArray = input.split(",");
+        
+        for (int i = 0; i < wordsArray.length; i++) {
+            // Trim spaces and remove quotes
+            wordsArray[i] = wordsArray[i].trim().replace("\"", "");
+        }
+        
+        Solution solution = new Solution();
+        int result = solution.maxPalindromesAfterOperations(wordsArray);
+        
+        System.out.println(result);
+    }
 }

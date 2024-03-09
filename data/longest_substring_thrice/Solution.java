@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 class Solution {
   public int maximumLength(String s) {
     // top three longest length of each char
@@ -47,4 +48,14 @@ class Solution {
 
     return result;
   }
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String s = scanner.next(); // Reads the input string
+
+    Solution solution = new Solution();
+    int result = solution.maximumLength(s);
+
+    // Output the result
+    System.out.println(result);
+}
 }

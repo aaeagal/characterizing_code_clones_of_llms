@@ -1,3 +1,5 @@
+
+import collections
 class Solution:
     def maximumLength(self, s: str) -> int:
         from collections import Counter
@@ -51,3 +53,12 @@ class Solution:
                     break
                     
         return res  
+    
+def main():
+    input_str = input()
+    sol = Solution()
+    result = sol.maximumLength(input_str)
+    print(result)
+
+if __name__ == "__main__":
+    main()

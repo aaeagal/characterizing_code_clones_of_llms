@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.*;
 class Solution {
   private static final int modulo = (int) 1e9 + 7;
 
@@ -38,4 +39,30 @@ class Solution {
 
     return (int) ((long) gap * gap % modulo);
   }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+        
+        // Assuming the input format is: 4, 3, [2,3], [2]
+        // Splitting the input string around the commas followed by space
+        String[] parts = input.split(",\\s*(?![^\\[]*\\])"); // Adjusted regex
+        
+        // Parsing m and n
+        int m = Integer.parseInt(parts[0]);
+        int n = Integer.parseInt(parts[1]);
+
+        // Parsing hFences and vFences
+        // The regex adjustment is to not split on commas inside the square brackets
+        String[] hFencesStr = parts[2].substring(1, parts[2].length() - 1).split(",");
+        int[] hFences = Arrays.stream(hFencesStr).map(String::trim).mapToInt(Integer::parseInt).toArray();
+        
+        String[] vFencesStr = parts[3].substring(1, parts[3].length() - 1).split(",");
+        int[] vFences = Arrays.stream(vFencesStr).map(String::trim).mapToInt(Integer::parseInt).toArray();
+        
+        Solution solution = new Solution();
+        int result = solution.maximizeSquareArea(m, n, hFences, vFences);
+
+        System.out.println(result);
+    }
 }

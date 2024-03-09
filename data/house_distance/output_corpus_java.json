@@ -1,0 +1,8 @@
+{
+    "19 101123846 19": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 101123845\n\tat Solution.countOfPairs(Solution.java:19)\n\tat Solution.main(Solution.java:51)\n",
+    "2147483647 58078 15310": "Exception in thread \"main\" java.lang.OutOfMemoryError: Requested array size exceeds VM limit\n\tat Solution.countOfPairs(Solution.java:8)\n\tat Solution.main(Solution.java:51)\n",
+    "-117703940 -1303 -6056": "Exception in thread \"main\" java.lang.NegativeArraySizeException\n\tat Solution.countOfPairs(Solution.java:8)\n\tat Solution.main(Solution.java:51)\n",
+    "-235 69 52015": "Exception in thread \"main\" java.lang.NegativeArraySizeException\n\tat Solution.countOfPairs(Solution.java:8)\n\tat Solution.main(Solution.java:51)\n",
+    "1795 2147483647 1795": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 2147483646\n\tat Solution.countOfPairs(Solution.java:19)\n\tat Solution.main(Solution.java:51)\n",
+    "-33379 -817892209 -22211": "Exception in thread \"main\" java.lang.NegativeArraySizeException\n\tat Solution.countOfPairs(Solution.java:8)\n\tat Solution.main(Solution.java:51)\n"
+}

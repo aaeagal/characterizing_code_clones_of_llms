@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <map>
 #include <sstream>
+#include <iostream>
+
 using namespace std;
 class Solution {
 public:
@@ -55,3 +57,16 @@ public:
         return ans;
     }
 };
+
+int main() {
+    string s;
+    cin >> s; // Reads the input string
+
+    Solution solution;
+    int result = solution.maximumLength(s);
+
+    // Output the result
+    cout << result << endl;
+
+    return 0;
+}

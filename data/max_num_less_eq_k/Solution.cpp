@@ -37,3 +37,17 @@ public:
         return ans;
         }
 };
+
+int main() {
+    long long k;
+    int x;
+    cin >> k >> x; // Reads the two inputs
+
+    Solution solution;
+    long long result = solution.findMaximumNumber(k, x);
+
+    // Output the result
+    cout << result << endl;
+
+    return 0;
+}

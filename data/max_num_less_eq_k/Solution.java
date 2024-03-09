@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class Solution {
     public long count(long k, int bit, int x) {
         if (k < bit)
@@ -15,5 +16,17 @@ public class Solution {
         return count(k, 0, x) - 1;
     }
 
-    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Reads the two inputs
+        long k = scanner.nextLong();
+        int x = scanner.nextInt();
+        
+        Solution solution = new Solution();
+        long result = solution.findMaximumNumber(k, x);
+        
+        // Output the result
+        System.out.println(result);
+    }
 }

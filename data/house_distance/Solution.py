@@ -40,3 +40,21 @@ class Solution:
             do(i)
         return ans
     
+def main():
+    input_str = input()
+
+    input_list = input_str.split()
+
+    n = int(input_list[0])
+    x = int(input_list[1])
+    y = int(input_list[2])
+
+    sol = Solution()
+
+    result = sol.countOfPairs(n, x, y)
+
+    # print as a list
+    print(result)
+
+if __name__ == "__main__":
+    main()

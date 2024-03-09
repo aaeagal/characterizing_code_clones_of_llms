@@ -1,5 +1,9 @@
 #include <vector>
 #include <unordered_set>
+#include <iostream>
+#include <sstream>
+#include <string>
+
 using namespace std;
 class Solution {
 public:
@@ -51,3 +55,33 @@ public:
         return st.size();
     }
 };
+std::vector<int> parseInputVector(const std::string& input) {
+    std::vector<int> result;
+    std::istringstream iss(input.substr(1, input.size() - 2)); // Remove the brackets
+    std::string item;
+    while (getline(iss, item, ',')) {
+        result.push_back(std::stoi(item));
+    }
+    return result;
+}
+
+int main() {
+    std::string line;
+    getline(std::cin, line); // Reads the entire input line
+
+    // Splitting the input line into two parts: two vectors
+    size_t mid = line.find("] [");
+    std::string vecA = line.substr(0, mid+1);
+    std::string vecB = line.substr(mid+2);
+    
+    std::vector<int> A = parseInputVector(vecA);
+    std::vector<int> B = parseInputVector(vecB);
+
+    Solution solution;
+    int result = solution.maximumSetSize(A, B);
+
+    // Output the result
+    std::cout << result << std::endl;
+
+    return 0;
+}

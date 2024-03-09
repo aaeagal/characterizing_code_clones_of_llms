@@ -1,3 +1,4 @@
+import java.util.Scanner;
 class Solution {
     int N = 0;
     Integer[][] memo1, memo2, memo3;
@@ -29,4 +30,21 @@ class Solution {
         return memo[l][r] = Math.max(Math.max(res1, res2), res3);
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine(); // Reads the entire input line
+
+        // Removing the brackets and parsing the array part
+        String[] numsAsString = input.substring(1, input.length() - 1).split(",");
+        int[] nums = new int[numsAsString.length];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = Integer.parseInt(numsAsString[i].trim());
+        }
+
+        Solution solution = new Solution();
+        int result = solution.maxOperations(nums);
+
+        // Output the result
+        System.out.println(result);
+    }
 }

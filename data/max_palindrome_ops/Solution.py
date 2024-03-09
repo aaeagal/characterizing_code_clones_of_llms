@@ -1,5 +1,6 @@
 from collections import Counter
 from typing import List
+import ast
 class Solution:
     def maxPalindromesAfterOperations(self, words: List[str]) -> int:
         n = len(words)
@@ -18,3 +19,17 @@ class Solution:
                 ans+=1
         
         return ans
+
+def main():
+    input_str = input()
+
+    input_list = ast.literal_eval(input_str)
+
+    s = Solution()
+
+    behavior = s.maxPalindromesAfterOperations(input_list)
+
+    print(behavior)
+    
+if __name__ == "__main__":
+    main()

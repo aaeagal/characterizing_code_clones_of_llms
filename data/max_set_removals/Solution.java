@@ -41,4 +41,31 @@ class Solution {
             else return a+b+dyn;
         return a+b;
     }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine(); // Reads the entire input line
+
+        // Splitting the input into two parts based on the pattern "] ["
+        String[] parts = input.split("\\] \\[");
+        
+        // Processing the first array
+        String[] nums1String = parts[0].substring(1).split(",");
+        int[] nums1 = new int[nums1String.length];
+        for (int i = 0; i < nums1.length; i++) {
+            nums1[i] = Integer.parseInt(nums1String[i].trim());
+        }
+
+        // Processing the second array
+        String[] nums2String = parts[1].substring(0, parts[1].length() - 1).split(",");
+        int[] nums2 = new int[nums2String.length];
+        for (int i = 0; i < nums2.length; i++) {
+            nums2[i] = Integer.parseInt(nums2String[i].trim());
+        }
+
+        Solution solution = new Solution();
+        int result = solution.maximumSetSize(nums1, nums2);
+
+        // Output the result
+        System.out.println(result);
+    }
 }

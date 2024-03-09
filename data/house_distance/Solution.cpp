@@ -1,5 +1,8 @@
 #include <vector>
 #include <cmath>
+#include <iostream>
+#include <sstream>
+
 using namespace std;
 class Solution {
 public:
@@ -16,3 +19,22 @@ public:
     }
 
 };
+
+int main() {
+    int n, x, y;
+    cin >> n >> x >> y; // Reads the three integers
+
+    Solution solution;
+    vector<int> result = solution.countOfPairs(n, x, y);
+
+    // Output the result as an array of integers
+    cout << "[";
+    for (int i = 0; i < result.size(); i++) {
+        cout << result[i];
+        if (i < result.size() - 1) {
+            cout << ", ";
+        }
+    }
+    cout << "]" << endl;
+    return 0;
+}

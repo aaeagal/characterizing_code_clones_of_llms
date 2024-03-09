@@ -39,4 +39,18 @@ class Solution {
         }
         return result;
     }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Reads the three integers from a single line
+        int n = scanner.nextInt();
+        int x = scanner.nextInt();
+        int y = scanner.nextInt();
+
+        Solution solution = new Solution();
+        int[] result = solution.countOfPairs(n, x, y);
+
+        // Output the result
+        System.out.println(Arrays.toString(result));
+    }
 }

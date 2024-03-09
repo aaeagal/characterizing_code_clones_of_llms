@@ -1,6 +1,9 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <iostream>
+#include <sstream>
+
 using namespace std;
 class Solution {
 public:
@@ -41,3 +44,30 @@ public:
         return ans;
     }
 };
+
+vector<string> parseInputVector(const string& input) {
+    vector<string> result;
+    stringstream ss(input.substr(1, input.size() - 2)); // Remove the brackets
+    string item;
+    while (getline(ss, item, ',')) {
+        item.erase(remove(item.begin(), item.end(), '\"'), item.end()); // Remove double quotes
+        item.erase(remove(item.begin(), item.end(), ' '), item.end()); // Remove spaces
+        result.push_back(item);
+    }
+    return result;
+}
+
+int main() {
+    string line;
+    getline(cin, line); // Reads the entire input line
+
+    vector<string> words = parseInputVector(line);
+
+    Solution solution;
+    int result = solution.maxPalindromesAfterOperations(words);
+
+    // Output the result
+    cout << result << endl;
+
+    return 0;
+}
