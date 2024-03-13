@@ -69,61 +69,40 @@ public:
     }
 };
 
+
+vector<vector<int>> stringToMatrix(string input) {
+    vector<vector<int>> result;
+    istringstream iss(input);
+    string row;
+    // Skip the initial '['
+    getline(iss, row, '[');
+    while(getline(iss, row, '[')) {
+        vector<int> rowVector;
+        stringstream ss(row);
+        string value;
+        while(getline(ss, value, ',')) {
+            // Remove potential trailing ']' characters
+            value.erase(remove(value.begin(), value.end(), ']'), value.end());
+            if(!value.empty())
+                rowVector.push_back(stoi(value));
+        }
+        if(!rowVector.empty())
+            result.push_back(rowVector);
+    }
+    return result;
+}
+
 int main() {
-    string inputLine;
-    getline(cin, inputLine); // Read the entire line of input
+    string input;
+    getline(cin, input); // Read the entire line
+    size_t pos = input.find_last_of(' '); // Find the position of the last space character
+    string matrixString = input.substr(0, pos); // Extract the matrix part of the input
+    int threshold = stoi(input.substr(pos + 1)); // Extract the threshold part of the input
 
-    // Remove spaces to ensure consistent parsing
-    inputLine.erase(remove(inputLine.begin(), inputLine.end(), ' '), inputLine.end());
-
-    // Find the start of the target value
-    size_t startPosOfTarget = inputLine.find_last_of(']') + 1;
-    if (startPosOfTarget == string::npos) {
-        cerr << "Error: Could not find the end of the arrays part." << endl;
-        return 1;
-    }
-
-    string arraysPart = inputLine.substr(1, startPosOfTarget - 2); // Extract arrays part without outer brackets
-
-    string targetStr = inputLine.substr(startPosOfTarget);
-    
-    if (targetStr.empty()) {
-        cerr << "Error: Target string is empty." << endl;
-        return 1;
-    }
-
-    int target = stoi(targetStr);
-
-    vector<vector<int>> variables;
-    stringstream ss(arraysPart);
-    string segment;
-
-    // Process each array within the arrays part
-    while (getline(ss, segment, ']')) {
-        if (!segment.empty() && segment[0] == ',') {
-            segment = segment.substr(1); // Remove leading comma
-        }
-        if (!segment.empty() && segment[0] == '[') {
-            segment = segment.substr(1); // Remove leading '['
-        }
-
-        stringstream segmentStream(segment);
-        vector<int> currentArray;
-        string number;
-        while (getline(segmentStream, number, ',')) {
-            if (!number.empty()) {
-                currentArray.push_back(stoi(number));
-            }
-        }
-        
-        if (!currentArray.empty()) {
-            variables.push_back(currentArray);
-        }
-    }
-
+    vector<vector<int>> matrix = stringToMatrix(matrixString);
     // Assuming Solution class is correctly defined and implements getGoodIndices method
     Solution solution;
-    vector<int> result = solution.getGoodIndices(variables, target);
+    vector<int> result = solution.getGoodIndices(matrix, threshold);
 
     // Print the result
     cout << "[";

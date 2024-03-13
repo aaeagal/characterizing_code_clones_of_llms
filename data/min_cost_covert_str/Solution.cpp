@@ -1,11 +1,13 @@
-typedef pair<int,int> pii;
+#include <utility>
 #include <vector>
 #include <string>
 #include <functional>
 #include <climits>
 #include <iostream>
 #include <queue>
+#include <sstream>
 using namespace std;
+typedef pair<int,int> pii;
 class Solution {
 public:
     long long minimumCost(string source, string target, vector<char>& O, vector<char>& C, vector<int>& cost) {
@@ -59,3 +61,52 @@ public:
         return res;
     }
 };
+
+vector<char> parseCharVector(string input) {
+    vector<char> result;
+    stringstream ss(input.substr(1, input.size() - 2)); // Remove the brackets.
+    string item;
+    while (getline(ss, item, ',')) {
+        item.erase(remove(item.begin(), item.end(), '\"'), item.end()); // Remove quotes.
+        item.erase(remove(item.begin(), item.end(), ' '), item.end()); // Remove spaces.
+        if (!item.empty()) {
+            result.push_back(item[0]);
+        }
+    }
+    return result;
+}
+
+vector<int> parseIntVector(string input) {
+    vector<int> result;
+    stringstream ss(input.substr(1, input.size() - 2)); // Remove the brackets.
+    string item;
+    while (getline(ss, item, ',')) {
+        result.push_back(stoi(item));
+    }
+    return result;
+}
+
+int main() {
+    string source, target;
+    cin >> source >> target;
+
+    string temp;
+    vector<char> O, C;
+    vector<int> cost;
+
+    cin >> temp; // Read the vector as a string.
+    O = parseCharVector(temp);
+
+    cin >> temp; // Read the next vector.
+    C = parseCharVector(temp);
+
+    cin >> temp; // Read the cost vector.
+    cost = parseIntVector(temp);
+
+    Solution solution;
+    long long result = solution.minimumCost(source, target, O, C, cost);
+
+    cout << result << endl;
+
+    return 0;
+}

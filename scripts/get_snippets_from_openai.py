@@ -32,10 +32,7 @@ def parse_arguments() -> dict:
     parser = argparse.ArgumentParser(description='Queries the LLMs for a given prompt and returns code snippets.')
 
     parser.add_argument(
-        '--prompt', type=str, help='Prompt to send to the model', required=True
-    )
-    parser.add_argument(
-        '--model', type=str, help='Model (GPT vs StarCoder)', required=True
+        '--leetcode_description', type=str, help='Prompt to send to the model', required=True
     )
     parser.add_argument(
         '--temperature', type=int, help='Temperature for the response generation', required=True
@@ -103,8 +100,6 @@ def get_file_suffix(task: str) -> str:
     Returns:
         str: The file suffix for the given task.
     """
-
-    # Return the file suffix based on the task
     if task == "cppToJava":
         return "java"
     elif task == "cppToPython":
@@ -133,7 +128,7 @@ def main():
     args = parse_arguments()
     task = args.task
     model = args.model
-    prompt = args.prompt
+    leetcode = args.leetcode_description
     temperature = args.temperature
     sampling = args.sampling
 
@@ -141,35 +136,230 @@ def main():
     file_suffix = get_file_suffix(task)
 
     # -- Query the model -- #
-    with open(f'../data/{prompt}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+    total_samples_per_prompt = 0
 
-        total_samples_per_prompt = 0
+    while total_samples_per_prompt < 20:
+        total_samples_per_prompt += 1
 
-        while total_samples_per_prompt < 20:
-            total_samples_per_prompt += 1
+        if task == "cppToJava":
+            # --- Read Solution.cpp file --- #
+            with open(f'../data/{leetcode}/Solution.cpp', 'r') as solution_file:
+                code = solution_file.read()
+            
+            # --- Query the model for combined clones --- #
+            if sampling == "combined":
+                prompt = f"Generate 20 Java semantic clones of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated 20 Java semantic clones using {leetcode} Solution.cpp")
+                    break
 
-            if task == "cppToJava":
-                with open(f'../data/{prompt}/Solution.cpp', 'r') as file:
-                    code = file.read()
-                    
-            elif task == "cppToPython":
-                return "py"
-            elif task == "javaToCpp":
-                return "cpp"
-            elif task == "javaToPython":
-                return "py"
-            elif task == "pythonToCpp":
-                return "cpp"
-            elif task == "pythonToJava":
-                return "java"
-            elif task == "python":
-                return "py"
-            elif task == "java":
-                return "java"
-            elif task == "cpp":
-                return "cpp"
-            else:
-                raise ValueError(f"Unknown file suffix in get_file_suffix: {task}")
+            # --- Query the model for seperate clones --- #
+            elif sampling == "seperate":
+                prompt = f"Generate a Java semantic clone of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated_{total_samples_per_prompt}.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated Java semantic clone {total_samples_per_prompt} using {leetcode} Solution.cpp")
+                    continue
+                
+        elif task == "cppToPython":
+            # --- Read Solution.cpp file --- #
+            with open(f'../data/{leetcode}/Solution.cpp', 'r') as solution_file:
+                code = solution_file.read()
+            
+            # --- Query the model for combined clones --- #
+            if sampling == "combined":
+                prompt = f"Generate 20 Python semantic clones of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated 20 Python semantic clones using {leetcode} Solution.cpp")
+                    break
+
+            # --- Query the model for seperate clones --- #
+            elif sampling == "seperate":
+                prompt = f"Generate 20 Python semantic clone of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated_{total_samples_per_prompt}.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated Python semantic clone {total_samples_per_prompt} using {leetcode} Solution.cpp")
+                    continue
+        elif task == "javaToCpp":
+            # --- Read Solution.java file --- #
+            with open(f'../data/{leetcode}/Solution.java', 'r') as solution_file:
+                code = solution_file.read()
+            
+            # --- Query the model for combined clones --- #
+            if sampling == "combined":
+                prompt = f"Generate 20 C++ semantic clones of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated 20 C++ semantic clones using {leetcode} Solution.java")
+                    break
+
+            # --- Query the model for seperate clones --- #
+            elif sampling == "seperate":
+                prompt = f"Generate a C++ semantic clone of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated_{total_samples_per_prompt}.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated C++ semantic clone {total_samples_per_prompt} using {leetcode} Solution.java")
+                    continue
+        elif task == "javaToPython":
+            # --- Read Solution.java file --- #
+            with open(f'../data/{leetcode}/Solution.java', 'r') as solution_file:
+                code = solution_file.read()
+            
+            # --- Query the model for combined clones --- #
+            if sampling == "combined":
+                prompt = f"Generate 20 Python semantic clones of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated 20 Python semantic clones using {leetcode} Solution.java")
+                    break
+
+            # --- Query the model for seperate clones --- #
+            elif sampling == "seperate":
+                prompt = f"Generate a Python semantic clone of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated_{total_samples_per_prompt}.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated Python semantic clone {total_samples_per_prompt} using {leetcode} Solution.java")
+                    continue
+        elif task == "pythonToCpp":
+            # --- Read Solution.py file --- #
+            with open(f'../data/{leetcode}/Solution.py', 'r') as solution_file:
+                code = solution_file.read()
+            
+            # --- Query the model for combined clones --- #
+            if sampling == "combined":
+                prompt = f"Generate 20 C++ semantic clones of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated 20 C++ semantic clones using {leetcode} Solution.py")
+                    break
+
+            # --- Query the model for seperate clones --- #
+            elif sampling == "seperate":
+                prompt = f"Generate a C++ semantic clone of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated_{total_samples_per_prompt}.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated C++ semantic clone {total_samples_per_prompt} using {leetcode} Solution.py")
+                    continue
+        elif task == "pythonToJava":
+            # --- Read Solution.py file --- #
+            with open(f'../data/{leetcode}/Solution.py', 'r') as solution_file:
+                code = solution_file.read()
+            
+            # --- Query the model for combined clones --- #
+            if sampling == "combined":
+                prompt = f"Generate 20 Java semantic clones of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated 20 Java semantic clones using {leetcode} Solution.py")
+                    break
+
+            # --- Query the model for seperate clones --- #
+            elif sampling == "seperate":
+                prompt = f"Generate a Java semantic clone of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated_{total_samples_per_prompt}.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated Java semantic clone {total_samples_per_prompt} using {leetcode} Solution.py")
+                    continue
+        elif task == "python":
+            # --- Read Solution.py file --- #
+            with open(f'../data/{leetcode}/Solution.py', 'r') as solution_file:
+                code = solution_file.read()
+            
+            # --- Query the model for combined clones --- #
+            if sampling == "combined":
+                prompt = f"Generate 20 syntactically different semantic Python clones of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated 20 Python syntactically different semantic clones using {leetcode} Solution.py")
+                    break
+
+            # --- Query the model for seperate clones --- #
+            elif sampling == "seperate":
+                prompt = f"Generate a syntactically different semantic Python clone of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated_{total_samples_per_prompt}.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated Python syntactically different semantic clone {total_samples_per_prompt} using {leetcode} Solution.py")
+                    continue
+        elif task == "java":
+            # --- Read Solution.java file --- #
+            with open(f'../data/{leetcode}/Solution.java', 'r') as solution_file:
+                code = solution_file.read()
+            
+            # --- Query the model for combined clones --- #
+            if sampling == "combined":
+                prompt = f"Generate 20 syntactically different semantic Java clones of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated 20 Java syntactically different semantic clones using {leetcode} Solution.java")
+                    break
+
+            # --- Query the model for seperate clones --- #
+            elif sampling == "seperate":
+                prompt = f"Generate a syntactically different semantic Java clone of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated_{total_samples_per_prompt}.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated Java syntactically different semantic clone {total_samples_per_prompt} using {leetcode} Solution.java")
+                    continue
+        elif task == "cpp":
+            # --- Read Solution.cpp file --- #
+            with open(f'../data/{leetcode}/Solution.cpp', 'r') as solution_file:
+                code = solution_file.read()
+            
+            # --- Query the model for combined clones --- #
+            if sampling == "combined":
+                prompt = f"Generate 20 syntactically different semantic C++ clones of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated 20 C++ syntactically different semantic clones using {leetcode} Solution.cpp")
+                    break
+
+            # --- Query the model for seperate clones --- #
+            elif sampling == "seperate":
+                prompt = f"Generate a syntactically different semantic C++ clone of the provided code below: \n{code}"
+                response = query_gpt(prompt, model, temperature)
+                
+                with open(f'../data/{leetcode}/{temperature}/{model}/{task}/{sampling}/llm_generated/generated_{total_samples_per_prompt}.{file_suffix}', 'w') as file:
+                    file.write(response)
+                    logging.info(f"Generated C++ syntactically different semantic clone {total_samples_per_prompt} using {leetcode} Solution.cpp")
+                    continue
+        else:
+            raise ValueError(f"Unknown file suffix in get_file_suffix: {task}")
 
 
 

@@ -41,7 +41,7 @@ int main() {
     Solution solution;
     bool result = solution.canSortArray(nums);
     // print the result as true or false
-    cout << (result ? "true" : "false") << endl;
+    cout << (result ? "True" : "False") << endl;
     
     return 0;
 }

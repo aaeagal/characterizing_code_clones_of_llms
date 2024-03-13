@@ -9,3 +9,12 @@ class Solution:
             else: 
                 if num % nums[0] != 0: return 1
         return (cnt+1)//2
+
+def main():
+    input_str = input()
+    nums = list(map(int, input_str.strip("[]").split(",")))
+    solution = Solution()
+    print(solution.minimumArrayLength(nums))
+
+if __name__ == "__main__":
+    main()

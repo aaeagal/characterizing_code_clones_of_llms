@@ -1,5 +1,8 @@
 #include <queue>
 #include <unordered_set>
+#include <iostream>
+#include <string>
+
 using namespace std;
 class Solution {
 public:
@@ -40,3 +43,14 @@ public:
         return -1;
     }
 };
+
+int main(){
+    int x, y;
+    cin >> x >> y;
+
+    Solution sol;
+    int result = sol.minimumOperationsToMakeEqual(x, y);
+
+    cout << result << endl;
+    
+}

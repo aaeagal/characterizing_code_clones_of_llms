@@ -1,4 +1,8 @@
 #include <vector>
+#include <iostream>
+#include <string>
+#include <sstream>
+
 using namespace std;
 class Solution {
 public:
@@ -23,3 +27,33 @@ public:
         return ans;
     }
 };
+
+vector<int> parseInputVector(string input) {
+    vector<int> result;
+    stringstream ss(input.substr(1, input.size() - 2)); // Remove the brackets
+    string item;
+    while (getline(ss, item, ',')) {
+        result.push_back(stoi(item));
+    }
+    return result;
+}
+
+int main() {
+    string line;
+    getline(cin, line); // Reads the entire input line
+
+    // Splitting the input line into two parts: vector and integer
+    size_t spacePos = line.find_last_of(' ');
+    string vectorPart = line.substr(0, spacePos);
+    int k = stoi(line.substr(spacePos + 1));
+
+    vector<int> nums = parseInputVector(vectorPart);
+
+    Solution solution;
+    long long result = solution.minOperations(nums, k);
+
+    // Output the result
+    cout << result << endl;
+
+    return 0;
+}

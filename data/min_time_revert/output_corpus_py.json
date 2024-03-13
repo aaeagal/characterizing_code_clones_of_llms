@@ -1,0 +1,12 @@
+{
+    " -55865": "Traceback (most recent call last):\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_time_revert/Solution.py\", line 25, in <module>\n    main()\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_time_revert/Solution.py\", line 18, in main\n    k = int(input_list[1])\nIndexError: list index out of range\n",
+    "\u00ce\u00cd -173421149": "0\n",
+    " -45683767": "Traceback (most recent call last):\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_time_revert/Solution.py\", line 25, in <module>\n    main()\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_time_revert/Solution.py\", line 18, in main\n    k = int(input_list[1])\nIndexError: list index out of range\n",
+    "\\ -23259": "0\n",
+    "\u00ae\u00aeO,\u0002\u00c8 -4409": "0\n",
+    "1 -2": "0\n",
+    " 117768960": "Traceback (most recent call last):\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_time_revert/Solution.py\", line 25, in <module>\n    main()\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_time_revert/Solution.py\", line 18, in main\n    k = int(input_list[1])\nIndexError: list index out of range\n",
+    "5e -1690404122": "0\n",
+    "\u00c9\u000f -15494": "0\n",
+    "F/\uda6d\udd1a 1238481272": "1\n"
+}

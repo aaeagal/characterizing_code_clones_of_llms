@@ -2,7 +2,7 @@
 #include <string>
 #include <algorithm>
 #include <iostream>
-
+#include <sstream>
 using namespace std;
 
 class Solution {
@@ -56,3 +56,34 @@ private:
     }
 
 };
+
+vector<int> parseInputVector(const string& input) {
+    vector<int> result;
+    stringstream ss(input.substr(1, input.find(']') - 1)); // Extract numbers without brackets
+    string item;
+    while (getline(ss, item, ',')) {
+        result.push_back(stoi(item));
+    }
+    return result;
+}
+
+int main() {
+    string line;
+    getline(cin, line); // Reads the entire line containing both vectors
+
+    // Splitting the input line into two parts based on the space between arrays
+    size_t spacePos = line.find("] ") + 1;
+    string input1 = line.substr(0, spacePos);
+    string input2 = line.substr(spacePos + 1);
+
+    vector<int> arr1 = parseInputVector(input1);
+    vector<int> arr2 = parseInputVector(input2);
+
+    Solution solution;
+    int result = solution.countMatchingSubarrays(arr1, arr2);
+
+    // Output the result
+    cout << result << endl;
+
+    return 0;
+}

@@ -24,3 +24,13 @@ class Solution:
             return dist
       
         return dijkstras_10(x)
+    
+def main():
+    x, y = map(int, input().split())
+
+    solution = Solution()
+
+    print(solution.minimumOperationsToMakeEqual(x, y))
+
+if __name__ == "__main__":
+    main()

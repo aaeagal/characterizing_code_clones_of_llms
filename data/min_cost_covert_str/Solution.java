@@ -1,3 +1,8 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.stream.*;
+import java.util.*;
+
 class Solution {
     public long minimumCost(String s, String t, char[] o, char[] c, int[] cost) {
         long[][] g = new long[26][26];
@@ -47,4 +52,40 @@ class Solution {
         
         return ans;
     }
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Reading input strings for s and t
+        String s = scanner.next();
+        String t = scanner.next();
+        
+        // Reading and parsing the character arrays
+        String[] oStrings = scanner.next().replace("[", "").replace("]", "").replace("\"", "").split(",");
+        String[] cStrings = scanner.next().replace("[", "").replace("]", "").replace("\"", "").split(",");
+        char[] o = new char[oStrings.length];
+        char[] c = new char[cStrings.length];
+        for (int i = 0; i < oStrings.length; i++) {
+            o[i] = oStrings[i].charAt(0);
+        }
+
+        for (int i = 0; i < cStrings.length; i++) {
+            c[i] = cStrings[i].charAt(0);
+        }
+        
+        // Reading and parsing the cost array
+        String[] costStrings = scanner.nextLine().replace("[", "").replace("]", "").split(",");
+        int[] cost = new int[costStrings.length];
+        for (int i = 0; i < costStrings.length; i++) {
+            cost[i] = Integer.parseInt(costStrings[i].trim());
+        }
+        
+        // Creating an instance of Solution to call the non-static minimumCost method
+        Solution solution = new Solution();
+        long minimumCost = solution.minimumCost(s, t, o, c, cost);
+        
+        System.out.println(minimumCost);
+    }
+
 }

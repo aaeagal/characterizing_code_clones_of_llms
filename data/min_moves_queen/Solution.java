@@ -1,3 +1,4 @@
+import java.util.Scanner;
 class Solution {
     public int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {
         int rookXPosition = a;
@@ -118,5 +119,21 @@ class Solution {
         } 
         
         return result;
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Assuming the input format is: a b c d e f
+        int a = scanner.nextInt(); // Rook's x position
+        int b = scanner.nextInt(); // Rook's y position
+        int c = scanner.nextInt(); // Bishop's x position
+        int d = scanner.nextInt(); // Bishop's y position
+        int e = scanner.nextInt(); // Queen's x position
+        int f = scanner.nextInt(); // Queen's y position
+
+        Solution solution = new Solution();
+        int result = solution.minMovesToCaptureTheQueen(a, b, c, d, e, f);
+
+        System.out.println(result);
     }
 }

@@ -8,11 +8,12 @@ class Solution:
             if sum(nums[:len(nums)-i-1])>nums[len(nums)-1-i]:
                 return sum(nums[:len(nums)-i-1])+nums[len(nums)-1-i]
         return -1
+
 def main():
     input_str = input()
     nums = ast.literal_eval(input_str)
-    solution = Solution()  # Assuming Solution class is defined elsewhere
-    result = solution.largestPerimeter(nums)  # Assuming the Solution class has a method canSortArray
+    solution = Solution() 
+    result = solution.largestPerimeter(nums) 
     print(result)
     
 if __name__ == "__main__":

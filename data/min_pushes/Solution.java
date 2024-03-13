@@ -14,4 +14,16 @@ class Solution {
 
     return push;
   }
+      public static void main(String[] args) {
+        Solution sol = new Solution();
+        // read string from stdin
+        Scanner scanner = new Scanner(System.in);
+        // read only one line from stdin
+        String s = scanner.nextLine();
+        // call the function and print the result
+        System.out.println(sol.minimumPushes(s));
+        scanner.close();
+        // end the program
+        System.exit(0);
+    }
 }

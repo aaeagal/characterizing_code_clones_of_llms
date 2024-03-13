@@ -2,6 +2,8 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <iostream>
+
 using namespace std;
 class Solution {
 public:
@@ -29,3 +31,19 @@ public:
         return ans;
     }
 };
+
+int main() {
+    Solution solution;
+    string inputString;
+
+    // read only one line from stdin
+    getline(cin, inputString);
+
+    // call the solution's function and get the result
+    int result = solution.minimumPushes(inputString);
+
+    // output the result to stdout
+    cout << result << endl;
+
+    return 0;
+}

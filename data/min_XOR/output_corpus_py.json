@@ -1,0 +1,12 @@
+{
+    "[-97, -16860161, 33] 1568321694": "22\n",
+    "[-589824, -589824] 53794": "6\n",
+    "[-808363719, -1545351729, 13239775, -13590, 1488853969, -18552, 31036, -14097, 333205099, 133, -1024903753, 1870769226, -89, -35, 1035126320, -205, -1735989702, 63303, 49804, 58, -10, 34372, 246, -33076, -49784, 56324, -21053] -7238": "0\n",
+    "[-6482, 2098832436] -489381717": "12\n",
+    "[-61059, -542528528, 54516, -881193222] -46699": "13\n",
+    "[-1310, 1567295524, -1479178655, -52908, -34, 1755953748, 1695392065, -833145378, -1310, -15385, 51242] 188": "0\n",
+    "[] -890216414": "Traceback (most recent call last):\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_XOR/Solution.py\", line 30, in <module>\n    main()\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_XOR/Solution.py\", line 22, in main\n    nums_list = [int(x) for x in nums_str.strip('[').split(',')]\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_XOR/Solution.py\", line 22, in <listcomp>\n    nums_list = [int(x) for x in nums_str.strip('[').split(',')]\nValueError: invalid literal for int() with base 10: ''\n",
+    "[66873718, -43588, 1009611266, 130721865, 42085, 2047868324, -2147483648, -14850, -15405, -3] -86": "20\n",
+    "[-75, -75, -1815209423, -690117720, -266345801, -63, -132, 0, 0] 2147483647": "0\n",
+    "[] 1733734": "Traceback (most recent call last):\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_XOR/Solution.py\", line 30, in <module>\n    main()\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_XOR/Solution.py\", line 22, in main\n    nums_list = [int(x) for x in nums_str.strip('[').split(',')]\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/min_XOR/Solution.py\", line 22, in <listcomp>\n    nums_list = [int(x) for x in nums_str.strip('[').split(',')]\nValueError: invalid literal for int() with base 10: ''\n"
+}

@@ -1,0 +1,12 @@
+{
+    "[0] 1": "1\n",
+    "[17, 43, 578476962, -377351823, -33065] -199": "15\n",
+    "[-2147483647, 2147483646, 911081222, 22, 20958] 0": "15\n",
+    "[] 76": "Traceback (most recent call last):\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/subarrays_atleast_ktimes/Solution.py\", line 41, in <module>\n    main()\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/subarrays_atleast_ktimes/Solution.py\", line 33, in main\n    nums_list = [int(x) for x in nums_str.strip('[').split(',')]\n  File \"/home/aeagal/characterizing_code_clones_of_llms/data/subarrays_atleast_ktimes/Solution.py\", line 33, in <listcomp>\n    nums_list = [int(x) for x in nums_str.strip('[').split(',')]\nValueError: invalid literal for int() with base 10: ''\n",
+    "[-2147483647, -2147483647, 911081222, 22, 20958] 0": "15\n",
+    "[48579, -52, -171212471, -24, 452986375, 221, -49186] 10680": "0\n",
+    "[-18948, -12780842] 817860": "0\n",
+    "[-495] 7119": "0\n",
+    "[48579, -52, 221, 16783361, 7, 221, -49186] 770": "0\n",
+    "[-23722] -23722": "1\n"
+}

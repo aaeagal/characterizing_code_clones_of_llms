@@ -1,0 +1,12 @@
+{
+    "\u00046015\u0090": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: -93\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n",
+    "w\u0015\u0091+\u00a3": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: -76\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n",
+    "\u00b1\u00e3\u00fdC\ud852\udf76": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 80\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n",
+    "%H\u0094\ud9b3\udc38\u00feX\u00a3D\ud8f6\udc34": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: -60\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n",
+    "t\u00e8\u00aa\u00ebYd": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 135\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n",
+    "\ud802\udf8d5\ud918\udf0614\ud943\udf05\ud846\ude057": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 55201\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n",
+    "44661#": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: -45\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n",
+    "r\uda2a\udd965\uda67\udea8\u00acuP:6\u00da72\u00d8\u00db\u00b0R5\udb50\udf3e\u0094": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 55753\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n",
+    "c\u00b9": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 88\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n",
+    "\ud970\udcd4\u00f1\u008d\"v\u0010\u00ac\u00b4F\u00dd\u00ec4L4\u001377%N\u00ac": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 55567\n\tat Solution.minimumPushes(Solution.java:6)\n\tat Solution.main(Solution.java:24)\n"
+}

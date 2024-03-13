@@ -23,4 +23,12 @@ class Solution:
         for i in word:
             count1+= d[i]
         return count1
-            
+
+def main():
+    sol = Solution()
+    # read only one line
+    s = input().strip()
+    print(sol.minimumPushes(s))
+
+if __name__ == "__main__":
+    main()

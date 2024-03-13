@@ -1,4 +1,8 @@
 #include <algorithm>
+#include <iostream>
+#include <vector>
+#include <string>
+
 using namespace std;
 class Solution {
 public:
@@ -36,3 +40,11 @@ public:
         return min(rook, bishop);
     }
 };
+
+int main() {
+    Solution s;
+    int a, b, c, d, e, f;
+    cin >> a >> b >> c >> d >> e >> f;
+    int result = s.minMovesToCaptureTheQueen(a, b, c, d, e, f);
+    cout << result << endl;
+}

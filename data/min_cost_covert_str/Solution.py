@@ -1,3 +1,6 @@
+import sys
+import ast
+import json
 class Solution(object):
     def minimumCost(self, source, target, original, changed, cost):
         """
@@ -29,3 +32,27 @@ class Solution(object):
                 res += A[a][b]
                 
         return res
+
+def main():
+    # Read the input string from standard input
+    input_string = input().strip()
+    
+    # Splitting the input string into its components
+    parts = input_string.split(' ')
+    source = parts[0]
+    target = parts[1]
+    original = ast.literal_eval(parts[2])
+    changed = ast.literal_eval(parts[3])
+    cost = ast.literal_eval(parts[4])
+
+    # Create an object of the Solution class
+    sol = Solution()
+
+    # Call the minimumCost method of the Solution class
+    result = sol.minimumCost(source, target, original, changed, cost)
+
+    # Print the result to standard output
+    print(result)
+
+if __name__ == "__main__":
+    main()

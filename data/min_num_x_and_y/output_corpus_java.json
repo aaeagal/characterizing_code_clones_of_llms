@@ -1,0 +1,12 @@
+{
+    "96 104": "8\n",
+    "-21496069 1315526986": "1337023055\n",
+    "131094068 140": "34\n",
+    "-2147483647 2147483646": "-3\n",
+    "1292 -7473": "Exception in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n\tat java.util.HashMap.resize(HashMap.java:705)\n\tat java.util.HashMap.putVal(HashMap.java:664)\n\tat java.util.HashMap.put(HashMap.java:613)\n\tat java.util.HashSet.add(HashSet.java:220)\n\tat Solution.minimumOperationsToMakeEqual(Solution.java:19)\n\tat Solution.main(Solution.java:49)\n",
+    "-12683 10230": "22913\n",
+    "-1789233663 -864971629": "924262034\n",
+    "-1298109296 -1298109296": "0\n",
+    "44819 -585185115": "Exception in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n\tat java.util.HashMap.resize(HashMap.java:705)\n\tat java.util.HashMap.putVal(HashMap.java:664)\n\tat java.util.HashMap.put(HashMap.java:613)\n\tat java.util.HashSet.add(HashSet.java:220)\n\tat Solution.minimumOperationsToMakeEqual(Solution.java:19)\n\tat Solution.main(Solution.java:49)\n",
+    "117899269 117899269": "0\n"
+}

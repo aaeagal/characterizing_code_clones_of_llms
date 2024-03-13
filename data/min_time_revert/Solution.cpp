@@ -1,5 +1,7 @@
 #include <vector>
 #include <string>
+#include <iostream>
+
 using namespace std;
 
 class Solution {
@@ -20,3 +22,12 @@ int minimumTimeToInitialState(string word, int k) {
     return (n + k - 1) / k;
 }
 };
+
+int main() {
+    Solution sol;
+    string word;
+    int k;
+    cin >> word >> k;
+    cout << sol.minimumTimeToInitialState(word, k) << endl;
+    return 0;
+}

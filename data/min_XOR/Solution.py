@@ -15,3 +15,16 @@ class Solution:
             target_xor >>=1
 
         return total_flips
+    
+def main():
+    input_str = input()
+    nums_str, k_str = input_str.split('] ')
+    nums_list = [int(x) for x in nums_str.strip('[').split(',')]
+    k = int(k_str)
+
+    solution = Solution()
+    result = solution.minOperations(nums_list, k)
+    print(result)
+
+if __name__ == "__main__":
+    main()

@@ -7,3 +7,12 @@ class Solution:
         if (a+b==c+d and a+b==e+f and min(c, e) < a < max(c, e)) or (a-b==c-d and a-b==e-f and min(c, e) < a < max(c, e)):
             wb += 1
         return min(wb, wr)
+    
+def main():
+    input_str = input()
+    a, b, c, d, e, f = map(int, input_str.strip().split())
+    solution = Solution()
+    print(solution.minMovesToCaptureTheQueen(a, b, c, d, e, f))
+
+if __name__ == "__main__":
+    main()

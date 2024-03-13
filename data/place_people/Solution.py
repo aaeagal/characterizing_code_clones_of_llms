@@ -1,4 +1,5 @@
 from typing import List
+import ast
 class Solution:
     def numberOfPairs(self, points: List[List[int]]) -> int:
         ans = 0
@@ -15,3 +16,13 @@ class Solution:
                             break
                     ans += 1
         return ans
+    
+def main():
+    input_str = input()
+    mat = ast.literal_eval(input_str)
+    solution = Solution()  # Assuming Solution class is defined elsewhere
+    result = solution.numberOfPairs(mat)  # Assuming the Solution class has a method canSortArray
+    print(result)
+
+if __name__ == "__main__":
+    main()

@@ -3,7 +3,7 @@ import os
 
 models = ["codellama", "gpt_3.5_turbo", "gpt4", "starcoder"]
 temperatures = ["0", "0.5", "1", "1.5", "2"]
-tasks = ["javaToPython", "javaToCpp", "pythonToJava", "pythonToCpp", "cppToJava", "cppToPython", "cpp", "java", "python"]
+tasks = ["javaToPython", "javaToCpp", "pythonToJava", "pythonToCpp", "cppToJava", "cppToPython", "cpp", "java", "python", "cpp_regular", "java_regular", "python_regular"]
 prompting = ["seperate", "combined"]
 preprocessing = ["llm_generated", "preprocessed"]
 def main():
@@ -15,15 +15,13 @@ def main():
 
         # create a directory for each prompt_id
         for prompt_id in prompt_ids:
-            os.mkdir(f"../../data/{prompt_id}")
 
             # create a directory for each temperature
             for temp in temperatures:
-                os.mkdir(f"../../data/{prompt_id}/{temp}")
 
                 # create a directory for each model
                 for model in models:
-                    os.mkdir(f"../../data/{prompt_id}/{temp}/{model}")
+
 
                     # create a directory for each task
                     for task in tasks:

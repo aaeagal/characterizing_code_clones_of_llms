@@ -37,4 +37,18 @@ class Solution {
 
     return -1;
   }
+
+      public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Reads the two integers x and y from the input
+        int x = scanner.nextInt();
+        int y = scanner.nextInt();
+
+        Solution solution = new Solution();
+        int result = solution.minimumOperationsToMakeEqual(x, y);
+
+        // Output the result
+        System.out.println( result);
+    }
 }

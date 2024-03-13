@@ -7,3 +7,20 @@ class Solution:
                 break
             count+=1
         return (count)
+    
+def main():
+    input_str = input()
+
+    input_list = input_str.split()
+
+    word = input_list[0]
+
+    k = int(input_list[1])
+
+    s = Solution()
+
+    print(s.minimumTimeToInitialState(word, k))
+
+if __name__ == "__main__":
+    main()
+
