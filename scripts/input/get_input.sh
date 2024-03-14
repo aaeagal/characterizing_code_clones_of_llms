@@ -1,4 +1,4 @@
-cd ../data
+cd ../../data
 
 # Iterate through all the subdirectories
 for dir in $(ls -d */); do
