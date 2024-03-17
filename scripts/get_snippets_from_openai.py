@@ -121,6 +121,12 @@ def get_file_suffix(task: str) -> str:
         return "java"
     elif task == "cpp":
         return "cpp"
+    elif task == "java_regular":
+        return "java"
+    elif task == "cpp_regular":
+        return "cpp"
+    elif task == "python_regular":
+        return "py"  
     else:
         raise ValueError(f"Unknown file suffix in get_file_suffix: {task}")
     

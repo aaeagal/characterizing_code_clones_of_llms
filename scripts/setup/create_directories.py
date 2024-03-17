@@ -3,7 +3,9 @@ import os
 
 models = ["codellama", "gpt_3.5_turbo", "gpt4", "starcoder"]
 temperatures = ["0", "0.5", "1", "1.5", "2"]
-tasks = ["javaToPython", "javaToCpp", "pythonToJava", "pythonToCpp", "cppToJava", "cppToPython", "cpp", "java", "python", "cpp_regular", "java_regular", "python_regular"]
+
+all_tasks = ["javaToPython", "javaToCpp", "pythonToJava", "pythonToCpp", "cppToJava", "cppToPython", "cpp", "java", "python", "cpp_regular", "java_regular", "python_regular"]
+tasks = ["pythonToJava", "cppToJava", "java", "java_regular"]
 prompting = ["once", "repeated"]
 preprocessing = ["llm_generated", "preprocessed"]
 def main():
