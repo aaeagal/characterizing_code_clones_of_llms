@@ -1,1 +1,1 @@
-python3 get_clusters.py --directory "/home/aeagal/characterizing_code_clones_of_llms/data/divide_arrays_with_max_diff"
+python3 get_clusters.py --leetcode_description apply_ops_empty_str --temperature 0 --sampling repeated --model gpt_3.5_turbo --task pythonToJava

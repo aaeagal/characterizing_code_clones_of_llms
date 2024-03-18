@@ -1,4 +1,4 @@
-python3 get_output_from_leetcode_solution.py --directory "/home/aeagal/characterizing_code_clones_of_llms/data/min_cost_covert_str"
+python3 get_output_from_leetcode_solution.py --directory "/home/aeagal/characterizing_code_clones_of_llms/data/apply_ops_empty_str"
 
 # Iterate through all the subdirectories
 # for dir in $(ls -d */); do

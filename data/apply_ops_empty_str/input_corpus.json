@@ -1,5 +1,11 @@
 {
     "lastNonEmptyString": [
+        [   
+            "aabcbbca"
+        ], 
+        [
+            "abcd"
+        ],   
         [
             "\u00cb0\u00b2\u0091;1\u00e2\ud983\udd0b5\u00176\ud937\ude034"
         ],

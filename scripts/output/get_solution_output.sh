@@ -1,0 +1,1 @@
+python3 get_solution_output.py  --leetcode_description apply_ops_empty_str --temperature 0 --sampling repeated --model gpt_3.5_turbo --task cppToJava

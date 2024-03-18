@@ -1,0 +1,12 @@
+{
+    "aabcbbca": "ba\n",
+    "abcd": "abcd\n",
+    "\u00cb0\u00b2\u0091;1\u00e2\ud983\udd0b5\u00176\ud937\ude034": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 106\n\tat Solution13.lastNonEmptyString(Solution13.java:13)\n\tat Solution13.main(Solution13.java:50)\n",
+    "+\u00f4\udb0c\udc351\u00d9\uda9a\udee7^(": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: -54\n\tat Solution13.lastNonEmptyString(Solution13.java:13)\n\tat Solution13.main(Solution13.java:50)\n",
+    "\udbc2\ude04\bN2\u00c5\ud9fd\udcfe": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 56161\n\tat Solution13.lastNonEmptyString(Solution13.java:13)\n\tat Solution13.main(Solution13.java:50)\n",
+    "\u00a02\u00e7\u00e7\u00e9\u00bbF\r\u001f\t\u0095*\u00a7\u0097\u009e\ud83b\udc22r\r": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 63\n\tat Solution13.lastNonEmptyString(Solution13.java:13)\n\tat Solution13.main(Solution13.java:50)\n",
+    "\ud822\udfec": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 55233\n\tat Solution13.lastNonEmptyString(Solution13.java:13)\n\tat Solution13.main(Solution13.java:50)\n",
+    "R\u001av\u008cR\u008ew\r\u00de\u00ef=": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: -15\n\tat Solution13.lastNonEmptyString(Solution13.java:13)\n\tat Solution13.main(Solution13.java:50)\n",
+    "\u0017a\u00177a\u0090": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: -74\n\tat Solution13.lastNonEmptyString(Solution13.java:13)\n\tat Solution13.main(Solution13.java:50)\n",
+    "\udac8\uddf9\u0088\uda03\udc49%\udba8\udd8bJ\udba8\udd8b\u0005\u00f1\u00c7cJ\uda2a\udeb1\u00d7\u00f8P": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: 55911\n\tat Solution13.lastNonEmptyString(Solution13.java:13)\n\tat Solution13.main(Solution13.java:50)\n"
+}
