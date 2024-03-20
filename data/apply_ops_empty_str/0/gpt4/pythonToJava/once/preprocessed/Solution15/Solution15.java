@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Solution1515 {
+class Solution15 {
     public String lastNonEmptyString(String s) {
         Map<Character, Integer> map = new HashMap<>();
         for (char c : s.toCharArray()) {

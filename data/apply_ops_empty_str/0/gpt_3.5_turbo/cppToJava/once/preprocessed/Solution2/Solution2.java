@@ -29,7 +29,7 @@ public:
 };
 
 int main() {
-    Solution2 solution;
+    Solution2  solution;
     string inputString;
 
     // read only one line from stdin

@@ -4,6 +4,7 @@ import subprocess
 import json
 import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+import re
 
 def parse_arguments() -> dict:
 
@@ -34,10 +35,15 @@ def get_solution_output(sol_dir_path: str, input: dict) -> dict:
     compiling_error = ''
     main_flag = False
     files = os.listdir(sol_dir_path)
+    pattern = re.compile(r"Solution\d*.java")
 
+    # If main.java exists and an element that matches the pattern exists, remove the main.java file
     if "Main.java" in files:
-        files.remove("Main.java")
-        main_flag = True
+        for file in files:
+            if pattern.match(file):
+                main_flag = True
+                files.remove("Main.java")
+                break
 
     for file in files:
         # -- Skip the json file -- #
@@ -63,7 +69,7 @@ def get_solution_output(sol_dir_path: str, input: dict) -> dict:
                 compile_process = subprocess.run(['g++', '-std=c++20', '-o', executable_name, file], capture_output=True, text=True)
                 logging.info(f"Compiled {file}")
         except subprocess.CalledProcessError as e:
-            logging.error(f"Error: {e.stderr}")
+            logging.error(f"Compiling Error: {e.stderr}")
             compiling_error = e.stderr
             behavior.update({"compiling_error": compiling_error})
 

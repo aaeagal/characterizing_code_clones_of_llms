@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Solution1212 {
+class Solution12 {
     public String getLastNonEmptySubstr(String str) {
         int[] charFreq = new int[26];
         int maxFreq = 0;
@@ -25,7 +25,7 @@ class Solution1212 {
         return resultStr;
     }
     public static void main(String[] args) {
-        Solution1212 solution = new Solution1212();
+        Solution12 solution = new Solution12();
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
         System.out.println(solution.getLastNonEmptySubstr(str));

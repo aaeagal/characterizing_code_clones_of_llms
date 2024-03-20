@@ -41,4 +41,3 @@ class Solution1 {
 
 
 
-public 

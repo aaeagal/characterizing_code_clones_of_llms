@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Solution77 {
+class Solution7 {
     public String retrieveLastNonEmptyString(String userInput) {
         int[] charFrequency = new int[26];
         int maxFrequency = 0;
@@ -25,7 +25,7 @@ class Solution77 {
         return result;
     }
     public static void main(String[] args) {
-        Solution77 solution = new Solution77();
+        Solution7 solution = new Solution7();
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
         System.out.println(solution.retrieveLastNonEmptyString(userInput));

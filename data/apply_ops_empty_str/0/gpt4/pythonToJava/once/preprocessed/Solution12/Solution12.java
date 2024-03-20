@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Solution1212 {
+class Solution12 {
     public String lastNonEmptyString(String s) {
         Map<Character, Integer> map = new HashMap<>();
         for (char c : s.toCharArray()) {
@@ -30,7 +30,7 @@ class Solution1212 {
     }
 
     public static void main(String[] args) {
-        Solution1212 sol = new Solution1212();
+        Solution12 sol = new Solution12();
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine().trim();
         System.out.println(sol.lastNonEmptyString(s));
@@ -41,4 +41,3 @@ class Solution1212 {
 
 
 
-public 

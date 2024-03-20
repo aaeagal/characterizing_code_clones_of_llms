@@ -38,9 +38,25 @@ def preprocess_combined_java_files(filepath: str) -> None:
         combined_content = file.read()
     # -- Split the classes based on the "class Solution" keyword -- #
     if "public class Solution" in combined_content:
-        classes = re.split(r"public class Solution", combined_content)
+        classes = re.split(r"public class Solution\d*", combined_content)
     elif "class Solution" in combined_content:
-        classes = re.split(r"class Solution", combined_content)
+        classes = re.split(r"class Solution\d*", combined_content)
+    elif "public class Main" in combined_content:
+        classes = re.split(r"public class Main", combined_content)
+    elif "class Main" in combined_content:
+        classes = re.split(r"class Main", combined_content)
+    elif "public class Answer" in combined_content:
+        classes = re.split(r"public class Answer", combined_content)
+        only_answer = re.compile(r"Answer\d*")
+        combined_content = only_answer.sub(f"Solution", combined_content)
+    elif "class Answer" in combined_content:
+        classes = re.split(r"class Answer", combined_content)
+        only_answer = re.compile(r"Answer\d*")
+        combined_content = only_answer.sub(f"Solution", combined_content)
+    elif "class OutputString" in combined_content:
+        classes = re.split(r"class OutputString", combined_content)
+        only_output_string = re.compile(r"OutputString\d*")
+        combined_content = only_output_string.sub(f"Solution", combined_content)
 
     for i, class_content in enumerate(classes):
         logging.info(f"Preprocessing Solution{i} for {filepath}")
@@ -50,19 +66,35 @@ def preprocess_combined_java_files(filepath: str) -> None:
             continue
         # -- Remove the import statements and the markdown code block -- #
         for line in class_content.split("\n"):
-            if line.endswith(".") or line.startswith("import"):
+            if line.endswith(".") or "import" in line:
                 # delete the import statements
+                with open(f"/home/aeagal/characterizing_code_clones_of_llms/imports.txt", "a") as file:
+                    file.write(line + "\n")
                 class_content = class_content.replace(line, "")
         # -- Replace the class name with Solution{i} -- #
         pattern = re.compile(r"Solution\d*")
-        class_content = pattern.sub(f"Solution{i} ", class_content)
+        class_content = pattern.sub(f"Solution{i}", class_content)
+        only_output_string = re.compile(r"OutputString\d*")
+        class_content = only_output_string.sub(f"Solution{i}", class_content)
+
+        # -- Remove the clone number -- #
+        pattern2 = r"Clone \d*:"
+        class_content = re.sub(pattern2, "", class_content)
+        pattern3 = r"\d*.* Java Code Clone \d*:"
+        class_content = re.sub(pattern3, "", class_content)
+
+        # -- Remove everything below the ``` -- # 
+        if "```" in class_content:
+            class_content = class_content.split("```")[0] 
+
 
         
         class_content = class_content.replace("```java", "")
         class_content = class_content.replace("```", "")
 
+
         # --- Create class content --- #
-        class_content = f"import java.util.*;\nimport java.io.*;\nclass Solution{i}" + class_content
+        class_content = f"import java.util.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Solution{i}" + class_content
         # -- Write the class to a file -- #
         if not os.path.exists(preprocessed_file_path):
             os.makedirs(preprocessed_file_path, exist_ok=True)
@@ -81,7 +113,7 @@ def preprocess_separate_java_files(dirpath: str) -> None:
         preprocessed_file_path = os.path.join(dirpath, "preprocessed")
         preprocessed_file_path = os.path.join(preprocessed_file_path, f"Solution{number_of_file}")
 
-        # -- Read the combined file -- #
+        # -- Read the separate file -- #
         with open(filepath, "r") as file:
             file_content = file.read()
         
@@ -89,9 +121,17 @@ def preprocess_separate_java_files(dirpath: str) -> None:
         if "```java" in file_content and "```" in file_content:
             # get everything between the two markdown code blocks
             file_content = re.search(r'```java(.*?)```', file_content, re.DOTALL).group(1)
+        
+        if "```Java" in file_content and "```" in file_content:
+            # get everything between the two markdown code blocks
+            file_content = re.search(r'```Java(.*?)```', file_content, re.DOTALL).group(1)
+
+        # -- Remove the import statements and the markdown code block -- #
         for line in file_content.split("\n"):
             if "import" in line:
                 # delete the import statements
+                with open(f"/home/aeagal/characterizing_code_clones_of_llms/imports.txt", "a") as file:
+                    file.write(line + "\n")
                 file_content = file_content.replace(line, "")
                 
             if "```java" in line:
@@ -104,12 +144,46 @@ def preprocess_separate_java_files(dirpath: str) -> None:
         # --- Create class content --- #
         pattern = re.compile(r"Solution\d*")
         file_content = pattern.sub(f"Solution{number_of_file}", file_content)
-        file_content = f"import java.util.*;\nimport java.io.*;\n" + file_content
+        pattern2 = r"Clone \d*:"
+        file_content = re.sub(pattern2, "", file_content)
+        pattern3 = r"\d*.* Java Code Clone \d*:"
+        file_content = re.sub(pattern3, "", file_content)
+        file_content = f"import java.util.*;\nimport java.io.*;\nimport java.util.stream.*;\n" + file_content
 
         # --- Put Main Class in a separate file and take it out of file_content --- #
         if "public class Main {" in file_content:
             main_flag = True
             main_class = re.split(r"public class Main {", file_content) 
+        
+            main_class_content = main_class[1]
+
+            if "public class" in main_class_content:
+                main_flag = False
+                file_content = re.split(r"public class", main_class_content)
+                main_class_content = file_content[0]
+                file_content = 'import java.util.*;\nimport java.io.*;\nimport java.util.stream.*;\npublic class' + file_content[1]
+
+                
+                
+            elif "class" in main_class_content:
+                main_flag = False
+                file_content = re.split(r"class", main_class_content)
+                main_class_content = file_content[0]
+                file_content = 'import java.util.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass' + file_content[1]
+                
+
+
+            # -- Write the main class to a file -- #
+            if not os.path.exists(preprocessed_file_path):
+                os.makedirs(preprocessed_file_path, exist_ok=True)
+            
+            with open(os.path.join(preprocessed_file_path, f"Main.java"), "w") as file:
+                main_class_content = "import java.util.*;\nimport java.io.*;\nimport java.util.stream.*;\npublic class Main {" + main_class_content
+                file.write(main_class_content)
+
+        elif "class Main {" in file_content:
+            main_flag = True
+            main_class = re.split(r"class Main {", file_content) 
             main_class_content = main_class[1]
 
             # -- Write the main class to a file -- #
@@ -117,9 +191,17 @@ def preprocess_separate_java_files(dirpath: str) -> None:
                 os.makedirs(preprocessed_file_path, exist_ok=True)
             
             with open(os.path.join(preprocessed_file_path, f"Main.java"), "w") as file:
-                main_class_content = "import java.util.*;\nimport java.io.*;\npublic class Main {" + main_class_content
+                main_class_content = "import java.util.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Main {" + main_class_content
                 file.write(main_class_content)
-
+        big_pattern = re.compile(
+                r"(?:public )?class (Answer|Example|CloneSolution\d*|CodeClone\d*|DifferentSolution\d*|"
+                r"ModifiedSolution\d*|UniqueLetters\d*|WordArray\d*|Processor\d*|TextProcessor\d*|"
+                r"Solution\d*Clone\d*|MainClass\d*|Clone\d*) \{")
+        
+        if big_pattern.search(file_content):
+            class_name = big_pattern.search(file_content).group(1)
+            file_content = big_pattern.sub(f"public class Solution{number_of_file} {{" , file_content)
+            file_content = file_content.replace(class_name, f"Solution{number_of_file}")
 
         # -- Write the class to a file -- #
         if not os.path.exists(preprocessed_file_path):

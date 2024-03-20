@@ -1,0 +1,13 @@
+{
+    "compiling_error": "../../data/apply_ops_empty_str/0.5/gpt_3.5_turbo/cppToJava/repeated/preprocessed/Solution3/Solution3.java:23: error: cannot find symbol\n                ans.append(String.valueOf((char)('a' + i)).repeat(Math.max(0, freq[i] - maxi)));\n                                                          ^\n  symbol:   method repeat(int)\n  location: class String\n1 error\n",
+    "aabcbbca": "Error: Could not find or load main class Main\n",
+    "abcd": "Error: Could not find or load main class Main\n",
+    "\u00cb0\u00b2\u0091;1\u00e2\ud983\udd0b5\u00176\ud937\ude034": "Error: Could not find or load main class Main\n",
+    "+\u00f4\udb0c\udc351\u00d9\uda9a\udee7^(": "Error: Could not find or load main class Main\n",
+    "\udbc2\ude04\bN2\u00c5\ud9fd\udcfe": "Error: Could not find or load main class Main\n",
+    "\u00a02\u00e7\u00e7\u00e9\u00bbF\r\u001f\t\u0095*\u00a7\u0097\u009e\ud83b\udc22r\r": "Error: Could not find or load main class Main\n",
+    "\ud822\udfec": "Error: Could not find or load main class Main\n",
+    "R\u001av\u008cR\u008ew\r\u00de\u00ef=": "Error: Could not find or load main class Main\n",
+    "\u0017a\u00177a\u0090": "Error: Could not find or load main class Main\n",
+    "\udac8\uddf9\u0088\uda03\udc49%\udba8\udd8bJ\udba8\udd8b\u0005\u00f1\u00c7cJ\uda2a\udeb1\u00d7\u00f8P": "Error: Could not find or load main class Main\n"
+}

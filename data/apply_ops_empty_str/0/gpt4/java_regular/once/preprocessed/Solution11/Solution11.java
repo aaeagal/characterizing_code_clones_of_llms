@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Solution1111 {
+class Solution11 {
     public String findLastNonEmptySubsequence(String input) {
         int[] charCounts = new int[26];
         int maxCount = 0;
@@ -25,7 +25,7 @@ class Solution1111 {
         return result;
     }
     public static void main(String[] args) {
-        Solution1111 solution = new Solution1111();
+        Solution11 solution = new Solution11();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         System.out.println(solution.findLastNonEmptySubsequence(input));

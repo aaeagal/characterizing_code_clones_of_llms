@@ -55,16 +55,29 @@ def get_similarity_clusters(cpp_behavior: dict, java_behavior: dict, python_beha
         logging.info(f'Processing solution: {solutions}')
         solution_dir = os.path.join(sol_dir_path, solutions)
         files = os.listdir(solution_dir)
-        java_file = [file for file in files if file.endswith('.java')]
-        solution_name = java_file[0].split('.')[0]
-
+        java_files = [file for file in files if file.endswith('.java')]
+        
+        # Remove the Main.java file if it exists
+        pattern = re.compile(r"Solution\d*.java")
+        if "Main.java" in files:
+            for file in files:
+                if pattern.match(file):
+                    files.remove("Main.java")
+                    java_files.remove("Main.java")
+                    break
+            
+        
+        
         # --- Get the behavior of the solution --- #
         try:
             with open(f'{solution_dir}/behavior.json', 'r') as file:
                 behavior = json.load(file)
-
+                # if behavior is NoneType, then skip the solution
+                if behavior is None or behavior == {}:
+                    logging.info(f'No behavior found for solution: {solutions}')
+                    continue
         except:
-            logging.info(f'No behavior found for solution: {solution_name}')
+            logging.info(f'No behavior found for solution: {solutions}')
             continue
             
 
@@ -73,10 +86,23 @@ def get_similarity_clusters(cpp_behavior: dict, java_behavior: dict, python_beha
             java_output = java_behavior[input]
             python_output = python_behavior[input]
 
+            # Normalize the outputs to make comparison easier (Java only)
             if "Exception" in java_output:
                 java_output = "Exception"
             if "Exception" in behavior[input]:
                 behavior[input] = "Exception"
+
+            if "Could not find or load main class" in java_output:
+                java_output = "Could not find or load main class"
+            if "Could not find or load main class" in behavior[input]:
+                behavior[input] = "Could not find or load main class"
+            
+            if "Traceback" in python_output:
+                python_output = "Exception"
+            if "Traceback" in behavior[input]:
+                behavior[input] = "Exception"
+
+            
 
             # Increment similarity score if outputs are the same
             if cpp_output == behavior[input]:
@@ -93,8 +119,7 @@ def get_similarity_clusters(cpp_behavior: dict, java_behavior: dict, python_beha
 
         
         # --- Write the similarity scores to a file --- #
-        with open(f'{results_directory}/{solution_name}_similarity_scores.json', 'w') as file:
-            
+        with open(f'{results_directory}/{solutions}_similarity_scores.json', 'w') as file:           
             if 'compiling_error' in behavior.keys():
                 similarity_scores['compiling_error'] = behavior['compiling_error']  
             json.dump(similarity_scores, file)

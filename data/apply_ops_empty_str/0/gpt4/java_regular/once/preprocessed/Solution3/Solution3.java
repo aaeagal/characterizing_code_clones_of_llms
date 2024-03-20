@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Solution33 {
+class Solution3 {
     public String computeLastNonEmptyString(String sequence) {
         int[] freq = new int[26];
         int maxFreq = 0;
@@ -25,7 +25,7 @@ class Solution33 {
         return answer;
     }
     public static void main(String[] args) {
-        Solution33 solution = new Solution33();
+        Solution3 solution = new Solution3();
         Scanner scanner = new Scanner(System.in);
         String sequence = scanner.nextLine();
         System.out.println(solution.computeLastNonEmptyString(sequence));

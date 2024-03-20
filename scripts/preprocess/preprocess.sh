@@ -1,1 +1,1 @@
-python3 preprocess_java_files.py  --leetcode_description apply_ops_empty_str --temperature 0 --sampling repeated --model gpt_3.5_turbo --task pythonToJava
+python3 preprocess_java_files.py  --leetcode_description apply_ops_empty_str --temperature 0 --sampling once --model gpt4 --task pythonToJava

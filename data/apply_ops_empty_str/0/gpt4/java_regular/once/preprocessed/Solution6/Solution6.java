@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Solution66 {
+class Solution6 {
     public String extractLastNonEmptyString(String inputString) {
         int[] letterCount = new int[26];
         int maxLetterCount = 0;
@@ -25,7 +25,7 @@ class Solution66 {
         return outputString;
     }
     public static void main(String[] args) {
-        Solution66 solution = new Solution66();
+        Solution6 solution = new Solution6();
         Scanner scanner = new Scanner(System.in);
         String inputString = scanner.nextLine();
         System.out.println(solution.extractLastNonEmptyString(inputString));

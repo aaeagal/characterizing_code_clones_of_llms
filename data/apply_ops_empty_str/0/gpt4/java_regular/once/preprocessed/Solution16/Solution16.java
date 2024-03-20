@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Solution1616 {
+class Solution16 {
     public String getLastNonEmptySubstr(String str) {
         int[] charFreq = new int[26];
         int maxFreq = 0;

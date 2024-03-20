@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Solution55 {
+class Solution5 {
     public String calculateLastNonEmptyString(String line) {
         int[] charCount = new int[26];
         int maxCharCount = 0;
@@ -25,7 +25,7 @@ class Solution55 {
         return finalString;
     }
     public static void main(String[] args) {
-        Solution55 solution = new Solution55();
+        Solution5 solution = new Solution5();
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
         System.out.println(solution.calculateLastNonEmptyString(line));
