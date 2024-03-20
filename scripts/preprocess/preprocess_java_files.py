@@ -193,15 +193,100 @@ def preprocess_separate_java_files(dirpath: str) -> None:
             with open(os.path.join(preprocessed_file_path, f"Main.java"), "w") as file:
                 main_class_content = "import java.util.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Main {" + main_class_content
                 file.write(main_class_content)
-        big_pattern = re.compile(
-                r"(?:public )?class (Answer|Example|CloneSolution\d*|CodeClone\d*|DifferentSolution\d*|"
-                r"ModifiedSolution\d*|UniqueLetters\d*|WordArray\d*|Processor\d*|TextProcessor\d*|"
-                r"Solution\d*Clone\d*|MainClass\d*|Clone\d*) \{")
+        public_answer_pattern = re.compile(r"public class Answer {")
+        answer_pattern = re.compile(r"class Answer {")
+        public_example_pattern = re.compile(r"public class Example {")
+        example_pattern = re.compile(r"class Example {")
+        public_clone_solution_pattern = re.compile(r"public class CloneSolution\d* {")
+        clone_solution_pattern = re.compile(r"class CloneSolution\d* {")
+        public_codeclone_pattern = re.compile(r"public class CodeClone\d* {")
+        codeclone_pattern = re.compile(r"class CodeClone\d* {")
+        public_different_solution_pattern = re.compile(r"public class DifferentSolution\d* {")
+        different_solution_pattern = re.compile(r"class DifferentSolution\d* {")
+        public_modified_solution_pattern = re.compile(r"public class ModifiedSolution\d* {")
+        modified_solution_pattern = re.compile(r"class ModifiedSolution\d* {")
+        public_unique_letters_pattern = re.compile(r"public class UniqueLetters\d* {")
+        unique_letters_pattern = re.compile(r"class UniqueLetters\d* {")
+        public_word_array_pattern = re.compile(r"public class WordArray\d* {")
+        word_array_pattern = re.compile(r"class WordArray\d* {")
+        public_processor_pattern = re.compile(r"public class Processor\d* {")
+        processor_pattern = re.compile(r"class Processor\d* {")
+        public_text_processor_pattern = re.compile(r"public class TextProcessor\d* {")
+        text_processor_pattern = re.compile(r"class TextProcessor\d* {")
+        public_number_processor_pattern = re.compile(r"public class Solution\d*Clone\d* {")
+        number_processor_pattern = re.compile(r"class Solution\d*Clone\d* {")
+        public_main_class_pattern = re.compile(r"public class MainClass\d* {")
+        main_class_pattern = re.compile(r"class MainClass\d* {")
+        public_clone_pattern = re.compile(r"public class Clone\d* {")
+        clone_pattern = re.compile(r"class Clone\d* {")
+
+        pattern = re.compile(
+    r"(?:public )?class (Answer|Example|CloneSolution\d*|CodeClone\d*|DifferentSolution\d*|"
+    r"ModifiedSolution\d*|UniqueLetters\d*|WordArray\d*|Processor\d*|TextProcessor\d*|"
+    r"Solution\d*Clone\d*|MainClass\d*|Clone\d*) \{"
+)
         
-        if big_pattern.search(file_content):
-            class_name = big_pattern.search(file_content).group(1)
-            file_content = big_pattern.sub(f"public class Solution{number_of_file} {{" , file_content)
-            file_content = file_content.replace(class_name, f"Solution{number_of_file}")
+
+
+        if public_answer_pattern.search(file_content):
+            # -- Replace Answer with Solution{number_of_file} -- #
+            only_answer = re.compile(r"Answer\d*")
+            file_content = only_answer.sub(f"Solution{number_of_file}", file_content)
+        elif answer_pattern.search(file_content):
+            # -- Replace Answer with Solution{number_of_file} -- #
+            only_answer = re.compile(r"Answer\d*")
+            file_content = only_answer.sub(f"Solution{number_of_file}", file_content)
+        elif public_example_pattern.search(file_content):
+            # -- Replace Example with Solution{number_of_file} -- #
+            only_example = re.compile(r"Example\d*")
+            file_content = only_example.sub(f"Solution{number_of_file}", file_content)
+        elif example_pattern.search(file_content):
+            # -- Replace Example with Solution{number_of_file} -- #
+            only_example = re.compile(r"Example\d*")
+            file_content = only_example.sub(f"Solution{number_of_file}", file_content)
+        elif public_clone_solution_pattern.search(file_content):
+            # -- Replace CloneSolution with Solution{number_of_file} -- #
+            only_clone_solution = re.compile(r"CloneSolution\d*")
+            file_content = only_clone_solution.sub(f"Solution{number_of_file}", file_content)
+        elif clone_solution_pattern.search(file_content):
+            # -- Replace CloneSolution with Solution{number_of_file} -- #
+            only_clone_solution = re.compile(r"CloneSolution\d*")
+            file_content = only_clone_solution.sub(f"Solution{number_of_file}", file_content)
+        elif public_codeclone_pattern.search(file_content):
+            # -- Replace CodeClone with Solution{number_of_file} -- #
+            only_codeclone = re.compile(r"CodeClone\d*")
+            file_content = only_codeclone.sub(f"Solution{number_of_file}", file_content)
+        elif codeclone_pattern.search(file_content):
+            # -- Replace CodeClone with Solution{number_of_file} -- #
+            only_codeclone = re.compile(r"CodeClone\d*")
+            file_content = only_codeclone.sub(f"Solution{number_of_file}", file_content)
+        elif public_different_solution_pattern.search(file_content):
+            # -- Replace DifferentSolution with Solution{number_of_file} -- #
+            only_different_solution = re.compile(r"DifferentSolution\d*")
+            file_content = only_different_solution.sub(f"Solution{number_of_file}", file_content)
+        elif different_solution_pattern.search(file_content):
+            # -- Replace DifferentSolution with Solution{number_of_file} -- #
+            only_different_solution = re.compile(r"DifferentSolution\d*")
+            file_content = only_different_solution.sub(f"Solution{number_of_file}", file_content)
+        elif public_modified_solution_pattern.search(file_content):
+            # -- Replace ModifiedSolution with Solution{number_of_file} -- #
+            only_modified_solution = re.compile(r"ModifiedSolution\d*")
+            file_content = only_modified_solution.sub(f"Solution{number_of_file}", file_content)
+        elif modified_solution_pattern.search(file_content):
+            # -- Replace ModifiedSolution with Solution{number_of_file} -- #
+            only_modified_solution = re.compile(r"ModifiedSolution\d*")
+            file_content = only_modified_solution.sub(f"Solution{number_of_file}", file_content)
+        elif public_unique_letters_pattern.search(file_content):
+            # -- Replace UniqueLetters with Solution{number_of_file} -- #
+            only_unique_letters = re.compile(r"UniqueLetters\d*")
+            file_content = only_unique_letters.sub(f"Solution{number_of_file}", file_content)
+        elif unique_letters_pattern.search(file_content):
+            # -- Replace UniqueLetters with Solution{number_of_file} -- #
+            only_unique_letters = re.compile(r"UniqueLetters\d*")
+            file_content = only_unique_letters.sub(f"Solution{number_of_file}", file_content)
+        
+        
+
 
         # -- Write the class to a file -- #
         if not os.path.exists(preprocessed_file_path):
