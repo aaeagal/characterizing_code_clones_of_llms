@@ -1,5 +1,5 @@
 {
-    "compiling_error": "../../data/apply_ops_empty_str/0.5/gpt_3.5_turbo/java/once/preprocessed/Solution18/Solution18.java:6: error: reached end of file while parsing\n        int max = 0;\n                    ^\n1 error\n",
+    "compiling_error": "../../data/apply_ops_empty_str/0.5/gpt_3.5_turbo/java/once/preprocessed/Solution18/Solution18.java:7: error: reached end of file while parsing\n        int max = 0;\n                    ^\n1 error\n",
     "aabcbbca": "Error: Could not find or load main class Solution18\n",
     "abcd": "Error: Could not find or load main class Solution18\n",
     "\u00cb0\u00b2\u0091;1\u00e2\ud983\udd0b5\u00176\ud937\ude034": "Error: Could not find or load main class Solution18\n",

@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 public class Main {
     public static void main(String[] args) {
         Solution5 sol = new Solution5();

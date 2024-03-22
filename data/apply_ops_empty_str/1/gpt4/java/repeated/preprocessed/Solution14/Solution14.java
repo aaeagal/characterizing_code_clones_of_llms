@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 import java.util.stream.*;
 
-class Clone {
+class Solution14 {
     public String getLastNonEmptyString(String input) {
         int alphabets[] = new int[26];
         int highestFrequency = 0;
@@ -28,7 +28,7 @@ class Clone {
     }
     
     public static void main(String[] arguments) {
-        Clone cloneInstance = new Clone();
+        Solution14 cloneInstance = new Solution14();
         Scanner userScanner = new Scanner(System.in);
         String userInput = userScanner.nextLine();
         System.out.println(cloneInstance.getLastNonEmptyString(userInput));

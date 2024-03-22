@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution7 {
     public String findLastNonEmptyString(String s) {
         int[] count = new int[26];
@@ -34,5 +35,3 @@ class Solution7 {
         System.exit(0);
     }
 }
-
-

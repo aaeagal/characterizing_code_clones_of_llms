@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution2 {
 public:
     string lastNonEmptyString(string s) {
@@ -29,7 +30,7 @@ public:
 };
 
 int main() {
-    Solution2  solution;
+    Solution2 solution;
     string inputString;
 
     // read only one line from stdin

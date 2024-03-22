@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.stream.*;
 
 
-class WordArray {
+class Solution4 {
     public String lastNonEmpty(String myString) {
         int characterCount[] = new int[26];
         int maximum = 0;
@@ -29,7 +29,7 @@ class WordArray {
     }
 
     public static void main(String[] args) {
-        WordArray wordArray = new WordArray();
+        Solution4 wordArray = new Solution4();
         Scanner inputReader = new Scanner(System.in);
         String inputString = inputReader.nextLine();
         System.out.println(wordArray.lastNonEmpty(inputString));

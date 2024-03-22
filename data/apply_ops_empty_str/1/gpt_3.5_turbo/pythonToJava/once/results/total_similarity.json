@@ -1,0 +1,98 @@
+{
+    "Solution7": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution7/Solution7.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new Hashtable<>();\n                                ^\n1 error\n"
+    },
+    "Solution9": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution9/Solution9.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new LinkedHashMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution3": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution3/Solution3.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new Hashtable<>();\n                                ^\n1 error\n"
+    },
+    "Solution11": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution11/Solution11.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new Hashtable<>();\n                                ^\n1 error\n"
+    },
+    "Solution14": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution14/Solution14.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new HashMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution5": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution5/Solution5.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new LinkedHashMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution12": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution12/Solution12.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new TreeMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution13": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution13/Solution13.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new LinkedHashMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution8": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution8/Solution8.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new TreeMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution2": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution2/Solution2.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new HashMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution6": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution6/Solution6.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new HashMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution4": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution4/Solution4.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new TreeMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution1": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution1/Solution1.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new LinkedHashMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution10": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution10/Solution10.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new HashMap<>();\n                                ^\n1 error\n"
+    },
+    "Solution15": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution15/Solution15.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new Hashtable<>();\n                                ^\n1 error\n"
+    },
+    "Solution16": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution16/Solution16.java:10: error: reached end of file while parsing\n        int highest = d_list.get\n                                ^\n1 error\n"
+    }
+}

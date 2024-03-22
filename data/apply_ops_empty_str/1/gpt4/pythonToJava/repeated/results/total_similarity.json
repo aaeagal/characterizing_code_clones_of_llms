@@ -1,0 +1,103 @@
+{
+    "Solution7": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution9": {
+        "cpp": 0.1,
+        "java": 0.1,
+        "python": 0.2
+    },
+    "Solution3": {
+        "cpp": 0.2,
+        "java": 0.2,
+        "python": 0.7
+    },
+    "Solution11": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution14": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution5": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution12": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution18": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution13": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0
+    },
+    "Solution8": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution19": {
+        "cpp": 0.2,
+        "java": 0.2,
+        "python": 0.7
+    },
+    "Solution2": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution6": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution4": {
+        "cpp": 0.2,
+        "java": 0.2,
+        "python": 1.0
+    },
+    "Solution1": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/1/gpt4/pythonToJava/repeated/preprocessed/Solution1/Solution1.java:46: error: cannot find symbol\n        String s = sc.nextLine().strip();\n                                ^\n  symbol:   method strip()\n  location: class String\n1 error\n"
+    },
+    "Solution10": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution15": {
+        "cpp": 0.2,
+        "java": 0.2,
+        "python": 1.0
+    },
+    "Solution17": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution16": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution20": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    }
+}

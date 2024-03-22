@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 
 class Solution17 {
     public String firstNonEmptyString(String s) {

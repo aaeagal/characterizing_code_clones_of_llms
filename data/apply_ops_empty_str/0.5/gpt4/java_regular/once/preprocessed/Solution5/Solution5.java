@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution5 {
     public String getLastString(String s) {
         int arr[] = new int[26];

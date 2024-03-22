@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
-class Solution10 {
+import java.util.stream.*;
+public class Solution10 {
     public String lastNonEmptyString(String s) {
         Map<Character, Integer> charCount = new HashMap<>();
         for (char c : s.toCharArray()) {

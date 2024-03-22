@@ -1,7 +1,8 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 
-class NewSolution9 {
+class Solution9 {
     public String firstNonEmptyString(String s) {
         int arr[] = new int[26];
         int min = Integer.MAX_VALUE;
@@ -26,7 +27,7 @@ class NewSolution9 {
         return ans;
     }
     public static void main(String[] args) {
-        NewSolution9 newSol = new NewSolution9();
+        Solution9 newSol = new Solution9();
         
         Scanner scanner = new Scanner(System.in);
         

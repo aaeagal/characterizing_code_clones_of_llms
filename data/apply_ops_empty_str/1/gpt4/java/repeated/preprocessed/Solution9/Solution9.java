@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.stream.*;
 
 
-public class Processor {
+public class Solution9 {
     public String retrieveLastNonEmptyString(String inputStr) {
         int[] counterArray = new int[26];
         int maximum = 0;
@@ -29,7 +29,7 @@ public class Processor {
     }
 
     public static void main(String[] args) {
-        Processor processor = new Processor();
+        Solution9 processor = new Solution9();
 
         Scanner inputScanner = new Scanner(System.in);
 

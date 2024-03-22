@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution16 {
     public String lastNonEmptyString(String userTextString) {
         int arr[] = new int[26];
@@ -26,7 +27,7 @@ class Solution16 {
         return ans;
     }
     public static void main(String[] args) {
-        Solution16  sol = new Solution16 ();
+        Solution16 sol = new Solution16();
         Scanner scanner = new Scanner(System.in);
         String userTextString = scanner.nextLine();
         System.out.println(sol.lastNonEmptyString(userTextString));
@@ -34,8 +35,3 @@ class Solution16 {
         System.exit(0);
     }
 }
-
-
-
-
-

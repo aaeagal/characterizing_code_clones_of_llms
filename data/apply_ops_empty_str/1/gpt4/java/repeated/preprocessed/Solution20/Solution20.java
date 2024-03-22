@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.stream.*;
 
 
-public class AlternativeSolution20 {
+public class Solution20 {
     public String returnLastNonEmptyString(String inputString) {
         int countArray[] = new int[26];
         int maximumCount = 0;
@@ -29,7 +29,7 @@ public class AlternativeSolution20 {
     }
 
     public static void main(String[] args) {
-        AlternativeSolution20 alternativeSolution20 = new AlternativeSolution20();
+        Solution20 alternativeSolution20 = new Solution20();
 
         // read string from stdin
         Scanner scannedInput = new Scanner(System.in);

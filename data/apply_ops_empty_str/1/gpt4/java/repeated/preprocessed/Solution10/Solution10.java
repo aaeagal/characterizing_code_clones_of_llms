@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 import java.util.stream.*;
 
-public class TextProcessor {
+public class Solution10 {
     public String fetchLastNonEmptyString(String input) {
         int alphabetCount[] = new int[26];
         int highestFrequency = 0;
@@ -27,7 +27,7 @@ public class TextProcessor {
         return answer;
     }
     public static void main(String[] arguments) {
-        TextProcessor textProcessor = new TextProcessor();
+        Solution10 textProcessor = new Solution10();
         Scanner inputScanner = new Scanner(System.in);
         String lineOfText = inputScanner.nextLine();
         System.out.println(textProcessor.fetchLastNonEmptyString(lineOfText));

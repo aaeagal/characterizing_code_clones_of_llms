@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.stream.*;
 
 
-public class ClonedSolution17 {
+public class Solution17 {
     public String getFinalNonEmptyString(String inputString) {
         int characterFrequency[] = new int[26];
         int maximumFrequency = 0;
@@ -29,7 +29,7 @@ public class ClonedSolution17 {
     }
 
     public static void main(String[] commandLineArgs) {
-        ClonedSolution17 clonedSol = new ClonedSolution17();
+        Solution17 clonedSol = new Solution17();
         Scanner inputScanner = new Scanner(System.in);
         String inputString = inputScanner.nextLine();
         System.out.println(clonedSol.getFinalNonEmptyString(inputString));

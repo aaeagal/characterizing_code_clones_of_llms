@@ -1,5 +1,5 @@
 {
-    "compiling_error": "../../data/apply_ops_empty_str/0.5/gpt_3.5_turbo/cppToJava/repeated/preprocessed/Solution16/Solution16.java:26: error: cannot find symbol\n                ans.append(String.valueOf((char)('a' + i)).repeat(Math.max(0, freq[i] - maxi)));\n                                                          ^\n  symbol:   method repeat(int)\n  location: class String\n1 error\n",
+    "compiling_error": "../../data/apply_ops_empty_str/0.5/gpt_3.5_turbo/cppToJava/repeated/preprocessed/Solution16/Solution16.java:27: error: cannot find symbol\n                ans.append(String.valueOf((char)('a' + i)).repeat(Math.max(0, freq[i] - maxi)));\n                                                          ^\n  symbol:   method repeat(int)\n  location: class String\n1 error\n",
     "aabcbbca": "Error: Could not find or load main class Main\n",
     "abcd": "Error: Could not find or load main class Main\n",
     "\u00cb0\u00b2\u0091;1\u00e2\ud983\udd0b5\u00176\ud937\ude034": "Error: Could not find or load main class Main\n",

@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 
 class Solution16 {
     public String findLongestSubstring(String s) {

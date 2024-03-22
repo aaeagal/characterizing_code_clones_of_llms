@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 
 class Solution4 {
     public String getLongestSubstring(String str) {

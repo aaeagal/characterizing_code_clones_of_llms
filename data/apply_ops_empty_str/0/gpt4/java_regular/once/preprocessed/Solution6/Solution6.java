@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution6 {
     public String extractLastNonEmptyString(String inputString) {
         int[] letterCount = new int[26];
@@ -33,8 +34,3 @@ class Solution6 {
         System.exit(0);
     }
 }
-
-
-
-
-

@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution8 {
     public String getLastNonEmptySubstring(String inputStr) {
         int[] charFreq = new int[26];
@@ -33,8 +34,3 @@ class Solution8 {
         System.exit(0);
     }
 }
-
-
-
-
-

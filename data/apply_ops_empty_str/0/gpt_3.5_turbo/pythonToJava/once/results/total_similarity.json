@@ -1,0 +1,9 @@
+{
+    "Solution1": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/0/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution1/Solution1.java:2: error: '{' expected\nclass Solution1(object):\n               ^\n../../data/apply_ops_empty_str/0/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution1/Solution1.java:28: error: illegal character: '#'\n    # read only one line\n    ^\n../../data/apply_ops_empty_str/0/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution1/Solution1.java:31: error: illegal character: '#'\n    # end the program\n    ^\n../../data/apply_ops_empty_str/0/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution1/Solution1.java:35: error: reached end of file while parsing\n    main()\n          ^\n4 errors\n",
+        "other_language": "Python"
+    }
+}

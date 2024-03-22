@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution7 {
     public String lastNonEmptyString(String s) {
         

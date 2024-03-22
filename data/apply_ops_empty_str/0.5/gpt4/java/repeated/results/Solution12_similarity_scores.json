@@ -1,1 +1,0 @@
-{"cpp": 0.0, "java": 0.0, "python": 0.0, "compiling_error": "../../data/apply_ops_empty_str/0.5/gpt4/java/repeated/preprocessed/Solution12/Solution12.java:5: error: class Program is public, should be declared in a file named Program.java\npublic class Program {\n       ^\n1 error\n"}

@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Main {
     public String findLastNonEmptyString(String input) {
         int[] frequency = new int[26];

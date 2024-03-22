@@ -72,6 +72,15 @@ def get_solution_output(sol_dir_path: str, input: dict) -> dict:
             logging.error(f"Compiling Error: {e.stderr}")
             compiling_error = e.stderr
             behavior.update({"compiling_error": compiling_error})
+            # -- Hint that it's a different language -- #
+            with open(full_file_path, "r") as chekcing_language_file:
+                file_content = chekcing_language_file.read()
+
+            if "def main()" in file_content:
+                behavior.update({"other_language": "Python"})
+            elif "#include" in file_content or "cout <<" in file_content:
+                behavior.update({"other_language": "C++"})
+        
 
 
         # -- Run the file -- #

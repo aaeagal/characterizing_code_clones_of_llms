@@ -1,0 +1,68 @@
+{
+    "Solution7": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution9": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution3": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution11": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution5": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution12": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution13": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/0.5/gpt4/pythonToJava/once/preprocessed/Solution13/Solution13.java:27: error: reached end of file while parsing\n            if (maxCountMap\n                           ^\n1 error\n"
+    },
+    "Solution8": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution2": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution6": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution4": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution1": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    },
+    "Solution10": {
+        "cpp": 0.3,
+        "java": 0.2,
+        "python": 0.9
+    }
+}

@@ -1,8 +1,9 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 
 
-public class Solution11Clone {
+public class Solution11 {
     public String getLastNonEmptyString(String inputStr) {
         int[] alphabetCount = new int[26];
         int maxCount = 0;
@@ -28,7 +29,7 @@ public class Solution11Clone {
     }
 
     public static void main(String[] args) {
-        Solution11Clone solutionClone = new Solution11Clone();
+        Solution11 solutionClone = new Solution11();
         Scanner scanner = new Scanner(System.in);
         String inputStr = scanner.nextLine();
         System.out.println(solutionClone.getLastNonEmptyString(inputStr));

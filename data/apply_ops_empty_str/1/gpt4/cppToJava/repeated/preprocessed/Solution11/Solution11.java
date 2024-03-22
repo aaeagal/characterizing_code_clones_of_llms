@@ -4,7 +4,6 @@ import java.util.stream.*;
 
 
 
-
 public class Solution11 {
    
     public String lastNonEmptyString(String s) {

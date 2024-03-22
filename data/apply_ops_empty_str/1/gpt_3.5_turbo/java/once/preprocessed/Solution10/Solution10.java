@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution10{
     public String getLastNonEmptyString(String input){
         int letterArray[] = new int[26];
@@ -33,5 +34,3 @@ class Solution10{
         System.exit(0);
     }
 }
-
-

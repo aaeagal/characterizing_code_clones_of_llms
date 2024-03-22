@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution15 {
     public String calculateLastNonEmptyString(String str) {
         int arr[] = new int[26];
@@ -34,7 +35,3 @@ class Solution15 {
         System.exit(0);
     }
 }
-
-
-
-

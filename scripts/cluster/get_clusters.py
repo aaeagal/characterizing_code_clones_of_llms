@@ -4,6 +4,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 import os
 import json
+import shutil
 
 def parse_arguments() -> dict:
 
@@ -29,18 +30,26 @@ def parse_arguments() -> dict:
 
     return args
 
-def get_clusters(cpp_behavior: dict, java_behavior: dict, python_behavior: dict, directory: str):
+def get_clusters(cpp_behavior: dict, java_behavior: dict, python_behavior: dict, directory: str, total_similarity: dict) -> dict:
     # --- Create a 'results' directory if it doesn't exist --- #
     results_directory = f'{directory}/results'
     if not os.path.exists(results_directory):
         os.makedirs(results_directory)
         logging.info(f'Created directory: {results_directory}')
-    
-    # --- Get the similarity clusters --- #
-    get_similarity_clusters(cpp_behavior, java_behavior, python_behavior, directory, results_directory, 'exact')
+    else:
+        # remove the directory and create a new one
+        shutil.rmtree(results_directory)
+        os.makedirs(results_directory)
+        logging.info(f'Directory already exists. Removed and created new directory: {results_directory}')
 
     
-def get_similarity_clusters(cpp_behavior: dict, java_behavior: dict, python_behavior: dict, directory: str, results_directory: str, strictness: str) -> None:
+    # --- Get the similarity clusters --- #
+    total_similarity = get_similarity_clusters(cpp_behavior, java_behavior, python_behavior, directory, results_directory, total_similarity, 'exact')
+
+    return total_similarity
+
+    
+def get_similarity_clusters(cpp_behavior: dict, java_behavior: dict, python_behavior: dict, directory: str, results_directory: str, total_similarity: dict, strictness: str) -> dict:
     inputs = list(cpp_behavior.keys())
     num_of_inputs = len(inputs)
 
@@ -119,10 +128,16 @@ def get_similarity_clusters(cpp_behavior: dict, java_behavior: dict, python_beha
 
         
         # --- Write the similarity scores to a file --- #
-        with open(f'{results_directory}/{solutions}_similarity_scores.json', 'w') as file:           
-            if 'compiling_error' in behavior.keys():
-                similarity_scores['compiling_error'] = behavior['compiling_error']  
-            json.dump(similarity_scores, file)
+        #with open(f'{results_directory}/{solutions}_similarity_scores.json', 'w') as file:           
+        #    json.dump(similarity_scores, file)
+        if 'compiling_error' in behavior.keys():
+            similarity_scores['compiling_error'] = behavior['compiling_error']
+
+        if "other_language" in behavior.keys():
+            similarity_scores['other_language'] = behavior['other_language']
+        total_similarity.update({solutions: similarity_scores})
+    
+    return total_similarity
         
 
 def main():
@@ -153,8 +168,14 @@ def main():
     with open(f'../../data/{leetcode}/output_corpus_py.json', 'r') as python_file:
         python_behavior = json.load(python_file)
     
+    total_similarity = {}
+    
     # --- Get Clusters --- #    
-    get_clusters(cpp_behavior, java_behavior, python_behavior, directory=directory)
+    total_similarity = get_clusters(cpp_behavior, java_behavior, python_behavior, directory=directory, total_similarity=total_similarity)
+
+    # --- Write the total similarity to a file --- #
+    with open(f'{directory}/results/total_similarity.json', 'w') as file:
+        json.dump(total_similarity, file, indent=4)
 
 
 

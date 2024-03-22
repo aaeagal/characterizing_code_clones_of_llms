@@ -1,5 +1,5 @@
 {
-    "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution14/Solution14.java:10: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new HashMap<>();\n                                ^\n1 error\n",
+    "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution14/Solution14.java:11: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new HashMap<>();\n                                ^\n1 error\n",
     "aabcbbca": "Error: Could not find or load main class Solution14\n",
     "abcd": "Error: Could not find or load main class Solution14\n",
     "\u00cb0\u00b2\u0091;1\u00e2\ud983\udd0b5\u00176\ud937\ude034": "Error: Could not find or load main class Solution14\n",

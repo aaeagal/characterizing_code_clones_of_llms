@@ -3,7 +3,6 @@ import java.io.*;
 import java.util.stream.*;
 
 
-
 public class Solution1 {
     String lastNonEmptyString(String s){
         int n = s.length();

@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.stream.*;
 
 
-public class MainClass {
+public class Solution13 {
     private String findLastNonEmptyString(String str) {
         int[] charCountArray = new int[26];
         int maxCount = 0;
@@ -32,7 +32,7 @@ public class MainClass {
     }
 
     public static void main(String[] args) {
-        MainClass obj = new MainClass();
+        Solution13 obj = new Solution13();
         Scanner inputScanner = new Scanner(System.in);
         String inpString = inputScanner.nextLine();
         System.out.println(obj.findLastNonEmptyString(inpString));

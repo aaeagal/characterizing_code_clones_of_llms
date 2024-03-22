@@ -1,0 +1,93 @@
+{
+    "Solution7": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution9": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution3": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution11": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution14": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution5": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution12": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution18": {
+        "cpp": 0.0,
+        "java": 0.0,
+        "python": 0.0,
+        "compiling_error": "../../data/apply_ops_empty_str/0.5/gpt_3.5_turbo/java/once/preprocessed/Solution18/Solution18.java:7: error: reached end of file while parsing\n        int max = 0;\n                    ^\n1 error\n"
+    },
+    "Solution13": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution8": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution2": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution6": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution4": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution1": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution10": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution15": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution17": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    },
+    "Solution16": {
+        "cpp": 0.2,
+        "java": 1.0,
+        "python": 0.2
+    }
+}

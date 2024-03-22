@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
-class Solution4 {
+import java.util.stream.*;
+public class Solution4 {
     public static String getLastNonEmptyString(String str) {
         int[] frequency = new int[26];
         int[] lastOccurrence = new int[26];
@@ -38,8 +39,3 @@ class Solution4 {
         System.out.println(output);
     }
 }
-
-
-
-
-

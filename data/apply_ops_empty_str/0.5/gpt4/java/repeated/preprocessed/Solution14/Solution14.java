@@ -1,8 +1,9 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 
 
-public class Solution14Clone {
+public class Solution14 {
     public String getLastNonEmptyString(String inputString) {
         int[] frequencyArray = new int[26];
         int maximum = 0;
@@ -28,7 +29,7 @@ public class Solution14Clone {
     }
 
     public static void main(String[] args) {
-        Solution14Clone solutionClone = new Solution14Clone();
+        Solution14 solutionClone = new Solution14();
         Scanner inputScanner = new Scanner(System.in);
         String inputString = inputScanner.nextLine();
         System.out.println(solutionClone.getLastNonEmptyString(inputString));

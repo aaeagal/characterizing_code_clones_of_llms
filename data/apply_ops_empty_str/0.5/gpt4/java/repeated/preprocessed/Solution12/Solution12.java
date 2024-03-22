@@ -1,8 +1,9 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 
 
-public class Program {
+public class Solution12 {
     public String getLastNonEmptySubstring(String input) {
         int[] alphabetCount = new int[26];
         int maximumCount = 0;
@@ -28,7 +29,7 @@ public class Program {
     }
 
     public static void main(String[] args) {
-        Program programInstance = new Program();
+        Solution12 programInstance = new Solution12();
         Scanner inputScanner = new Scanner(System.in);
         String userInput = inputScanner.nextLine();
         System.out.println(programInstance.getLastNonEmptySubstring(userInput));

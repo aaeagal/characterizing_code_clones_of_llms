@@ -6,8 +6,8 @@ start=$(date +%s)
 LeetCode=("apply_ops_empty_str")
 temperatures=(1)
 model=("gpt4")
-tasks=("java")
-sampling=("repeated")
+tasks=("java_regular")
+sampling=("once" "repeated")
 
 for temperature in "${temperatures[@]}"; do
     for task in "${tasks[@]}"; do

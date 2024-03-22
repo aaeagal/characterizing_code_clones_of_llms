@@ -5,7 +5,6 @@ import java.util.stream.*;
 
 
 
-
 public class Solution18 {
     public String lastNonEmptyString(String s) {
         int[] freq = new int[26];

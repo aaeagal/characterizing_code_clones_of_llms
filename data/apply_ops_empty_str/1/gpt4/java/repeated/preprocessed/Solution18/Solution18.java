@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.stream.*;
 
 
-class MySolution18 {
+class Solution18 {
     public String getlastNonEmptyStr(String str) {
         int freq[] = new int[26];
         int maxValue = 0;
@@ -29,7 +29,7 @@ class MySolution18 {
     }
 
     public static void main(String[] mainArgs) {
-        MySolution18 mySol = new MySolution18();
+        Solution18 mySol = new Solution18();
         Scanner inputScanner = new Scanner(System.in);
         String strInput = inputScanner.nextLine();
         System.out.println(mySol.getlastNonEmptyStr(strInput));

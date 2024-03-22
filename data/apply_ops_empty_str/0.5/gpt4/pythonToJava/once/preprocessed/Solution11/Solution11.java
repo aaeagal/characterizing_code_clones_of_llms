@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
-class Solution11 {
+import java.util.stream.*;
+public class Solution11 {
     public String lastNonEmptyString(String s) {
         Map<Character, Integer> charFreq = new HashMap<>();
         for (char c : s.toCharArray()) {

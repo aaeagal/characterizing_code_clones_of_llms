@@ -1,1 +1,0 @@
-{"cpp": 0.0, "java": 0.0, "python": 0.0, "compiling_error": "../../data/apply_ops_empty_str/1/gpt_3.5_turbo/pythonToJava/once/preprocessed/Solution11/Solution11.java:10: error: variable d is already defined in method lastNonEmptyString(String)\n        Map<Character, Integer> d = new Hashtable<>();\n                                ^\n1 error\n"}

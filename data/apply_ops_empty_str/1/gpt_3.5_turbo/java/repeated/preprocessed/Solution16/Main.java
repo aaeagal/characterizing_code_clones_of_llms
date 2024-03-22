@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Main {
     public String getMaxRepeatingChar(String s) {
         int[] arr = new int[26];

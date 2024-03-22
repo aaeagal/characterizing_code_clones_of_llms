@@ -1,8 +1,9 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 
 
-class Solution15Clone {
+class Solution15 {
     public String getLastNonEmptySubstring(String inputStr) {
         int alphabetCount[] = new int[26];
         int maximum = 0;
@@ -28,7 +29,7 @@ class Solution15Clone {
         return result;
     }
     public static void main(String[] args) {
-        Solution15Clone solutionClone = new Solution15Clone();
+        Solution15 solutionClone = new Solution15();
         // read string from stdin
         Scanner scannerInput = new Scanner(System.in);
         // read only one line from stdin

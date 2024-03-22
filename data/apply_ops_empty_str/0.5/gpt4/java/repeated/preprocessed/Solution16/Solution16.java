@@ -1,7 +1,8 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 
-class AlternativeSolution16 {
+class Solution16 {
     public String getLastNonEmptyString(String inputString) {
         int frequencyArray[] = new int[26];
         int maximumFrequency = 0;
@@ -27,7 +28,7 @@ class AlternativeSolution16 {
         return resultString;
     }
     public static void main(String[] args) {
-        AlternativeSolution16 alternativeSolution16 = new AlternativeSolution16();
+        Solution16 alternativeSolution16 = new Solution16();
         // create scanner object to read input
         Scanner inputScanner = new Scanner(System.in);
         // read a line from user input

@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Main {
     public String getLastNonEmptyString(String input) {
         int count[] = new int[26];

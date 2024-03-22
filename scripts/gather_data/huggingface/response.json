@@ -1,0 +1,4 @@
+{
+    "error": "Input validation error: `inputs` tokens + `max_new_tokens` must be <= 7000. Given: 303 `inputs` tokens and 7000 `max_new_tokens`",
+    "error_type": "validation"
+}

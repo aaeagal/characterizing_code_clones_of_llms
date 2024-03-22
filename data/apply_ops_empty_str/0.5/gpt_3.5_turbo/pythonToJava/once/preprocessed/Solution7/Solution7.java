@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.util.stream.*;
 class Solution7 {
     public String lastNonEmptyString(String s) {
         Map<Character, Integer> d = new HashMap<>();
@@ -10,11 +11,3 @@ class Solution7 {
         // rest of the code remains the same
     }
 }
-
-
-
-
-
-
-
-

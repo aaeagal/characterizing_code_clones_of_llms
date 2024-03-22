@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
-class Solution12 {
+import java.util.stream.*;
+public class Solution12 {
     public String lastNonEmptyString(String s) {
         int[] freq = new int[26];
         int[] last = new int[26];
@@ -26,15 +27,10 @@ class Solution12 {
     }
 
     public static void main(String[] args) {
-        Solution12  solution = new Solution12 ();
+        Solution12 solution = new Solution12();
         Scanner scanner = new Scanner(System.in);
         String inputString = scanner.nextLine();
         String result = solution.lastNonEmptyString(inputString);
         System.out.println(result);
     }
 }
-
-
-
-
-
