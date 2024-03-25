@@ -14,7 +14,7 @@ for temperature in "${temperatures[@]}"; do
     for task in "${tasks[@]}"; do
         for model in "${model[@]}"; do
             for sample in "${sampling[@]}"; do
-                python3 huggingface_models.py --leetcode_description "${LeetCode}" --task "${task}" --temperature "${temperature}" --sampling "${sample}" --model "${model}"
+                python3 get_snippets_from_huggingface.py --leetcode_description "${LeetCode}" --task "${task}" --temperature "${temperature}" --sampling "${sample}" --model "${model}"
             done
         done
     done

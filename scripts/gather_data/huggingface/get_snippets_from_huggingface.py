@@ -4,18 +4,27 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 import requests
 import json
 import os
+from openai import OpenAI
+
+client = OpenAI(
+	base_url="https://c15yfse7gpktep2p.us-east-1.aws.endpoints.huggingface.cloud/v1/", 
+	api_key="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" 
+)
+
 
 # ----------------------------------------------------Global Variables---------------------------------------------------- #
-codellama_API_URL = "https://s7z6ejlhf7s7wgiv.us-east-1.aws.endpoints.huggingface.cloud"
+huggingface_token = os.environ["HUGGINGFACE_TOKEN"]
+codellama_API_URL = "https://c15yfse7gpktep2p.us-east-1.aws.endpoints.huggingface.cloud"
 codellama_headers = {
 	"Accept" : "application/json",
-	"Authorization": "Bearer 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",
+	"Authorization": "Bearer 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",
 	"Content-Type": "application/json" 
 }
+
 starcoder_API_URL = "https://smzbn5ysaf5sdpie.us-east-1.aws.endpoints.huggingface.cloud"
 starcoder_headers = {
 	"Accept" : "application/json",
-	"Authorization": "Bearer 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",
+	"Authorization": f"Bearer {huggingface_token}",
 	"Content-Type": "application/json" 
 }
 # ----------------------------------------------------Functions---------------------------------------------------- #
@@ -73,23 +82,43 @@ def get_file_suffix(task: str) -> str:
         raise ValueError(f"Unknown file suffix in get_file_suffix: {task}")
 
 def query_codellama(prompt: str, temperature: float) -> str:
-    codedata = {
-        "inputs": prompt,
-        "parameters": {
-            "Temperature": temperature,
-            "max_length": 4000,
-            "max_new_tokens": 7000,         
-        }
-    }
-    
+    response_str = ""
+    stop_sequence = "<step>"
+    messages = [
+                    {
+                    "role": "system",
+                    "content": "You are an expert coding assistant that provides code clones to users in markdown blocks.",
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ]
     try:
-        response = requests.post(codellama_API_URL, headers=codellama_headers, json=codedata)
-        response.raise_for_status()
-        print(response.json())
-        return response.json()[0]['generated_text']
+        logging.info(f"Querying codellama")
+        response = client.chat.completions.create(
+            messages=messages,
+            model="tgi",   
+            temperature=temperature,
+            max_tokens=4000,
+            stream=True
+        )
+        for message in response:
+            content = message.choices[0].delta.content
+            # Check if the stop sequence is in the content
+            if stop_sequence in content:
+                # If yes, split the content at the first occurrence of the stop sequence and take the part before it
+                content_before_stop, _ = content.split(stop_sequence, 1)
+                print(content_before_stop, end="")
+                response_str += content_before_stop
+                break  # Stop the loop after processing the content up to the first stop sequence
+            else:
+                # If the stop sequence is not in the content, process it normally
+                print(content, end="")
+                response_str += content
+
+        return response_str                  
     except requests.exceptions.HTTPError as e:
-        with open("response.json", "w") as file:
-            file.write(json.dumps(response.json(), indent=4))
         logging.error(f"Error in query_codellama: {e}")
         return "Error in query_codellama"
 
@@ -98,8 +127,7 @@ def query_starcoder(prompt: str, temperature: float) -> str:
         "inputs": prompt,
         "parameters": {
             "temperature": temperature,
-            "max_length": 6500#,
-            #"max_new_tokens": 6500,         
+            "max_length": 6500,      
         }
     }
     
@@ -109,14 +137,13 @@ def query_starcoder(prompt: str, temperature: float) -> str:
         print(response.json())
         return response.json()[0]['generated_text']
     except requests.exceptions.HTTPError as e:
-        with open("response.json", "w") as file:
+        with open("error_response.json", "w") as file:
             file.write(json.dumps(response.json(), indent=4))
         logging.error(f"Error in query_codellama: {e}")
         return "Error in query_codellama"
 
     
 def main():
-    
     args = parse_arguments()
     task = args.task
     model = args.model
@@ -125,6 +152,7 @@ def main():
     sampling = args.sampling
 
     logging.info(f"Starting to generate the requested hugging face snippets the leetcode problem: {leetcode} using the model: {model} with temperature: {temperature} and task: {task} and sampling: {sampling}")
+
     # -- Fix temperature bug -- #
     if temperature == "0" or temperature == "1" or temperature == "2":
         temperature = int(temperature)

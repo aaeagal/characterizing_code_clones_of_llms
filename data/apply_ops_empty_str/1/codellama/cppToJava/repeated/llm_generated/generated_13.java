@@ -1,52 +1,23 @@
-
-
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-
-using namespace std;
-
-class Solution {
-public:
-    string lastNonEmptyString(string s) {
-        vector<int>freq(26,0);
-        vector<int>last(26,-1);
-        
-        for(int i=0; i< s.length() ; i++){
-            freq[s[i]-'a']++;
-            last[s[i]-'a']=i;
-        }
-        int maxi = *max_element(freq.begin() , freq.end());
-        maxi--;
-        string ans;
-        for(int i=0; i< 26 ; i++){
-            if(freq[i]-maxi >0){
-                ans +=string(freq[i] - maxi, 'a' + i);
-            }
-        }
-        auto customComparator = [&last](char a, char b) {
-            return last[a - 'a'] < last[b - 'a'];
-        };
-
-        // Sort the ans string using the custom comparator
-        sort(ans.begin(), ans.end(), customComparator);
-        return ans;
+ class SimpleClass {
+          public ArrayList<Character> lastNonEmptyString(String s) {
+              HashMap<Character, Integer> count = new HashMap<>();
+              for (int i = 0; i < s.length(); i++) {
+                  count.put(s.charAt(i), count.getOrDefault(s.charAt(i), 0) + 1);
+              }
+  
+              List<Character> ans = new ArrayList<>();
+  
+              for (int i = 0; i < s.length(); i++) {
+                  char c = s.charAt(i);
+                  if (count.get(c) > 1) {
+                      ans.add(c);
+                  }
+              }
+              return ans; 
+          }
     }
-};
 
-int main() {
-    Solution solution;
-    string inputString;
+Explanation: -
 
-    // read only one line from stdin
-    getline(cin, inputString);
-
-    // call the solution's function and get the result
-    string result = solution.lastNonEmptyString(inputString);
-
-    // output the result to stdout
-    cout << result << endl;
-
-    return 0;
-}
+This function takes a string s as an input and returns an ArrayList of all characters that repeat at least once in the string. The time complexity of this function is O(nlogn), where n
+ is the length of the input string. 
