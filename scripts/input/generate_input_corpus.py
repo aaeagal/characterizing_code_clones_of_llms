@@ -3,6 +3,8 @@ from hypothesis import given, strategies as st, settings, HealthCheck
 from hypothesis.strategies import composite
 import json
 import argparse
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Define your strategies mapping for Java types
 strategies = {
@@ -22,6 +24,7 @@ strategies = {
     'String': st.text(),
     'List': st.lists(st.integers())
 }
+
 @composite
 def dynamic_composite(draw, param_type):
     if param_type in strategies:
@@ -121,9 +124,9 @@ def generate_input_corpus(methods, num_of_inputs):
 
         collected_inputs = set()
 
-        # Keep trying to generate inputs until we have the desired number
+        # Keep trying to generate inputs until the desired number
         while len(collected_inputs) < num_of_inputs:
-            print(f'On {len(collected_inputs)} out of {num_of_inputs}')
+            logging.info(f'On {len(collected_inputs)} out of {num_of_inputs}')
             @given(combined_strategy)
             @settings(max_examples=num_of_inputs - len(collected_inputs), suppress_health_check=[HealthCheck.too_slow])
             def test_func(inputs):
@@ -143,14 +146,15 @@ def generate_input_corpus(methods, num_of_inputs):
 def main():
     args = parse_arguments()
     methods = parse_java_file(args.filepath)
-    print(methods)
+    logging.info(f"Methods found: {methods}")
+
     input_corpus = generate_input_corpus(methods, args.num_of_inputs)
     output_path = '/'.join(args.filepath.split('/')[:-1]) + '/input_corpus.json'
     
     with open(output_path, 'w') as file:
         json.dump(input_corpus, file, indent=4)
     
-    print(f"Input corpus generated at {output_path}")
+    logging.info(f"Input corpus generated at {output_path}")
 
 if __name__ == "__main__":
     main()

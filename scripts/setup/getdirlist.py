@@ -1,6 +1,9 @@
 import os
 def main():
     # get the immediate subdirectories of the current directory
+
+    #change directories
+    os.chdir("../../data")
     subdirs = [d for d in os.listdir(".") if os.path.isdir(d)]
     string_forbash = "LeetCode=("
     for i in range(len(subdirs)):

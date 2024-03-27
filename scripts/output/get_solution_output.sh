@@ -1,1 +1,0 @@
-python3 get_solution_output.py --leetcode_description apply_ops_empty_str --temperature 0 --sampling once --model gpt4 --task pythonToJava

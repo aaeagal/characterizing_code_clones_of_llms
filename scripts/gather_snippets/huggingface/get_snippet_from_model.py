@@ -8,20 +8,6 @@ from transformers import pipeline
 import transformers
 import torch
 
-# ----------------------------------------------------Global Variables---------------------------------------------------- #
-codellama_API_URL = "https://s7z6ejlhf7s7wgiv.us-east-1.aws.endpoints.huggingface.cloud"
-codellama_headers = {
-	"Accept" : "application/json",
-	"Authorization": "Bearer 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",
-	"Content-Type": "application/json" 
-}
-starcoder_API_URL = "https://smzbn5ysaf5sdpie.us-east-1.aws.endpoints.huggingface.cloud"
-starcoder_headers = {
-	"Accept" : "application/json",
-	"Authorization": "Bearer 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",
-	"Content-Type": "application/json" 
-}
-# 
 # ----------------------------------------------------Functions---------------------------------------------------- #
 
 
